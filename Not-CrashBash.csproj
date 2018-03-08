@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\C#\Ball.cs" />
     <Compile Include="Assets\C#\Curve.cs" />
     <Compile Include="Assets\C#\KartMovement.cs" />
     <Compile Include="Assets\C#\KartPulse.cs" />
