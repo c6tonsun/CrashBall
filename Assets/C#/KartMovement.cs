@@ -10,10 +10,9 @@ public class KartMovement : MonoBehaviour
     private float _input;
     private float _curveTime = 0.5f;
 
-    private void Update()
+    public void Move(float _input)
     {
         #region movement
-        _input = Input.GetAxisRaw("Horizontal");
 
         _curveTime += _input * speed * Time.deltaTime;
         if (_curveTime < 0)
