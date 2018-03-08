@@ -16,17 +16,24 @@ public class InputManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Player one
-        _kartMovements[0].Move(Input.GetAxis("HorizontalP1"));
+        float player1_input = Input.GetAxisRaw("HorizontalP1");
+        float player2_input = Input.GetAxisRaw("HorizontalP2");
+        if (Mathf.Abs(player1_input) < 0.5f)
+        {
+            player1_input = 0;
+        }
+        _kartMovements[0].Move(player1_input);
         if (Input.GetButtonDown("FireP1"))
         {
-            //_kartPulse[0].Pulse();
+            Debug.Log("pulse fired");
+            _kartPulse[0].Pulse();
         }
 
         //Player two
-        _kartMovements[1].Move(Input.GetAxis("HorizontalP2"));
+        _kartMovements[1].Move(player2_input);
         if (Input.GetButtonDown("FireP2"))
         {
-            //_kartPulse[1].Pulse();
+            _kartPulse[1].Pulse();
         }
     }
 }

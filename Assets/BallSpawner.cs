@@ -4,39 +4,71 @@ using UnityEngine;
 
 public class BallSpawner : MonoBehaviour {
 
-    public GameObject[] Balls;
+    public List<Ball> Balls;
 
-    public Transform cannon;
+    [SerializeField]
+    private Ball ballPrefab;
 
-    //[SerializeField]
-    //float _firingInterval = 5f;
+    public int maxBAAALLSSSSSSSSS = 8;
+
+    public Transform[] Cannons = new Transform[4];
+
+    [SerializeField]
+    float _firingInterval = 5f;
+    float _ballTimer = 0f;
     [SerializeField]
     float _fireForce = 5f;
 
+    bool canFire = false;
+
 
 	// Use this for initialization
-	void Start () {
-		foreach(GameObject ball in Balls)
+	void Start ()
+    {
+        for(int i = 0; i<maxBAAALLSSSSSSSSS; i++)
         {
-            ball.transform.position = cannon.position;
+            Balls.Add(Instantiate(ballPrefab, transform.position, transform.rotation, transform));
         }
+		//foreach(Ball ball in Balls)
+  //      {
+  //          ball.transform.position = RandomizeCannon().position;
+  //      }
 	}
+
+    private void Update()
+    {
+        if (_ballTimer >= 0)
+        {
+            _ballTimer -= Time.deltaTime;
+        }
+        else
+        {
+            canFire = true;
+            _ballTimer = _firingInterval;
+        }
+    }
+
+    Transform RandomizeCannon()
+    {
+        return Cannons[Random.Range(0, 4)];
+    }
 	
 	// Physics related stuff in fixed update
 	void FixedUpdate () {
-        foreach(GameObject ball in Balls)
+        foreach(Ball ball in Balls)
         {
             if(ball.transform.position.y < -5)
             {
-                ball.SetActive(false);
-                ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                
+                ball.gameObject.SetActive(false);
+                ball.Rb.velocity = Vector3.zero;
             }
-            if (!ball.activeSelf)
+            if (!ball.gameObject.activeSelf && canFire)
             {
+                var cannon = RandomizeCannon();
                 ball.transform.position = cannon.position;
-                ball.SetActive(true);
-                ball.GetComponent<Rigidbody>().AddForce(cannon.up * _fireForce, ForceMode.Impulse);
+                ball.gameObject.SetActive(true);
+                ball.Rb.AddForce(cannon.up * _fireForce, ForceMode.Impulse);
+                canFire = false;
             }
         }
     }

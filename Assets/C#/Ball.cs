@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour {
     [SerializeField]
     private float _minSpeed;
 
+    [HideInInspector]
     public Rigidbody Rb;
 
     private void Awake()

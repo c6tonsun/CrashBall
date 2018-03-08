@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Test scene.unity
+- path: Assets/Scenes/Ball fondling.unity
   isLoaded: 1
   isActive: 1
