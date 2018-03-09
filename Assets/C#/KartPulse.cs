@@ -13,9 +13,11 @@ public class KartPulse : MonoBehaviour
 
     Collider[] colliders;
 
-    public void Awake()
+    public void Start()
     {
         my_ParticleSystem = GetComponent<ParticleSystem>();
+        var colour = my_ParticleSystem.main;
+        colour.startColor = GetComponent<MeshRenderer>().material.color;
     }
 
     public void FixedUpdate()
