@@ -65,8 +65,9 @@ public class InputManager : MonoBehaviour {
         {
             player.controllerName = null;
         }
-
-        for (int i = 0; i < ControllerNames.Length; i++)
+        int pairLenght = 1;
+        pairLenght = (ControllerNames.Length < Players.Length)? ControllerNames.Length : Players.Length;
+        for (int i = 0; i < pairLenght; i++)
         {
             ControllerNames[i] = "Controller " + i;
             Players[i].controllerName = ControllerNames[i];

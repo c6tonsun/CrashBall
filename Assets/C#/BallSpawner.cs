@@ -51,6 +51,7 @@ public class BallSpawner : MonoBehaviour {
 	
 	// Physics related stuff in fixed update
 	void FixedUpdate () {
+        int inActiveBalls = 0;        
         foreach(Ball ball in Balls)
         {
             if(ball.transform.position.y < -5)
@@ -61,12 +62,34 @@ public class BallSpawner : MonoBehaviour {
             }
             if (!ball.gameObject.activeSelf && canFire)
             {
-                var cannon = RandomizeCannon();
-                ball.gameObject.SetActive(true);
-                ball.transform.position = cannon.position;                
-                ball.Rb.AddForce(cannon.up * _fireForce, ForceMode.VelocityChange);
+                FireBall(ball);               
                 canFire = false;
             }
+        }
+        foreach (Ball ball in Balls)
+        {
+            if (!ball.gameObject.activeSelf) inActiveBalls++;
+            if (inActiveBalls == Balls.Count)
+            {
+                FireBall(ball);
+            }
+        }
+    }
+
+    private void FireBall(Ball ball)
+    {
+        var cannon = RandomizeCannon();
+        var offsetDirection = (Mathf.Sign(Random.Range(-1f, 1f))==-1)? -2: 2;
+        ball.gameObject.SetActive(true);
+        ball.transform.position = cannon.position;
+        ball.Rb.AddForce(cannon.forward * _fireForce + cannon.right * offsetDirection, ForceMode.VelocityChange);
+    }
+    private void OnDrawGizmos()
+    {
+        for (int i = 0; i < Cannons.Length; i++)
+        {
+            var cannon = Cannons[i];
+            Debug.DrawLine(cannon.position, (cannon.position)+cannon.forward*3, Color.red);
         }
     }
 }
