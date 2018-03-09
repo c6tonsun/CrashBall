@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 114842908486881104}
   - component: {fileID: 198755615023395014}
   - component: {fileID: 199421602860347942}
-  - component: {fileID: 135492502400310442}
+  - component: {fileID: 64211481970881802}
   m_Layer: 0
   m_Name: Kart
   m_TagString: Untagged
@@ -185,13 +185,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1534955907808574}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4242545416290972}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!23 &23284816229410372
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -230,6 +230,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1534955907808574}
+  m_Mesh: {fileID: 4300000, guid: 482cd60164a91984c82170d9bc4402d1, type: 3}
+--- !u!64 &64211481970881802
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1534955907808574}
+  m_Material: {fileID: 13400000, guid: 0faade44a42d2974db391e79c0a90d82, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 482cd60164a91984c82170d9bc4402d1, type: 3}
 --- !u!114 &114048879681987586
 MonoBehaviour:
@@ -274,19 +288,7 @@ MonoBehaviour:
     m_Bits: 256
   PulseOrigin: {fileID: 4996704197826040}
   PulseRadius: 5
-  PulseForce: 1500
---- !u!135 &135492502400310442
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1534955907808574}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.4219317
-  m_Center: {x: 0.6565118, y: 0, z: 0}
+  PulseForce: 25
 --- !u!198 &198755615023395014
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -346,7 +348,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1936686275
+  randomSeed: 547480329
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -858,7 +860,7 @@ ParticleSystem:
     arc:
       value: 360
       mode: 3
-      spread: 0
+      spread: 0.01
       speed:
         serializedVersion: 2
         minMaxState: 0

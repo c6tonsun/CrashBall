@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour {
         _kartMovements[0].Move(player1_input);
         if (Input.GetButtonDown("FireP1"))
         {
-            Debug.Log("pulse fired");
+            Debug.Log("pulse1 fired");
             _kartPulse[0].Pulse();
         }
 
@@ -33,7 +33,9 @@ public class InputManager : MonoBehaviour {
         _kartMovements[1].Move(player2_input);
         if (Input.GetButtonDown("FireP2"))
         {
+            Debug.Log("pulse2 fired");
             _kartPulse[1].Pulse();
+            
         }
     }
 }

@@ -29,10 +29,6 @@ public class BallSpawner : MonoBehaviour {
         {
             Balls.Add(Instantiate(ballPrefab, transform.position, transform.rotation, transform));
         }
-		//foreach(Ball ball in Balls)
-  //      {
-  //          ball.transform.position = RandomizeCannon().position;
-  //      }
 	}
 
     private void Update()
@@ -59,15 +55,16 @@ public class BallSpawner : MonoBehaviour {
         {
             if(ball.transform.position.y < -5)
             {
-                ball.gameObject.SetActive(false);
                 ball.Rb.velocity = Vector3.zero;
+                ball.gameObject.SetActive(false);
+                
             }
             if (!ball.gameObject.activeSelf && canFire)
             {
                 var cannon = RandomizeCannon();
-                ball.transform.position = cannon.position;
                 ball.gameObject.SetActive(true);
-                ball.Rb.AddForce(cannon.up * _fireForce, ForceMode.Impulse);
+                ball.transform.position = cannon.position;                
+                ball.Rb.AddForce(cannon.up * _fireForce, ForceMode.VelocityChange);
                 canFire = false;
             }
         }

@@ -27,7 +27,6 @@ public class KartPulse : MonoBehaviour
     {
         my_ParticleSystem.Play();
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
-        Debug.Log("colliders recieved: " + colliders.Length);
         Ball[] balls = new Ball[colliders.Length];
         for (int i = 0; i < balls.Length; i++)
         {
@@ -36,7 +35,9 @@ public class KartPulse : MonoBehaviour
 
         foreach (Ball ball in balls)
         {
-            ball.Rb.AddForce((ball.transform.position - PulseOrigin.position).normalized * PulseForce);
+            var oldVelocity = ball.Rb.velocity.magnitude;
+            ball.Rb.velocity = Vector3.zero;
+            ball.Rb.AddForce((ball.transform.position - PulseOrigin.position).normalized * (PulseForce+oldVelocity), ForceMode.Impulse);
             Debug.Log("Pulse");
             
         }
