@@ -38,9 +38,10 @@ GameObject:
   - component: {fileID: 23911283082623820}
   - component: {fileID: 114477594790036752}
   - component: {fileID: 114784322650462614}
-  - component: {fileID: 198652486962100560}
-  - component: {fileID: 199258303187198844}
   - component: {fileID: 64197536343314504}
+  - component: {fileID: 135716931299108694}
+  - component: {fileID: 198104812115541886}
+  - component: {fileID: 199108327433900500}
   m_Layer: 0
   m_Name: Kart
   m_TagString: Untagged
@@ -289,7 +290,19 @@ MonoBehaviour:
   start: {fileID: 4520503656416876}
   middle: {fileID: 4563202982701332}
   end: {fileID: 4318504080443182}
---- !u!198 &198652486962100560
+--- !u!135 &135716931299108694
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221224120916796}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4219317
+  m_Center: {x: 0.6565118, y: 0, z: 0}
+--- !u!198 &198104812115541886
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -348,7 +361,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -510423933
+  randomSeed: 392055575
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3556,7 +3569,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
---- !u!199 &199258303187198844
+--- !u!199 &199108327433900500
 ParticleSystemRenderer:
   serializedVersion: 4
   m_ObjectHideFlags: 1
