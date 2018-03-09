@@ -41,7 +41,7 @@ public class InputManager : MonoBehaviour {
             player1_input = 0;
         }
         _kartMovements[0].Move(player1_input);
-        if (Input.GetButton("FireP1"))
+        if (Input.GetButtonDown("FireP1"))
         {
             Debug.Log("pulse1 fired");
             _kartPulse[0].Pulse();
