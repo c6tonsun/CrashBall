@@ -19,6 +19,8 @@ public class BallSpawner : MonoBehaviour {
     [SerializeField]
     float _fireForce = 5f;
 
+    private int _lastCannon = -1;
+
     bool canFire = false;
 
 
@@ -42,11 +44,22 @@ public class BallSpawner : MonoBehaviour {
             canFire = true;
             _ballTimer = _firingInterval;
         }
+
+        _firingInterval += -(Time.deltaTime/90f);
     }
 
     Transform RandomizeCannon()
     {
-        return Cannons[Random.Range(0, 4)];
+        int new_random = Random.Range (0, 4);
+        if(_lastCannon<0){
+            _lastCannon = new_random;
+            return Cannons [new_random];
+        }
+        while(_lastCannon==new_random){
+            new_random = Random.Range (0, 4);
+        }
+
+        return Cannons [new_random];
     }
 	
 	// Physics related stuff in fixed update
