@@ -40,7 +40,6 @@ public class KartPulse : MonoBehaviour
             var oldVelocity = ball.Rb.velocity.magnitude;
             ball.Rb.velocity = Vector3.zero;
             ball.Rb.AddForce((ball.transform.position - PulseOrigin.position).normalized * (PulseForce+oldVelocity), ForceMode.Impulse);
-            Debug.Log("Pulse");
             
         }
     }

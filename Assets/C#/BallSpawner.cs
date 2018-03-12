@@ -92,7 +92,7 @@ public class BallSpawner : MonoBehaviour {
     private void FireBall(Ball ball)
     {
         var cannon = RandomizeCannon();
-        var offsetDirection = (Mathf.Sign(Random.Range(-1f, 1f))==-1)? -2: 2;
+        var offsetDirection = (Random.Range(0, 2) == 0) ? -2 : 2;  // optimized :D
         ball.gameObject.SetActive(true);
         ball.transform.position = cannon.position;
         ball.Rb.AddForce(cannon.forward * _fireForce + cannon.right * offsetDirection, ForceMode.VelocityChange);

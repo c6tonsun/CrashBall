@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour {
     private bool _isFixedY = false;
     private float _fixedY = 0f;
     public bool stayOnFloor = false;
+    [Tooltip("If ball's x or z is over this value ball starts to fall (reset).")]
+    public float ballDeadzone = 12f;
 
     [HideInInspector]
     public Rigidbody Rb;
@@ -24,8 +26,9 @@ public class Ball : MonoBehaviour {
         {
             Rb.velocity = Rb.velocity.normalized * _minSpeed;
         }
-
-        if (_isFixedY) transform.position = new Vector3(transform.position.x, _fixedY, transform.position.z);
+        bool isXIn = transform.position.x > -ballDeadzone && transform.position.x < ballDeadzone;
+        bool isZIn = transform.position.z > -ballDeadzone && transform.position.z < ballDeadzone;
+        if (_isFixedY && isXIn && isZIn) transform.position = new Vector3(transform.position.x, _fixedY, transform.position.z);
     }
 
     private void OnTriggerStay(Collider other)

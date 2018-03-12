@@ -12,8 +12,19 @@ public class Player : MonoBehaviour {
         Three = 3,
         Four = 4
     }
-
+    
     public Number currentPlayer;
 
-    public string controllerName;
+    public bool hasController;
+
+    [HideInInspector]
+    public KartMovement movement;
+    [HideInInspector]
+    public KartPulse pulse;
+
+    private void Awake()
+    {
+        movement = GetComponentInChildren<KartMovement>();
+        pulse = GetComponentInChildren<KartPulse>();
+    }
 }
