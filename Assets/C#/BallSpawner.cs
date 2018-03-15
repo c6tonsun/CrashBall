@@ -16,8 +16,9 @@ public class BallSpawner : MonoBehaviour {
 
     public int maxBAAALLSSSSSSSSS = 8;
 
-    public Transform[] Cannons = new Transform[4];
+    public Transform[] Cannons;
     private Transform nextCannon;
+    private int CannonAmount;
 
     [SerializeField]
     float _firingInterval = 5f;
@@ -37,6 +38,7 @@ public class BallSpawner : MonoBehaviour {
             //Instantiates all balls to somewhere far away
             Balls.Add(Instantiate(ballPrefab, new Vector3(-25,-25, 25), transform.rotation, transform));
         }
+        CannonAmount = Cannons.Length;
         //Randomizes the first cannon to shoot.
         nextCannon = RandomizeCannon();
 	}
@@ -74,41 +76,51 @@ public class BallSpawner : MonoBehaviour {
     Transform RandomizeCannon()
     {
         _lastCannon = System.Array.IndexOf(Cannons, nextCannon);
-        int new_random = Random.Range (0, 4);
+        int new_random = Random.Range (0, CannonAmount);
         while (_lastCannon == new_random)
         {
-            new_random = Random.Range(0, 4);
+            new_random = Random.Range(0, CannonAmount);
         }
+        Debug.Log(new_random);
         return Cannons [new_random];
     }
 	
 	// Physics related stuff in fixed update
-	void FixedUpdate () {
-        int inActiveBalls = 0;        
+	void FixedUpdate () {     
         foreach(Ball ball in Balls)
         {
             if (ball != null)
             {
-                if (!ball.gameObject.activeSelf) inActiveBalls++;
-                if (ball.transform.position.y < -5 && ball.gameObject.activeSelf)
+                if (ball.transform.position.y < -0.5 && ball.gameObject.activeSelf)
                 {
                     ball.Rb.velocity = Vector3.zero;
                     ball.gameObject.SetActive(false);
-                    nextCannon = RandomizeCannon();
+                    //nextCannon = RandomizeCannon();
                     Destroy(Instantiate(ballDeath, ball.transform.position, ballDeath.transform.rotation), 2.6f);
-                }
-                if (!ball.gameObject.activeSelf && canFire)
-                {
-                    PrepareFire(ball);
-                    canFire = false;
-                    return;
-                }
-                if (inActiveBalls == Balls.Count)
-                {
-                    //PrepareFire(ball);
                 }
             }
         }
+        if (canFire)
+        {
+            if (GetInactiveBall() != null)
+            {
+                PrepareFire(GetInactiveBall());
+                canFire = false;
+            }
+        }
+
+    }
+
+    private Ball GetInactiveBall()
+    {
+        foreach(Ball ball in Balls)
+        {
+            if (!ball.gameObject.activeSelf)
+            {
+                return ball;
+            }
+        }
+        return null;
     }
     private void PrepareFire(Ball ball)
     {
@@ -117,7 +129,7 @@ public class BallSpawner : MonoBehaviour {
         ball.transform.position = cannon.position;
         Destroy(Instantiate(ballRespawn, cannon.transform.position+cannon.forward, cannon.transform.rotation), 2.4f);
         ball.gameObject.SetActive(true);        
-        ball.Rb.AddForce(cannon.forward * _fireForce + cannon.right * offsetDirection, ForceMode.Impulse); // TODO: This works irregurarily, no idea why. Possible fix: actually lerp the cannon to turn around.
+        ball.Rb.AddForce((cannon.forward * (_fireForce+1*offsetDirection) + cannon.right * offsetDirection), ForceMode.Impulse); // TODO: This works irregurarily, no idea why. Possible fix: actually lerp the cannon to turn around.
         nextCannon = RandomizeCannon();
     }
 

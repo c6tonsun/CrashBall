@@ -12,6 +12,9 @@ public class ContinuesCurve : MonoBehaviour
     [Range(0f, 1f)]
     public float maxVelocity = 0;
 
+    [SerializeField][Tooltip("Target you want object to turn to. Leave null if you want to keep rotation")]
+    private Transform LookAtTarget;
+
     public GameObject go;
     private float totalTime;
     private float time;
@@ -135,6 +138,11 @@ public class ContinuesCurve : MonoBehaviour
             curvePoints[index + 1].position,
             curvePoints[index + 2].position,
             time);
+
+        if (LookAtTarget != null)
+        {
+            go.transform.LookAt(LookAtTarget);
+        }
     }
 
     private void InitCurvePoints()
