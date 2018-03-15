@@ -30,7 +30,8 @@ public class Ball : MonoBehaviour {
         bool isZIn = transform.position.z > -ballDeadzone && transform.position.z < ballDeadzone;
         if (_isFixedY && isXIn && isZIn) transform.position = new Vector3(transform.position.x, _fixedY, transform.position.z);
 
-        transform.rotation = Quaternion.LookRotation(Rb.velocity);
+        //Makes balls turn towards their velocity direction. Prevents balls from rolling
+        //transform.rotation = Quaternion.LookRotation(Rb.velocity);
     }
 
     private void OnTriggerStay(Collider other)
