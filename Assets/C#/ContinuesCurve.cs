@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ContinuesCurve : MonoBehaviour
 {
-
+    // OnDrawGismos stuff
     public bool initDone = false;
     public Transform[] curvePoints;
     public bool isLoop = false;
@@ -16,8 +16,15 @@ public class ContinuesCurve : MonoBehaviour
     private Transform LookAtTarget;
 
     public GameObject go;
-    private float totalTime;
-    private float time;
+    public float speed = 0.5f;
+    private float _speedFactor;
+    private float _totalTime;
+    private float _time;
+    private int _index;
+    private int _targetIndex;
+    private bool _growing;
+    private bool _willLoop = false;
+    private bool _shortPath = false;
 
     private void OnDrawGizmos()
     {
@@ -118,30 +125,68 @@ public class ContinuesCurve : MonoBehaviour
 
     private void Update()
     {
-        totalTime += Time.deltaTime * 0.5f;
-        // skip odds
-        if ((int)totalTime % 2 == 1)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            MoveToPlayer(1, _shortPath);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            MoveToPlayer(2, _shortPath);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            MoveToPlayer(3, _shortPath);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            MoveToPlayer(4, _shortPath);
+
+        if (_totalTime == _targetIndex) { } // do nothing
+        else if (_growing)
         {
-            totalTime++;
+            _totalTime += Time.deltaTime * speed * _speedFactor;
+            if (_totalTime > _targetIndex && !_willLoop)
+                _totalTime = _targetIndex;
         }
-        // reset
-        if (totalTime > curvePoints.Length - 2)
+        else
         {
-            totalTime = 0f;
+            _totalTime -= Time.deltaTime * speed * _speedFactor;
+            if (_totalTime < _targetIndex && !_willLoop)
+                _totalTime = _targetIndex;
         }
 
-        int index = (int)totalTime;
-        time = totalTime - index;
+        // looping
+        if (_totalTime < 0)
+        {
+            _totalTime += curvePoints.Length - 1;
+            _willLoop = false;
+        }
+        // skip odds
+        if ((int)_totalTime % 2 == 1)
+        {
+            if (_growing) _totalTime++;
+            else _totalTime--;
+        }
+        // looping
+        if (_totalTime > curvePoints.Length - 2)
+        {
+            _totalTime -= curvePoints.Length - 1;
+            _willLoop = false;
+        }
+
+        _index = (int)_totalTime;
+        _time = _totalTime - _index;
 
         go.transform.position = MathHelp.GetCurvePosition(
-            curvePoints[index].position,
-            curvePoints[index + 1].position,
-            curvePoints[index + 2].position,
-            time);
+            curvePoints[_index].position,
+            curvePoints[_index + 1].position,
+            curvePoints[_index + 2].position,
+            _time);
 
         if (LookAtTarget != null)
         {
             go.transform.LookAt(LookAtTarget);
+        }
+        else
+        {
+            go.transform.rotation = MathHelp.GetCurveRotation(
+                curvePoints[_index].rotation,
+                curvePoints[_index + 1].rotation,
+                curvePoints[_index + 2].rotation,
+                _time);
         }
     }
 
@@ -155,6 +200,34 @@ public class ContinuesCurve : MonoBehaviour
                 curvePoints[i] = transform.GetChild(i);
             }
             initDone = true;
+        }
+    }
+
+    public void MoveToPlayer(int player, bool longPath)
+    {
+        _targetIndex = player * 2 - 2;
+        // numeral distanse
+        _speedFactor = _totalTime - _targetIndex;
+        _growing = true;
+        _willLoop = false;
+        if (_speedFactor < 0)
+        {
+            _speedFactor *= -1;
+            _growing = false;
+        }
+        // if numeral order is short way
+        if (_speedFactor < curvePoints.Length * 0.5f)
+        {   // correct direction
+            _growing = !_growing;
+            _speedFactor = (curvePoints.Length - 1) - _speedFactor;
+        }
+        else _willLoop = true;      // go "wrong" way and loop
+
+        // for longer path
+        if (longPath)
+        {
+            _growing = !_growing;
+            _willLoop = !_willLoop;
         }
     }
 }
