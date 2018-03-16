@@ -81,7 +81,6 @@ public class BallSpawner : MonoBehaviour {
         {
             new_random = Random.Range(0, CannonAmount);
         }
-        Debug.Log(new_random);
         return Cannons [new_random];
     }
 	
