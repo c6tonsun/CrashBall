@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 90fad143e7ca3eb4f89ac28b73a0e9f3
-timeCreated: 1521126795
+guid: 7a619f734864feb4fa83d6d85e354fcb
+timeCreated: 1521198561
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Box001
+    4300000: Teslacoil
   materials:
     importMaterials: 1
     materialName: 0
@@ -58,7 +58,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 0
+    tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0

@@ -9,19 +9,29 @@ ModelImporter:
     100002: Stage
     100004: Turret_gun
     100006: Turret_leg
+    100008: Jet packo
+    100010: Stand
     400000: //RootNode
     400002: Stage
     400004: Turret_gun
     400006: Turret_leg
+    400008: Jet packo
+    400010: Stand
     2300000: Stage
     2300002: Turret_gun
     2300004: Turret_leg
+    2300006: Jet packo
+    2300008: Stand
     3300000: Stage
     3300002: Turret_gun
     3300004: Turret_leg
+    3300006: Jet packo
+    3300008: Stand
     4300000: Stage
     4300002: Turret_leg
     4300004: Turret_gun
+    4300006: Jet packo
+    4300008: Stand
   materials:
     importMaterials: 1
     materialName: 0

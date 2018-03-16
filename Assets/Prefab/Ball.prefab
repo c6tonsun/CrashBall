@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minSpeed: 5
-  stayOnFloor: 0
+  stayOnFloor: 1
   ballDeadzone: 12
   Rb: {fileID: 0}
 --- !u!135 &135815935098482136
