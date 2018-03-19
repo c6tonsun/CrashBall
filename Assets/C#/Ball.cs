@@ -6,11 +6,15 @@ public class Ball : MonoBehaviour {
 
     [SerializeField]
     private float _minSpeed;
-    private bool _isFixedY = false;
-    private float _fixedY = 0f;
-    public bool stayOnFloor = false;
-    [Tooltip("If ball's x or z is over this value ball starts to fall (reset).")]
-    public float ballDeadzone = 12f;
+    
+    [HideInInspector]
+    public bool canScore = true;
+
+    public bool canFly;
+    [HideInInspector]
+    public bool canBePulsed = false;
+    [HideInInspector]
+    public bool isFixedY = false;
 
     [HideInInspector]
     public Rigidbody Rb;
@@ -20,29 +24,37 @@ public class Ball : MonoBehaviour {
         Rb = GetComponent<Rigidbody>();
     }
 
+    private void OnEnable()
+    {
+        canScore = true;
+        canBePulsed = false;
+        isFixedY = false;
+    }
+
     private void FixedUpdate()
     {
         if (Rb.velocity.magnitude < _minSpeed)
-        {
             Rb.velocity = Rb.velocity.normalized * _minSpeed;
-        }
-        bool isXIn = transform.position.x > -ballDeadzone && transform.position.x < ballDeadzone;
-        bool isZIn = transform.position.z > -ballDeadzone && transform.position.z < ballDeadzone;
-        if (_isFixedY && isXIn && isZIn) transform.position = new Vector3(transform.position.x, _fixedY, transform.position.z);
+
+        RaycastHit hit;
+        bool isOverStage = Physics.SphereCast(transform.position, transform.localScale.x, Vector3.down, out hit, 1f, LayerMask.NameToLayer("Floor"), QueryTriggerInteraction.Ignore);
+
+        if (isFixedY && isOverStage)
+            Rb.velocity = new Vector3(Rb.velocity.x, 0f, Rb.velocity.z);
 
         //Makes balls turn towards their velocity direction. Prevents balls from rolling
         //transform.rotation = Quaternion.LookRotation(Rb.velocity);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnCollisionStay(Collision collision)
     {
-        if (_isFixedY || !stayOnFloor) return;
-
-        Transform floor = other.transform;
-        if (floor.name == "Floor")
+        if (canBePulsed) return;
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
-            _fixedY = floor.position.y + (floor.localScale.y * 0.5f) + (transform.localScale.y * 0.5f);
-            _isFixedY = true;
+            if (!canFly)
+                isFixedY = true;
+
+            canBePulsed = true;
         }
     }
 }

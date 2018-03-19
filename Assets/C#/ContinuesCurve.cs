@@ -205,6 +205,9 @@ public class ContinuesCurve : MonoBehaviour
 
     public void MoveToPlayer(int player, bool longPath)
     {
+        if (_targetIndex == player * 2 - 2)
+            return;
+
         _targetIndex = player * 2 - 2;
         // numeral distanse
         _speedFactor = _totalTime - _targetIndex;

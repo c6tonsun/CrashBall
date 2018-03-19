@@ -9,6 +9,8 @@ public class KartPulse : MonoBehaviour
     public float PulseRadius;
     public float PulseForce;
 
+    public float pulseCooldown = 0.5f;
+    private float pulseTimer;
     private ParticleSystem my_ParticleSystem;
 
     Collider[] colliders;
@@ -20,13 +22,18 @@ public class KartPulse : MonoBehaviour
         colour.startColor = GetComponent<MeshRenderer>().material.color;
     }
 
-    public void FixedUpdate()
+    private void Update()
     {
-        
+        pulseTimer += Time.deltaTime;
     }
 
     public void Pulse()
     {
+        if (pulseTimer < pulseCooldown)
+            return;
+        else
+            pulseTimer = 0f;
+
         my_ParticleSystem.Play();
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
         Ball[] balls = new Ball[colliders.Length];
@@ -37,10 +44,15 @@ public class KartPulse : MonoBehaviour
 
         foreach (Ball ball in balls)
         {
-            var oldVelocity = ball.Rb.velocity.magnitude;
-            ball.Rb.velocity = Vector3.zero;
-            ball.Rb.AddForce((ball.transform.position - PulseOrigin.position).normalized * (PulseForce+oldVelocity), ForceMode.Impulse);
-            
+            if (ball.canBePulsed)
+            {
+                float oldVelocity = ball.Rb.velocity.magnitude;
+                ball.Rb.velocity = Vector3.zero;
+                Vector3 direction = ball.transform.position - PulseOrigin.position;
+                if (ball.isFixedY)
+                    direction.y = 0f;
+                ball.Rb.AddForce(direction.normalized * (PulseForce + oldVelocity), ForceMode.Impulse);
+            }
         }
     }
 

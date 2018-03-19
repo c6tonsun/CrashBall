@@ -5,21 +5,26 @@ using UnityEngine;
 public class InputManager : MonoBehaviour {
 
     private string[] _controllerNames;
-    private Player[] Players;
+    private Player[] _players;
+    private ScoreHandler _scoreHandler;
 
     public float inputDeadzone = 0.5f;
 
     private int oldTriggerInput = 0;
     
-	private void Start () {
+	private void Start ()
+    {
         Player[] unorderedPlayers = FindObjectsOfType<Player>();
-        Players = new Player[unorderedPlayers.Length];
+        _players = new Player[unorderedPlayers.Length];
         foreach (Player player in unorderedPlayers)
         {
-            Players[(int)player.currentPlayer - 1] = player;
+            _players[(int)player.currentPlayer - 1] = player;
         }
 
         PairConrollersToPlayers();
+
+        _scoreHandler = FindObjectOfType<ScoreHandler>();
+        _scoreHandler.players = _players;
     }
 	
 	private void Update () {
@@ -27,7 +32,7 @@ public class InputManager : MonoBehaviour {
         // GetJoystickNames keeps lost controllers as empty strings in array. Worked around this weature.
         PairConrollersToPlayers();
 
-        foreach (Player player in Players)
+        foreach (Player player in _players)
         {
             ActPlayerInput(player);
         }
@@ -35,17 +40,17 @@ public class InputManager : MonoBehaviour {
 
     private void PairConrollersToPlayers()
     {
-        foreach (Player player in Players)
+        foreach (Player player in _players)
             player.hasController = false;
 
         _controllerNames = Input.GetJoystickNames();
 
         int pairLenght = 1;
-        pairLenght = (_controllerNames.Length < Players.Length) ? _controllerNames.Length : Players.Length;
+        pairLenght = (_controllerNames.Length < _players.Length) ? _controllerNames.Length : _players.Length;
 
         for (int i = 0; i < pairLenght; i++)
         {
-            Players[i].hasController = _controllerNames[i].Length != 0;
+            _players[i].hasController = _controllerNames[i].Length != 0;
         }
     }
 

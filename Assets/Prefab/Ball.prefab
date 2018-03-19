@@ -202,8 +202,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minSpeed: 5
-  stayOnFloor: 1
-  ballDeadzone: 12
+  canScore: 1
+  canFly: 0
+  floorLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  canBePulsed: 0
+  isFixedY: 0
   Rb: {fileID: 0}
 --- !u!135 &135815935098482136
 SphereCollider:
