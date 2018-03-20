@@ -13,13 +13,16 @@ public class KartPulse : MonoBehaviour
     private float pulseTimer;
     private ParticleSystem my_ParticleSystem;
 
+    [SerializeField]
+    private MeshRenderer my_meshRenderer;
+
     Collider[] colliders;
 
     public void Start()
     {
         my_ParticleSystem = GetComponent<ParticleSystem>();
         var colour = my_ParticleSystem.main;
-        colour.startColor = GetComponent<MeshRenderer>().material.color;
+        colour.startColor = my_meshRenderer.material.color;
     }
 
     private void Update()
