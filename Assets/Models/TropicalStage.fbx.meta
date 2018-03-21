@@ -14,6 +14,10 @@ ModelImporter:
     100012: //RootNode
     100014: Plane001
     100016: SandHitbox
+    100018: Grass
+    100020: More Grass
+    100022: Sea
+    100024: Underwaterpart
     400000: Arena
     400002: Arena_with_bumo
     400004: Donut
@@ -23,6 +27,10 @@ ModelImporter:
     400012: //RootNode
     400014: Plane001
     400016: SandHitbox
+    400018: Grass
+    400020: More Grass
+    400022: Sea
+    400024: Underwaterpart
     2300000: Arena
     2300002: Arena_with_bumo
     2300004: Donut
@@ -31,6 +39,10 @@ ModelImporter:
     2300010: Sand
     2300012: Plane001
     2300014: SandHitbox
+    2300016: Grass
+    2300018: More Grass
+    2300020: Sea
+    2300022: Underwaterpart
     3300000: Arena
     3300002: Arena_with_bumo
     3300004: Donut
@@ -39,6 +51,10 @@ ModelImporter:
     3300010: Sand
     3300012: Plane001
     3300014: SandHitbox
+    3300016: Grass
+    3300018: More Grass
+    3300020: Sea
+    3300022: Underwaterpart
     4300000: Donut
     4300002: Sand
     4300004: Arena
@@ -47,6 +63,10 @@ ModelImporter:
     4300010: PalmTree
     4300012: SandHitbox
     4300014: Plane001
+    4300016: Sea
+    4300018: Grass
+    4300020: More Grass
+    4300022: Underwaterpart
   materials:
     importMaterials: 1
     materialName: 0
