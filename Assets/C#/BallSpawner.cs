@@ -128,7 +128,7 @@ public class BallSpawner : MonoBehaviour {
         ball.transform.position = cannon.position;
         Destroy(Instantiate(ballRespawn, cannon.transform.position+cannon.forward, cannon.transform.rotation), 2.4f);
         ball.gameObject.SetActive(true);        
-        ball.Rb.AddForce((cannon.forward * (_fireForce+1*offsetDirection) + cannon.right * offsetDirection), ForceMode.Impulse); // TODO: This works irregurarily, no idea why. Possible fix: actually lerp the cannon to turn around.
+        ball.Rb.AddForce((cannon.forward * (_fireForce)), ForceMode.Impulse); // TODO: This works irregurarily, no idea why. Possible fix: actually lerp the cannon to turn around.
         nextCannon = RandomizeCannon();
     }
 

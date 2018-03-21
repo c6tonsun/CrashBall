@@ -1,0 +1,124 @@
+fileFormatVersion: 2
+guid: 31abfc0698ec43e4a93a4429ff2c22e1
+timeCreated: 1521643197
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Arena
+    100002: Arena_with_bumo
+    100004: Donut
+    100006: PalmLeaves
+    100008: PalmTree
+    100010: Sand
+    100012: //RootNode
+    100014: Plane001
+    100016: SandHitbox
+    400000: Arena
+    400002: Arena_with_bumo
+    400004: Donut
+    400006: PalmLeaves
+    400008: PalmTree
+    400010: Sand
+    400012: //RootNode
+    400014: Plane001
+    400016: SandHitbox
+    2300000: Arena
+    2300002: Arena_with_bumo
+    2300004: Donut
+    2300006: PalmLeaves
+    2300008: PalmTree
+    2300010: Sand
+    2300012: Plane001
+    2300014: SandHitbox
+    3300000: Arena
+    3300002: Arena_with_bumo
+    3300004: Donut
+    3300006: PalmLeaves
+    3300008: PalmTree
+    3300010: Sand
+    3300012: Plane001
+    3300014: SandHitbox
+    4300000: Donut
+    4300002: Sand
+    4300004: Arena
+    4300006: Arena_with_bumo
+    4300008: PalmLeaves
+    4300010: PalmTree
+    4300012: SandHitbox
+    4300014: Plane001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
