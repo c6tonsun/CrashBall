@@ -23,5 +23,7 @@ public class KartMovement : MonoBehaviour
         transform.position = MathHelp.GetCurvePosition(movementCurve.start.position, movementCurve.middle.position, movementCurve.end.position, _curveTime);
         transform.rotation = MathHelp.GetCurveRotation(movementCurve.start.rotation, movementCurve.middle.rotation, movementCurve.end.rotation, _curveTime);
         #endregion
+
+        transform.Rotate(Vector3.forward * 15 * _input);
     }
 }
