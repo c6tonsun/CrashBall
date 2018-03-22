@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour {
     [HideInInspector]
     public bool canScore = true;
 
-    public bool canFly;
+    public bool canFly = false;
     [HideInInspector]
     public bool canBePulsed = false;
     [HideInInspector]

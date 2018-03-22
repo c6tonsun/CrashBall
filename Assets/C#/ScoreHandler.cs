@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Collections;
 
 public class ScoreHandler : MonoBehaviour {
     [HideInInspector]
@@ -36,7 +37,15 @@ public class ScoreHandler : MonoBehaviour {
         if (livingPLayerCount == 1)
         {
             Debug.Log("Winner is p" + winner);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            StartCoroutine(Restart());
         }
+    }
+
+    IEnumerator Restart()
+    {
+        yield return new WaitForSeconds(2);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        StopAllCoroutines();
     }
 }
