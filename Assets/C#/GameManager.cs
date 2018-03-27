@@ -5,36 +5,40 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     // player options
-    public int playerCount;
-    [Range(1f, 4f)]                     //
-    public float playerSpeed;           //
-    [Range(0f, 1f)]                     //
-    public float pulseCooldown;         // 
-    [Range(10f, 30f)]                   //
-    public float pulseForce;            //
-    [Range(2.5f, 4f)]                   //
-    public float pulseArea;             //
+    public int playerCount;             // implement
+    [Range(2f, 4f)]
+    public float playerSpeed;
+    [Range(0.2f, 1f)]
+    public float maxStunTime;
+    [Range(0.2f, 1f)]
+    public float pulseCooldown;
+    [Range(15f, 30f)]
+    public float pulseForce;
+    [Range(2.5f, 4f)]
+    public float pulseArea;
+    [Range(0f, 5f)]
+    public int maxMagnetTime;
     
     // ball options
-    public bool ballCanFly;             //
-    [Range(3f, 7f)]                     //
-    public float ballMinSpeed;          //
-    public int normalBallCount;         //
+    public bool ballCanFly;
+    [Range(3f, 7f)]
+    public float ballMinSpeed;
+    public int normalBallCount;
     [Range(0f, 1f)]
     public float normalBallLikelyness;
     public int stunBallCount;
     [Range(0f, 1f)]
-    public float StunBallLikelyness;
+    public float stunBallLikelyness;
     [Range(2f, 5f)]
-    public float firingInterval;        //
+    public float firingInterval;
     
     // game mode selection
-    public enum GameMode
+    public enum GameMode                // implement
     {
         ERROR = 0,
         Elimination = 1
     }
     public GameMode currentMode = GameMode.Elimination;
-    public int playerLives;             //
-    public int targetScore;
+    public int playerLives;
+    public int targetScore;             // implement
 }

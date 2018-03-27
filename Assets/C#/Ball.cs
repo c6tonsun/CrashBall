@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour {
     [HideInInspector]
     public float minSpeed;
     [HideInInspector]
-    public bool isMagneted;
+    public float magnetedTime;
     [HideInInspector]
     public bool canScore = true;
     [HideInInspector]
@@ -39,7 +39,9 @@ public class Ball : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (Rb.velocity.magnitude < minSpeed && !isMagneted)
+        magnetedTime -= Time.fixedDeltaTime;
+
+        if (Rb.velocity.magnitude < minSpeed && magnetedTime < 0)
             Rb.velocity = Rb.velocity.normalized * minSpeed;
 
         RaycastHit hit;
@@ -54,7 +56,7 @@ public class Ball : MonoBehaviour {
         //transform.rotation = Quaternion.LookRotation(Rb.velocity);
     }
 
-    private void OnCollisionStay(Collision collision)
+    protected void OnCollisionStay(Collision collision)
     {
         if (canBePulsed) return;
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Floor"))

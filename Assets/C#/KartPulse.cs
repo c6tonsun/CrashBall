@@ -9,6 +9,8 @@ public class KartPulse : MonoBehaviour
     private float PulseRadius;
     private float PulseForce;
 
+    private float maxMagnetTime;
+    private float magnetTimer;
     private float pulseCooldown;
     private float pulseTimer;
     private bool canPulse;
@@ -25,6 +27,7 @@ public class KartPulse : MonoBehaviour
         PulseRadius = gameManager.pulseArea;
         PulseForce = gameManager.pulseForce;
         pulseCooldown = gameManager.pulseCooldown;
+        maxMagnetTime = gameManager.maxMagnetTime;
 
         my_ParticleSystem = GetComponent<ParticleSystem>();
         var colour = my_ParticleSystem.main;
@@ -35,6 +38,8 @@ public class KartPulse : MonoBehaviour
     {
         if (!canPulse)
             pulseTimer += Time.deltaTime;
+        else
+            magnetTimer += Time.deltaTime;
     }
 
     public void Magnet()
@@ -42,24 +47,38 @@ public class KartPulse : MonoBehaviour
         if (pulseTimer < pulseCooldown)
             return;
 
+        if (magnetTimer > maxMagnetTime)
+        {
+            Pulse();
+            return;
+        }
+
         canPulse = true;
-        pulseTimer = 0f;
 
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
         Ball[] balls = new Ball[colliders.Length];
         for (int i = 0; i < balls.Length; i++)
             balls[i] = colliders[i].GetComponent<Ball>();
-
+        
         foreach (Ball ball in balls)
         {
+            if (!ball.canBePulsed || !ball.canScore)
+                continue;
+            
             float inForce = ball.Rb.velocity.magnitude;
             Vector3 direction = PulseOrigin.position - ball.transform.position;
-            ball.isMagneted = true;
+            ball.magnetedTime = Time.fixedDeltaTime * 4;
 
             if (direction.magnitude > 1)
             {
+                if (inForce > ball.minSpeed)
+                    inForce = ball.minSpeed;
                 ball.Rb.velocity *= 0.9f;
-                ball.Rb.AddForce(direction.normalized * inForce * 0.2f, ForceMode.Impulse);
+
+                if (ball.isFixedY)
+                    direction.y = 0f;
+
+                ball.Rb.AddForce(direction.normalized * inForce * 0.4f, ForceMode.Impulse);
             }
         }
     }
@@ -70,6 +89,9 @@ public class KartPulse : MonoBehaviour
             return;
         else
             canPulse = false;
+
+        pulseTimer = 0f;
+        magnetTimer = 0f;
 
         my_ParticleSystem.Play();
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
@@ -86,8 +108,7 @@ public class KartPulse : MonoBehaviour
                 Vector3 direction = ball.transform.position - transform.position;
                 if (ball.isFixedY)
                     direction.y = 0f;
-                ball.isMagneted = false;
-                ball.Rb.AddForce(direction.normalized * (PulseForce + oldVelocity), ForceMode.Impulse);
+                ball.Rb.AddForce(direction.normalized * (PulseForce), ForceMode.Impulse);
             }
         }
     }
