@@ -48,4 +48,9 @@ public class Goal : MonoBehaviour {
         }
         return false;
     }
+
+    public int GetCurrentLives()
+    {
+        return currentLives;
+    }
 }
