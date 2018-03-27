@@ -14,6 +14,9 @@ ModelImporter:
     100012: Plane001
     100014: //RootNode
     100016: Sphere001
+    100018: Floor
+    100020: Pipe
+    100022: Ritils
     400000: 25by25
     400002: Arena
     400004: Ball pipes
@@ -23,6 +26,9 @@ ModelImporter:
     400012: Plane001
     400014: //RootNode
     400016: Sphere001
+    400018: Floor
+    400020: Pipe
+    400022: Ritils
     2300000: 25by25
     2300002: Arena
     2300004: Ball pipes
@@ -31,6 +37,9 @@ ModelImporter:
     2300010: Cylinder003
     2300012: Plane001
     2300014: Sphere001
+    2300016: Floor
+    2300018: Pipe
+    2300020: Ritils
     3300000: 25by25
     3300002: Arena
     3300004: Ball pipes
@@ -39,6 +48,9 @@ ModelImporter:
     3300010: Cylinder003
     3300012: Plane001
     3300014: Sphere001
+    3300016: Floor
+    3300018: Pipe
+    3300020: Ritils
     4300000: 25by25
     4300002: Box001
     4300004: Sphere001
@@ -47,6 +59,9 @@ ModelImporter:
     4300010: bricks
     4300012: Ball pipes
     4300014: Plane001
+    4300016: Floor
+    4300018: Pipe
+    4300020: Ritils
   materials:
     importMaterials: 1
     materialName: 0
