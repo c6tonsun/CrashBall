@@ -16,13 +16,14 @@ public class Goal : MonoBehaviour {
     
     private ScoreHandler _scoreHandler;
 
-    public int lives = 5;
+    private int lives;
     private int currentLives;
     private bool canComeback;
 
     private void Start()
     {
         _scoreHandler = FindObjectOfType<ScoreHandler>();
+        lives = FindObjectOfType<GameManager>().playerLives;
         currentLives = lives;
     }
 

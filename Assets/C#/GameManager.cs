@@ -6,25 +6,28 @@ public class GameManager : MonoBehaviour {
 
     // player options
     public int playerCount;
-    [Range(1f, 4f)]
-    public float playerSpeed;
-    [Range(0f, 1f)]
-    public float pulseCooldown;
-    [Range(10f, 30f)]
-    public float pulseForce;
-    [Range(2.5f, 4f)]
-    public float pulseArea;
-
+    [Range(1f, 4f)]                     //
+    public float playerSpeed;           //
+    [Range(0f, 1f)]                     //
+    public float pulseCooldown;         // 
+    [Range(10f, 30f)]                   //
+    public float pulseForce;            //
+    [Range(2.5f, 4f)]                   //
+    public float pulseArea;             //
+    
     // ball options
-    public int normalBallCount;
+    public bool ballCanFly;             //
+    [Range(3f, 7f)]                     //
+    public float ballMinSpeed;          //
+    public int normalBallCount;         //
     [Range(0f, 1f)]
     public float normalBallLikelyness;
     public int stunBallCount;
     [Range(0f, 1f)]
     public float StunBallLikelyness;
     [Range(2f, 5f)]
-    public float firingInterval;
-
+    public float firingInterval;        //
+    
     // game mode selection
     public enum GameMode
     {
@@ -32,6 +35,6 @@ public class GameManager : MonoBehaviour {
         Elimination = 1
     }
     public GameMode currentMode = GameMode.Elimination;
-    public int playerLives;
+    public int playerLives;             //
     public int targetScore;
 }

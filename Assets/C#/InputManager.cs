@@ -56,6 +56,10 @@ public class InputManager : MonoBehaviour {
 
     private void ActPlayerInput(Player player)
     {
+        if (player.gameObject.activeSelf == false)
+        {
+            return;
+        }
         int playerNumber = (int)player.currentPlayer;
 
         float movementInput = 0f;
@@ -64,13 +68,13 @@ public class InputManager : MonoBehaviour {
         if (player.hasController)
         {
             movementInput = Input.GetAxisRaw("P" + playerNumber);
-            pulseInput = Input.GetButtonDown("FireP" + playerNumber);
+            pulseInput = Input.GetButton("FireP" + playerNumber);
             pulseInput = ActTriggerInput(playerNumber, pulseInput);
         }
         else
         {
             movementInput = Input.GetAxisRaw("Key" + playerNumber);
-            pulseInput = Input.GetButtonDown("FireKey" + playerNumber);
+            pulseInput = Input.GetButton("FireKey" + playerNumber);
         }
 
         if (movementInput > -inputDeadzone && movementInput < inputDeadzone)
@@ -79,6 +83,8 @@ public class InputManager : MonoBehaviour {
         player.movement.Move(movementInput);
 
         if (pulseInput)
+            player.pulse.Magnet();
+        else
             player.pulse.Pulse();
     }
 
