@@ -4,31 +4,53 @@ using UnityEngine;
 
 public class EmissionScale : MonoBehaviour {
 
-    Renderer renderer;
+    Renderer _renderer;
     Material mat;
     Color baseColor;
 
     [SerializeField]
     private Goal playerGoal;
+    private ParticleSystem particles;
 
+    private int playerMaxHP;
     private float playerHP;
+
+    private float oldPlayerHP = 0;
 
 
     // Use this for initialization
     void Start () {       
-        renderer = GetComponent<Renderer>();
-        mat = renderer.material;
+        _renderer = GetComponent<Renderer>();
+        mat = _renderer.material;
+        particles = GetComponent<ParticleSystem>();
         baseColor = new Color(0.13f, 0.27f, 0.54f);
+        playerMaxHP = FindObjectOfType<GameManager>().playerLives;
     }
-	
-	// Update is called once per frame
-	void Update () {
-        playerHP = playerGoal.GetCurrentLives()+1;
 
-        float emission = (1f-(5/playerHP));
-        //Replace this with whatever you want for your base color at emission level '1'
+    // Update is called once per frame
+    void Update() {
+        playerHP = playerGoal.GetCurrentLives();
 
-        Color finalColor = baseColor * Mathf.LinearToGammaSpace(emission);
+        float emission = (1f - (playerHP / playerMaxHP));
+
+        Color finalColor = baseColor * Mathf.LinearToGammaSpace(0);
+        if (emission > 0.1f)
+        {
+            finalColor = baseColor * Mathf.LinearToGammaSpace(0.2f);
+        }
+        if (emission > 0.3f)
+        {
+            finalColor = baseColor * Mathf.LinearToGammaSpace(0.5f);
+        }
+        if (emission > 0.6)
+        {
+            finalColor = baseColor * Mathf.LinearToGammaSpace(1f);
+            if(!particles.isPlaying)particles.Play();
+        }
+        if (emission >= 1f)
+        {
+            finalColor = baseColor * Mathf.LinearToGammaSpace(1.5f);
+        }
 
         mat.SetColor("_EmissionColor", finalColor);
     }

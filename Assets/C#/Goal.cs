@@ -32,8 +32,9 @@ public class Goal : MonoBehaviour {
         Ball ball = other.GetComponent<Ball>();
         if (ball.canScore)
         {
+
             currentLives--;
-            if (currentLives < 0)
+            if (currentLives <= 0)
                 _scoreHandler.KillPlayer((int)currentPlayer);
             ball.canScore = false;
         }
