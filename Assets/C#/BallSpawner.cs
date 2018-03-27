@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BallSpawner : MonoBehaviour {
 
-    public List<Ball> Balls;
+    public List<Ball> normalBalls;
+    private int maxNormalBallCount;
 
     [SerializeField]
     private GameObject ballDeath;
@@ -14,14 +15,11 @@ public class BallSpawner : MonoBehaviour {
     [SerializeField]
     private Ball ballPrefab;
 
-    public int maxBAAALLSSSSSSSSS = 8;
-
     public Transform[] Cannons;
     private Transform nextCannon;
     private int CannonAmount;
-
-    [SerializeField]
-    float _firingInterval = 5f;
+    
+    float _firingInterval;
     float _ballTimer = 0f;
     [SerializeField]
     float _fireForce = 5f;
@@ -33,11 +31,21 @@ public class BallSpawner : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        for(int i = 0; i<maxBAAALLSSSSSSSSS; i++)
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        // normal balls
+        maxNormalBallCount = gameManager.normalBallCount;
+        for(int i = 0; i < maxNormalBallCount; i++)
         {
             //Instantiates all balls to somewhere far away
-            Balls.Add(Instantiate(ballPrefab, new Vector3(-25,-25, 25), transform.rotation, transform));
+            Ball ball = Instantiate(ballPrefab, new Vector3(-25, 100, 25), transform.rotation, transform);
+            ball.gameObject.SetActive(false);
+            ball.canFly = gameManager.ballCanFly;
+            ball.minSpeed = gameManager.ballMinSpeed;
+
+            normalBalls.Add(ball);
         }
+        // cannon
+        _firingInterval = gameManager.firingInterval;
         CannonAmount = Cannons.Length;
         //Randomizes the first cannon to shoot.
         nextCannon = RandomizeCannon();
@@ -62,12 +70,12 @@ public class BallSpawner : MonoBehaviour {
     //Checks if number of balls is still maxballs, sometimes they get deleted by trash collector or something
     private void CheckBallCount()
     {
-        if (Balls.Count != maxBAAALLSSSSSSSSS)
+        if (normalBalls.Count != maxNormalBallCount)
         {
-            var missing = maxBAAALLSSSSSSSSS - Balls.Count;
+            var missing = maxNormalBallCount - normalBalls.Count;
             for (int i = 0; i < missing; i++)
             {
-                Balls.Add(Instantiate(ballPrefab, new Vector3(-25, -25, 25), transform.rotation, transform));
+                normalBalls.Add(Instantiate(ballPrefab, new Vector3(-25, 100, 25), transform.rotation, transform));
             }
         }
     }
@@ -85,12 +93,13 @@ public class BallSpawner : MonoBehaviour {
     }
 	
 	// Physics related stuff in fixed update
-	void FixedUpdate () {     
-        foreach(Ball ball in Balls)
+	void FixedUpdate () {
+        /*
+        foreach(Ball ball in normalBalls)
         {
             if (ball != null)
             {
-                if (ball.transform.position.y < -0.5 && ball.gameObject.activeSelf)
+                if (ball.transform.position.y < -5 && ball.gameObject.activeSelf)
                 {
                     ball.Rb.velocity = Vector3.zero;
                     ball.gameObject.SetActive(false);
@@ -99,11 +108,13 @@ public class BallSpawner : MonoBehaviour {
                 }
             }
         }
+        */
         if (canFire)
         {
-            if (GetInactiveBall() != null)
+            Ball ball = GetInactiveBall();
+            if (ball != null)
             {
-                PrepareFire(GetInactiveBall());
+                PrepareFire(ball);
                 canFire = false;
             }
         }
@@ -112,7 +123,7 @@ public class BallSpawner : MonoBehaviour {
 
     private Ball GetInactiveBall()
     {
-        foreach(Ball ball in Balls)
+        foreach(Ball ball in normalBalls)
         {
             if (!ball.gameObject.activeSelf)
             {

@@ -189,7 +189,7 @@ TrailRenderer:
     textureMode: 1
     generateLightingData: 0
   m_MinVertexDistance: 0.1
-  m_Autodestruct: 1
+  m_Autodestruct: 0
 --- !u!114 &114724535363039100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,12 +201,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af44bfaf8257a94e853157517c16f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpeed: 5
+  minSpeed: 0
+  isMagneted: 0
   canScore: 1
   canFly: 0
-  floorLayer:
-    serializedVersion: 2
-    m_Bits: 1024
   canBePulsed: 0
   isFixedY: 0
   Rb: {fileID: 0}

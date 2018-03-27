@@ -6,9 +6,13 @@ public class KartMovement : MonoBehaviour
 {
     public float speed;
     public Curve movementCurve;
-
-    private float _input;
+    
     private float _curveTime = 0.5f;
+
+    private void Start()
+    {
+        speed = FindObjectOfType<GameManager>().playerSpeed;
+    }
 
     public void Move(float _input)
     {
