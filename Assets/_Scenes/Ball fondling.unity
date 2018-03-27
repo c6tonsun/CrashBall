@@ -3619,11 +3619,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ed5e11dcd6d4c4798e8121105df477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalBallPrefab: {fileID: 114724535363039100, guid: a548c401c4c8b684082904c92f547886,
+    type: 2}
   normalBalls: []
+  stunBallPrefab: {fileID: 114627934752554184, guid: f2870901075625448926f14570ac0838,
+    type: 2}
+  stunBalls: []
   ballDeath: {fileID: 1831213469002752, guid: 1102d9d755f47d34eb691105dc605b14, type: 2}
   ballRespawn: {fileID: 1076742873643386, guid: c5d871548f70e6a47927f34096b06fe0,
-    type: 2}
-  ballPrefab: {fileID: 114724535363039100, guid: a548c401c4c8b684082904c92f547886,
     type: 2}
   Cannons:
   - {fileID: 2140608352}
@@ -7006,7 +7009,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 75518007}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: end
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
@@ -7332,7 +7335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 133602704}
   - component: {fileID: 133602705}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14130,7 +14133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 197220291}
   - component: {fileID: 197220292}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14471,7 +14474,7 @@ GameObject:
   - component: {fileID: 248899376}
   - component: {fileID: 248899375}
   - component: {fileID: 248899374}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14561,7 +14564,7 @@ GameObject:
   - component: {fileID: 262921847}
   - component: {fileID: 262921846}
   - component: {fileID: 262921845}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BumperKart (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14599,7 +14602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278a6175af69f074c9615d19602a12b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  stunTimer: 0
   movementCurve: {fileID: 541870680}
 --- !u!114 &262921846
 MonoBehaviour:
@@ -14731,7 +14734,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2052138741
+  randomSeed: 1634936755
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -18028,7 +18031,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 489348183}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PulseOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24916,7 +24919,7 @@ GameObject:
   - component: {fileID: 393316445}
   - component: {fileID: 393316444}
   - component: {fileID: 393316443}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28666,7 +28669,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1545876152}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: -0.7}
+  m_LocalPosition: {x: 0, y: -0.4, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1296982583}
@@ -28680,7 +28683,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 295100726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: -0.7}
+  m_LocalPosition: {x: 0, y: -0.4, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1336003940}
@@ -28698,7 +28701,7 @@ GameObject:
   - component: {fileID: 489414088}
   - component: {fileID: 489414087}
   - component: {fileID: 489414086}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29009,7 +29012,7 @@ GameObject:
   m_Component:
   - component: {fileID: 541870679}
   - component: {fileID: 541870680}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Curve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35802,7 +35805,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 562274551}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: middle
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
@@ -35834,7 +35837,7 @@ GameObject:
   - component: {fileID: 614922603}
   - component: {fileID: 614922605}
   - component: {fileID: 614922604}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42716,7 +42719,7 @@ GameObject:
   - component: {fileID: 680352847}
   - component: {fileID: 680352849}
   - component: {fileID: 680352848}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42967,7 +42970,7 @@ GameObject:
   - component: {fileID: 756698193}
   - component: {fileID: 756698195}
   - component: {fileID: 756698194}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43042,7 +43045,7 @@ GameObject:
   - component: {fileID: 780284175}
   - component: {fileID: 780284174}
   - component: {fileID: 780284173}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BumperKart (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43080,7 +43083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278a6175af69f074c9615d19602a12b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  stunTimer: 0
   movementCurve: {fileID: 1036642433}
 --- !u!114 &780284174
 MonoBehaviour:
@@ -43212,7 +43215,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 911199828
+  randomSeed: 1489927079
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -53271,7 +53274,7 @@ GameObject:
   - component: {fileID: 826818584}
   - component: {fileID: 826818586}
   - component: {fileID: 826818585}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53417,7 +53420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 852090628}
   - component: {fileID: 852090629}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlayerPrefab (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60468,7 +60471,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 948691852}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: end
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
@@ -63864,7 +63867,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1158046176}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PulseOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63946,7 +63949,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1031598105}
   - component: {fileID: 1031598106}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlayerPrefab (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67346,7 +67349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036642432}
   - component: {fileID: 1036642433}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Curve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70761,7 +70764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1057930947}
   - component: {fileID: 1057930948}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlayerPrefab (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70964,16 +70967,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCount: 0
-  playerSpeed: 1
-  pulseCooldown: 0
-  pulseForce: 10
-  pulseArea: 4
+  playerSpeed: 2.5
+  maxStunTime: 1
+  pulseCooldown: 0.2
+  pulseForce: 15
+  pulseArea: 3
+  maxMagnetTime: 2
   ballCanFly: 0
   ballMinSpeed: 5
   normalBallCount: 8
-  normalBallLikelyness: 0
-  stunBallCount: 0
-  StunBallLikelyness: 0
+  normalBallLikelyness: 1
+  stunBallCount: 4
+  stunBallLikelyness: 0.51
   firingInterval: 2
   currentMode: 1
   playerLives: 5
@@ -70999,7 +71004,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1003363856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: -0.7}
+  m_LocalPosition: {x: 0, y: -0.4, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 780284172}
@@ -74614,7 +74619,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1275290956}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: middle
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
@@ -74706,7 +74711,7 @@ GameObject:
   - component: {fileID: 1296982586}
   - component: {fileID: 1296982585}
   - component: {fileID: 1296982584}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BumperKart (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74720,7 +74725,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1296982582}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0.70000005, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
@@ -74744,7 +74749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278a6175af69f074c9615d19602a12b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  stunTimer: 0
   movementCurve: {fileID: 1421595612}
 --- !u!114 &1296982585
 MonoBehaviour:
@@ -74876,7 +74881,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 644690295
+  randomSeed: 254979060
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -81466,7 +81471,7 @@ GameObject:
   - component: {fileID: 1336003943}
   - component: {fileID: 1336003942}
   - component: {fileID: 1336003941}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BumperKart (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81504,7 +81509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278a6175af69f074c9615d19602a12b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  stunTimer: 0
   movementCurve: {fileID: 1994839004}
 --- !u!114 &1336003942
 MonoBehaviour:
@@ -81636,7 +81641,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -414696319
+  randomSeed: 184146084
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -84964,7 +84969,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1421595611}
   - component: {fileID: 1421595612}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Curve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85072,7 +85077,7 @@ GameObject:
   - component: {fileID: 1457420178}
   - component: {fileID: 1457420180}
   - component: {fileID: 1457420179}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88688,7 +88693,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1488334753}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: middle
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
@@ -88719,7 +88724,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1488878767}
   - component: {fileID: 1488878768}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95680,7 +95685,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 469582938}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PulseOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95696,7 +95701,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1548744589}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
@@ -95726,7 +95731,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1765149043}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PulseOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105963,7 +105968,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1695385630}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
@@ -106155,7 +106160,7 @@ GameObject:
   - component: {fileID: 1723738439}
   - component: {fileID: 1723738438}
   - component: {fileID: 1723738437}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109669,7 +109674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1747994204}
   - component: {fileID: 1747994205}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlayerPrefab (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109719,7 +109724,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1556039715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: -0.7}
+  m_LocalPosition: {x: 0, y: -0.4, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 262921844}
@@ -109734,7 +109739,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1776353793}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
@@ -109911,7 +109916,7 @@ GameObject:
   - component: {fileID: 1792124345}
   - component: {fileID: 1792124347}
   - component: {fileID: 1792124346}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113374,7 +113379,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1799700971}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
@@ -113406,7 +113411,7 @@ GameObject:
   - component: {fileID: 1821446665}
   - component: {fileID: 1821446667}
   - component: {fileID: 1821446666}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120287,7 +120292,7 @@ GameObject:
   - component: {fileID: 1911563761}
   - component: {fileID: 1911563763}
   - component: {fileID: 1911563762}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120358,7 +120363,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1924121824}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: end
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
@@ -123772,7 +123777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1994839003}
   - component: {fileID: 1994839004}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Curve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123821,7 +123826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2016675724}
   - component: {fileID: 2016675725}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123962,7 +123967,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2051142148}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: middle
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
@@ -124079,7 +124084,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2105549302}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: end
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}

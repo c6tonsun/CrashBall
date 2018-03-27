@@ -4,19 +4,31 @@ using UnityEngine;
 
 public class KartMovement : MonoBehaviour
 {
-    public float speed;
+    private float speed;
+    private float maxStunTime;
+    [HideInInspector]
+    public float stunTimer;
+
     public Curve movementCurve;
-    
     private float _curveTime = 0.5f;
 
     private void Start()
     {
-        speed = FindObjectOfType<GameManager>().playerSpeed;
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        speed = gameManager.playerSpeed;
+        maxStunTime = gameManager.maxStunTime;
+        stunTimer = maxStunTime;
+    }
+
+    private void Update()
+    {
+        stunTimer += Time.deltaTime;
     }
 
     public void Move(float _input)
     {
-        #region movement
+        if (stunTimer < maxStunTime)
+            _input *= 0.25f;
 
         _curveTime += _input * speed * Time.deltaTime;
         if (_curveTime < 0)
@@ -26,7 +38,6 @@ public class KartMovement : MonoBehaviour
 
         transform.position = MathHelp.GetCurvePosition(movementCurve.start.position, movementCurve.middle.position, movementCurve.end.position, _curveTime);
         transform.rotation = MathHelp.GetCurveRotation(movementCurve.start.rotation, movementCurve.middle.rotation, movementCurve.end.rotation, _curveTime);
-        #endregion
 
         transform.Rotate(Vector3.forward * 15 * _input);
     }

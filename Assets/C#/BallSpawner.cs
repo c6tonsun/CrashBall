@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class BallSpawner : MonoBehaviour {
 
+    [SerializeField]
+    private Ball normalBallPrefab;
     public List<Ball> normalBalls;
     private int maxNormalBallCount;
+    private float normalBallLikelyness;
+
+    [SerializeField]
+    private Ball stunBallPrefab;
+    public List<Ball> stunBalls;
+    private int maxStunBallCount;
+    private float stunBallLikelyness;
 
     [SerializeField]
     private GameObject ballDeath;
     [SerializeField]
     private GameObject ballRespawn;
 
-    [SerializeField]
-    private Ball ballPrefab;
 
     public Transform[] Cannons;
     private Transform nextCannon;
@@ -32,18 +39,15 @@ public class BallSpawner : MonoBehaviour {
     void Start ()
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
-        // normal balls
+        // balls
         maxNormalBallCount = gameManager.normalBallCount;
-        for(int i = 0; i < maxNormalBallCount; i++)
-        {
-            //Instantiates all balls to somewhere far away
-            Ball ball = Instantiate(ballPrefab, new Vector3(-25, 100, 25), transform.rotation, transform);
-            ball.gameObject.SetActive(false);
-            ball.canFly = gameManager.ballCanFly;
-            ball.minSpeed = gameManager.ballMinSpeed;
+        MakeBallList(normalBalls, normalBallPrefab, maxNormalBallCount, gameManager);
 
-            normalBalls.Add(ball);
-        }
+        maxStunBallCount = gameManager.stunBallCount;
+        MakeBallList(stunBalls, stunBallPrefab, maxStunBallCount, gameManager);
+
+        normalBallLikelyness = gameManager.normalBallLikelyness;
+        stunBallLikelyness = gameManager.stunBallLikelyness;
         // cannon
         _firingInterval = gameManager.firingInterval;
         CannonAmount = Cannons.Length;
@@ -64,19 +68,19 @@ public class BallSpawner : MonoBehaviour {
         }
 
         _firingInterval += -(Time.deltaTime/90f);
-        CheckBallCount();
     }
 
-    //Checks if number of balls is still maxballs, sometimes they get deleted by trash collector or something
-    private void CheckBallCount()
+    private void MakeBallList(List<Ball> list, Ball prefab, int listLenght, GameManager gameManager)
     {
-        if (normalBalls.Count != maxNormalBallCount)
+        for (int i = 0; i < listLenght; i++)
         {
-            var missing = maxNormalBallCount - normalBalls.Count;
-            for (int i = 0; i < missing; i++)
-            {
-                normalBalls.Add(Instantiate(ballPrefab, new Vector3(-25, 100, 25), transform.rotation, transform));
-            }
+            //Instantiates all balls to somewhere far away
+            Ball ball = Instantiate(prefab, new Vector3(-25, 100, 25), transform.rotation, transform);
+            ball.gameObject.SetActive(false);
+            ball.canFly = gameManager.ballCanFly;
+            ball.minSpeed = gameManager.ballMinSpeed;
+
+            list.Add(ball);
         }
     }
 
@@ -94,24 +98,14 @@ public class BallSpawner : MonoBehaviour {
 	
 	// Physics related stuff in fixed update
 	void FixedUpdate () {
-        /*
-        foreach(Ball ball in normalBalls)
-        {
-            if (ball != null)
-            {
-                if (ball.transform.position.y < -5 && ball.gameObject.activeSelf)
-                {
-                    ball.Rb.velocity = Vector3.zero;
-                    ball.gameObject.SetActive(false);
-                    //nextCannon = RandomizeCannon();
-                    Destroy(Instantiate(ballDeath, ball.transform.position, ballDeath.transform.rotation), 2.6f);
-                }
-            }
-        }
-        */
         if (canFire)
         {
-            Ball ball = GetInactiveBall();
+            Ball ball = null;
+            if (Random.Range(0f, normalBallLikelyness + stunBallLikelyness) < normalBallLikelyness)
+                ball = GetInactiveBall(normalBalls);
+            else
+                ball = GetInactiveBall(stunBalls);
+
             if (ball != null)
             {
                 PrepareFire(ball);
@@ -121,9 +115,9 @@ public class BallSpawner : MonoBehaviour {
 
     }
 
-    private Ball GetInactiveBall()
+    private Ball GetInactiveBall(List<Ball> list)
     {
-        foreach(Ball ball in normalBalls)
+        foreach(Ball ball in list)
         {
             if (!ball.gameObject.activeSelf)
             {
@@ -132,6 +126,7 @@ public class BallSpawner : MonoBehaviour {
         }
         return null;
     }
+
     private void PrepareFire(Ball ball)
     {
         var cannon = nextCannon;
@@ -140,6 +135,7 @@ public class BallSpawner : MonoBehaviour {
         Destroy(Instantiate(ballRespawn, cannon.transform.position+cannon.forward, cannon.transform.rotation), 2.4f);
         ball.gameObject.SetActive(true);        
         ball.Rb.AddForce((cannon.forward * (_fireForce)), ForceMode.Impulse); // TODO: This works irregurarily, no idea why. Possible fix: actually lerp the cannon to turn around.
+        ball.transform.parent = transform;
         nextCannon = RandomizeCannon();
     }
 

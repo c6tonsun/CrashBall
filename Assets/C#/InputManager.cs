@@ -80,12 +80,16 @@ public class InputManager : MonoBehaviour {
         if (movementInput > -inputDeadzone && movementInput < inputDeadzone)
             movementInput = 0f;
 
-        player.movement.Move(movementInput);
-
         if (pulseInput)
+        {
+            player.movement.Move(movementInput * 0.5f);
             player.pulse.Magnet();
+        }
         else
+        {
+            player.movement.Move(movementInput);
             player.pulse.Pulse();
+        }
     }
 
     private bool ActTriggerInput(int playerNumber, bool doPulse)
