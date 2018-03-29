@@ -1037,7 +1037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &362317043
 Transform:
   m_ObjectHideFlags: 0
@@ -1068,6 +1068,14 @@ MonoBehaviour:
   _materials:
   - {fileID: 2100000, guid: ea82d87bbe9570c48875a219a3fae68b, type: 2}
   - {fileID: 2100000, guid: c2669ef9e31327146a972394fddea37f, type: 2}
+  _mainMenu: []
+  _char1Menu: []
+  _char2Menu: []
+  _char3Menu: []
+  _char4Menu: []
+  _modeMenu: []
+  _stageMenu: []
+  _ballMenu: []
 --- !u!1 &362838475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,7 +1156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &460342638
 Transform:
   m_ObjectHideFlags: 0
@@ -1179,6 +1187,14 @@ MonoBehaviour:
   _materials:
   - {fileID: 2100000, guid: ea82d87bbe9570c48875a219a3fae68b, type: 2}
   - {fileID: 2100000, guid: c2669ef9e31327146a972394fddea37f, type: 2}
+  _mainMenu: []
+  _char1Menu: []
+  _char2Menu: []
+  _char3Menu: []
+  _char4Menu: []
+  _modeMenu: []
+  _stageMenu: []
+  _ballMenu: []
 --- !u!1 &479491375
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,7 +2864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &842092164
 Transform:
   m_ObjectHideFlags: 0
@@ -2879,6 +2895,14 @@ MonoBehaviour:
   _materials:
   - {fileID: 2100000, guid: ea82d87bbe9570c48875a219a3fae68b, type: 2}
   - {fileID: 2100000, guid: c2669ef9e31327146a972394fddea37f, type: 2}
+  _mainMenu: []
+  _char1Menu: []
+  _char2Menu: []
+  _char3Menu: []
+  _char4Menu: []
+  _modeMenu: []
+  _stageMenu: []
+  _ballMenu: []
 --- !u!1 &858659852
 GameObject:
   m_ObjectHideFlags: 0
@@ -4152,6 +4176,14 @@ MonoBehaviour:
   _materials:
   - {fileID: 2100000, guid: ea82d87bbe9570c48875a219a3fae68b, type: 2}
   - {fileID: 2100000, guid: c2669ef9e31327146a972394fddea37f, type: 2}
+  _mainMenu: []
+  _char1Menu: []
+  _char2Menu: []
+  _char3Menu: []
+  _char4Menu: []
+  _modeMenu: []
+  _stageMenu: []
+  _ballMenu: []
 --- !u!4 &1339835732
 Transform:
   m_ObjectHideFlags: 0
