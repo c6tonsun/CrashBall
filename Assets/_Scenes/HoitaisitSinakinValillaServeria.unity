@@ -158,7 +158,7 @@ Prefab:
     - target: {fileID: 2300008, guid: 74f7b815b2c491f48aeaa475f5ed495a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 786fbc8cc1ba4cb469d977c8b7e2f202, type: 2}
+      objectReference: {fileID: 2100000, guid: f1fb68b91760573408a08179cc9526ac, type: 2}
     - target: {fileID: 100010, guid: 74f7b815b2c491f48aeaa475f5ed495a, type: 3}
       propertyPath: m_Name
       value: GoalPipe
@@ -203,6 +203,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a107645548f89994abde8e058949c8e3, type: 2}
+    - target: {fileID: 2300016, guid: 74f7b815b2c491f48aeaa475f5ed495a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1fb68b91760573408a08179cc9526ac, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 74f7b815b2c491f48aeaa475f5ed495a, type: 3}
   m_IsPrefabParent: 0

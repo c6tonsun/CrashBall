@@ -93,7 +93,7 @@ public class KartPulse : MonoBehaviour
         pulseTimer = 0f;
         magnetTimer = 0f;
 
-        my_ParticleSystem.Play();
+        my_ParticleSystem.Play(withChildren:false);
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
         Ball[] balls = new Ball[colliders.Length];
         for (int i = 0; i < balls.Length; i++)

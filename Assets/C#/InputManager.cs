@@ -11,6 +11,10 @@ public class InputManager : MonoBehaviour {
     public float inputDeadzone = 0.5f;
 
     private int oldTriggerInput = 0;
+
+    [SerializeField]
+    GameObject pauseMenu;
+    public bool Paused = false;
     
 	private void Start ()
     {
@@ -35,6 +39,21 @@ public class InputManager : MonoBehaviour {
         foreach (Player player in _players)
         {
             ActPlayerInput(player);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Paused = !Paused;
+        }
+        if (Paused)
+        {
+            Time.timeScale = 0.0f;
+            pauseMenu.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+            pauseMenu.SetActive(false);
         }
     }
 
