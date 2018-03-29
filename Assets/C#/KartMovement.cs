@@ -12,6 +12,9 @@ public class KartMovement : MonoBehaviour
     public Curve movementCurve;
     private float _curveTime = 0.5f;
 
+    [SerializeField]
+    private ParticleSystem stunParticles;
+
     private void Start()
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
@@ -28,7 +31,14 @@ public class KartMovement : MonoBehaviour
     public void Move(float _input)
     {
         if (stunTimer < maxStunTime)
+        {
             _input *= 0.25f;
+            stunParticles.Play();
+        }
+        else
+        {
+            if (stunParticles.isPlaying) stunParticles.Stop();
+        }
 
         _curveTime += _input * speed * Time.deltaTime;
         if (_curveTime < 0)
