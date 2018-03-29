@@ -164662,7 +164662,6 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
-<<<<<<< HEAD
 --- !u!114 &2094114416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164680,8 +164679,6 @@ MonoBehaviour:
   maxOffsetRot: {x: 1, y: 1, z: 0}
   shake: 1
   maxShakeTime: 0.5
-=======
->>>>>>> 466ec16e3bba5ae0d61966a4eb2209d156283252
 --- !u!1 &2099815116
 GameObject:
   m_ObjectHideFlags: 0
