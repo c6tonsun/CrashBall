@@ -62,7 +62,7 @@ public class KartPulse : MonoBehaviour
         
         foreach (Ball ball in balls)
         {
-            if (!ball.canBePulsed || !ball.canScore)
+            if (!ball.canBePulsed || !ball.canScore || !ball.canBeMagneted)
                 continue;
             
             float inForce = ball.Rb.velocity.magnitude;
