@@ -16,6 +16,8 @@ public class Ball : MonoBehaviour {
     public bool canBePulsed = false;
     [HideInInspector]
     public bool isFixedY = false;
+    [HideInInspector]
+    public bool canBeMagneted = true;
 
     [HideInInspector]
     public Rigidbody Rb;
