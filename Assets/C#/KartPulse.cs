@@ -55,6 +55,9 @@ public class KartPulse : MonoBehaviour
 
         canPulse = true;
 
+        if (magnetTimer < 0.1f)
+            return;
+
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
         Ball[] balls = new Ball[colliders.Length];
         for (int i = 0; i < balls.Length; i++)
