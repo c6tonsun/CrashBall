@@ -6,5 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Ball fondling.unity
+    path: Assets/_Scenes/Ball fondling.unity
     guid: fa764feee11f39043a321456c94c4f3d
