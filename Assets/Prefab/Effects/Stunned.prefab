@@ -51,8 +51,8 @@ ParticleSystem:
   lengthInSec: 2
   simulationSpeed: 1
   looping: 1
-  prewarm: 0
-  playOnAwake: 1
+  prewarm: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -100,7 +100,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1715127353
+  randomSeed: -1919260673
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -496,7 +496,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 150
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -660,7 +660,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 250
+      scalar: 150
       minScalar: 150
       maxCurve:
         serializedVersion: 2
@@ -1006,17 +1006,17 @@ ParticleSystem:
         key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0.15862082, g: 0, b: 1, a: 0.24313726}
         key3: {r: 1, g: 1, b: 1, a: 0.9019608}
-        key4: {r: 0, g: 1, b: 0.048275948, a: 0.5647059}
-        key5: {r: 0.86206913, g: 0, b: 1, a: 1}
-        key6: {r: 1, g: 0.8896551, b: 0, a: 0}
+        key4: {r: 0.86206913, g: 0, b: 1, a: 0.5647059}
+        key5: {r: 0, g: 1, b: 0.9172416, a: 1}
+        key6: {r: 0, g: 1, b: 0.9172416, a: 0}
         key7: {r: 0, g: 1, b: 0.9172416, a: 0}
         ctime0: 0
         ctime1: 7325
         ctime2: 17540
         ctime3: 26214
-        ctime4: 37201
-        ctime5: 50115
-        ctime6: 55512
+        ctime4: 50115
+        ctime5: 65535
+        ctime6: 65535
         ctime7: 65535
         atime0: 0
         atime1: 12914
@@ -1027,7 +1027,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 8
+        m_NumColorKeys: 6
         m_NumAlphaKeys: 6
       minGradient:
         serializedVersion: 2
@@ -2364,9 +2364,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 3
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -2506,7 +2506,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 1024
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -2742,7 +2742,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.63
+      scalar: 0.6
       minScalar: 1
       maxCurve:
         serializedVersion: 2
