@@ -39,7 +39,7 @@ public class Ball : MonoBehaviour {
         Rb.velocity = Vector3.zero;
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         magnetedTime -= Time.fixedDeltaTime;
 
