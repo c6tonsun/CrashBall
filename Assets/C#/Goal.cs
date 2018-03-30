@@ -15,6 +15,7 @@ public class Goal : MonoBehaviour {
     public Number currentPlayer;
     
     private ScoreHandler _scoreHandler;
+    private CameraShake cameraShake;
 
     private int lives;
     private int currentLives;
@@ -25,6 +26,7 @@ public class Goal : MonoBehaviour {
         _scoreHandler = FindObjectOfType<ScoreHandler>();
         lives = FindObjectOfType<GameManager>().playerLives;
         currentLives = lives;
+        cameraShake = FindObjectOfType<CameraShake>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -32,10 +34,13 @@ public class Goal : MonoBehaviour {
         Ball ball = other.GetComponent<Ball>();
         if (ball.canScore)
         {
-
+            cameraShake.SetShakeTime(0.125f);
             currentLives--;
             if (currentLives <= 0)
+            {
+                cameraShake.SetShakeTime(0.5f);
                 _scoreHandler.KillPlayer((int)currentPlayer);
+            }
             ball.canScore = false;
         }
     }

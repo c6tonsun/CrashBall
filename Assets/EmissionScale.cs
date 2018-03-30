@@ -10,7 +10,10 @@ public class EmissionScale : MonoBehaviour {
 
     [SerializeField]
     private Goal playerGoal;
-    private ParticleSystem particles;
+    [SerializeField]
+    private ParticleSystem BeamPrepare;
+    [SerializeField]
+    private ParticleSystem BeamOn;
 
     private int playerMaxHP;
     private float playerHP;
@@ -22,9 +25,11 @@ public class EmissionScale : MonoBehaviour {
     void Start () {       
         _renderer = GetComponent<Renderer>();
         mat = _renderer.material;
-        particles = GetComponent<ParticleSystem>();
+        //particles = GetComponent<ParticleSystem>();
         baseColor = new Color(0.13f, 0.27f, 0.54f);
         playerMaxHP = FindObjectOfType<GameManager>().playerLives;
+        BeamPrepare.Stop();
+        BeamOn.Stop();
     }
 
     // Update is called once per frame
@@ -32,26 +37,32 @@ public class EmissionScale : MonoBehaviour {
         playerHP = playerGoal.GetCurrentLives();
 
         float emission = (1f - (playerHP / playerMaxHP));
+        if (playerHP != oldPlayerHP)
+        {
+            Color finalColor = baseColor * Mathf.LinearToGammaSpace(0);
+            if (emission > 0.1f)
+            {
+                finalColor = baseColor * Mathf.LinearToGammaSpace(0.2f);
+            }
+            if (emission > 0.3f)
+            {
+                finalColor = baseColor * Mathf.LinearToGammaSpace(0.5f);
+            }
+            if (emission > 0.6)
+            {
+                finalColor = baseColor * Mathf.LinearToGammaSpace(1f);
+                if (!BeamPrepare.isPlaying) BeamPrepare.Play();
+            }
+            if (emission >= 1f)
+            {
+                finalColor = baseColor * Mathf.LinearToGammaSpace(1.5f);
+                if (BeamPrepare.isPlaying) BeamPrepare.Stop();
+                if (!BeamOn.isPlaying) BeamOn.Play();
+            }
 
-        Color finalColor = baseColor * Mathf.LinearToGammaSpace(0);
-        if (emission > 0.1f)
-        {
-            finalColor = baseColor * Mathf.LinearToGammaSpace(0.2f);
-        }
-        if (emission > 0.3f)
-        {
-            finalColor = baseColor * Mathf.LinearToGammaSpace(0.5f);
-        }
-        if (emission > 0.6)
-        {
-            finalColor = baseColor * Mathf.LinearToGammaSpace(1f);
-            if(!particles.isPlaying)particles.Play();
-        }
-        if (emission >= 1f)
-        {
-            finalColor = baseColor * Mathf.LinearToGammaSpace(1.5f);
-        }
+            mat.SetColor("_EmissionColor", finalColor);
 
-        mat.SetColor("_EmissionColor", finalColor);
+            oldPlayerHP = playerHP;
+        }
     }
 }

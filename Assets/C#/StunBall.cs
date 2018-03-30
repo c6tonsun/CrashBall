@@ -4,10 +4,30 @@ using UnityEngine;
 
 public class StunBall : Ball {
 
+    private void Start()
+    {
+        canBeMagneted = false;
+    }
+    
+    protected void FixedUpdate() 
+    {
+        base.FixedUpdate();
+        Rb.velocity = Rb.velocity.normalized * minSpeed * 2;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        StunPlayer(collision.collider.GetComponentInParent<Player>());
+    }
+
     protected new void OnCollisionStay(Collision collision)
     {
         base.OnCollisionStay(collision);
-        Player player = collision.collider.GetComponentInParent<Player>();
+        StunPlayer(collision.collider.GetComponentInParent<Player>());
+    }
+
+    private void StunPlayer(Player player)
+    {
         if (player == null)
             return;
 

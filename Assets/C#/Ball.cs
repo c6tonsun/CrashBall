@@ -16,6 +16,8 @@ public class Ball : MonoBehaviour {
     public bool canBePulsed = false;
     [HideInInspector]
     public bool isFixedY = false;
+    [HideInInspector]
+    public bool canBeMagneted = true;
 
     [HideInInspector]
     public Rigidbody Rb;
@@ -37,7 +39,7 @@ public class Ball : MonoBehaviour {
         Rb.velocity = Vector3.zero;
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         magnetedTime -= Time.fixedDeltaTime;
 

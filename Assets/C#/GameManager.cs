@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour {
     public enum GameMode                // implement
     {
         ERROR = 0,
-        Elimination = 1
+        Elimination = 1,
+        ScoreRun = 2
     }
     public GameMode currentMode = GameMode.Elimination;
     public int playerLives;

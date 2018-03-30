@@ -55,6 +55,9 @@ public class KartPulse : MonoBehaviour
 
         canPulse = true;
 
+        if (magnetTimer < 0.1f)
+            return;
+
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
         Ball[] balls = new Ball[colliders.Length];
         for (int i = 0; i < balls.Length; i++)
@@ -62,7 +65,7 @@ public class KartPulse : MonoBehaviour
         
         foreach (Ball ball in balls)
         {
-            if (!ball.canBePulsed || !ball.canScore)
+            if (!ball.canBePulsed || !ball.canScore || !ball.canBeMagneted)
                 continue;
             
             float inForce = ball.Rb.velocity.magnitude;
@@ -93,7 +96,7 @@ public class KartPulse : MonoBehaviour
         pulseTimer = 0f;
         magnetTimer = 0f;
 
-        my_ParticleSystem.Play();
+        my_ParticleSystem.Play(withChildren:false);
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
         Ball[] balls = new Ball[colliders.Length];
         for (int i = 0; i < balls.Length; i++)

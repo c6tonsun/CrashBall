@@ -150,15 +150,15 @@ Prefab:
     - target: {fileID: 2300002, guid: 74f7b815b2c491f48aeaa475f5ed495a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1a6a7678642f52e4d8da29e80d4bd297, type: 2}
+      objectReference: {fileID: 2100000, guid: f1fa4b3aecb8f8149a1c24a9c03c03d4, type: 2}
     - target: {fileID: 2300004, guid: 74f7b815b2c491f48aeaa475f5ed495a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c2669ef9e31327146a972394fddea37f, type: 2}
+      objectReference: {fileID: 2100000, guid: 73722171be5c1774aa1da0cf11b069c8, type: 2}
     - target: {fileID: 2300008, guid: 74f7b815b2c491f48aeaa475f5ed495a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 786fbc8cc1ba4cb469d977c8b7e2f202, type: 2}
+      objectReference: {fileID: 2100000, guid: f1fb68b91760573408a08179cc9526ac, type: 2}
     - target: {fileID: 100010, guid: 74f7b815b2c491f48aeaa475f5ed495a, type: 3}
       propertyPath: m_Name
       value: GoalPipe
@@ -199,6 +199,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300020, guid: 74f7b815b2c491f48aeaa475f5ed495a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a107645548f89994abde8e058949c8e3, type: 2}
+    - target: {fileID: 2300016, guid: 74f7b815b2c491f48aeaa475f5ed495a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1fb68b91760573408a08179cc9526ac, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 74f7b815b2c491f48aeaa475f5ed495a, type: 3}
   m_IsPrefabParent: 0
