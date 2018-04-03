@@ -14,6 +14,9 @@ public class KartMovement : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem stunParticles;
+    private Animator kartAnimator;
+
+    private bool debugshit = false;
 
     private void Start()
     {
@@ -21,6 +24,8 @@ public class KartMovement : MonoBehaviour
         speed = gameManager.playerSpeed;
         maxStunTime = gameManager.maxStunTime;
         stunTimer = maxStunTime;
+
+        kartAnimator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -49,6 +54,11 @@ public class KartMovement : MonoBehaviour
         transform.position = MathHelp.GetCurvePosition(movementCurve.start.position, movementCurve.middle.position, movementCurve.end.position, _curveTime);
         transform.rotation = MathHelp.GetCurveRotation(movementCurve.start.rotation, movementCurve.middle.rotation, movementCurve.end.rotation, _curveTime);
 
-        transform.Rotate(Vector3.forward * 15 * _input);
+        if (kartAnimator != null)
+        {
+            kartAnimator.SetFloat("Input", _input);
+            var bonus = (_curveTime < 0.55 && _curveTime > 0.45) ? true : false;
+            kartAnimator.SetBool("Bonus", bonus);
+        }
     }
 }

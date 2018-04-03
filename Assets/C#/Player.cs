@@ -17,6 +17,10 @@ public class Player : MonoBehaviour {
 
     public bool hasController;
 
+    [SerializeField]
+    private GameObject DeathParticlePrefab;
+    private float _deathParticleDuration;
+
     [HideInInspector]
     public KartMovement movement;
     [HideInInspector]
@@ -27,10 +31,23 @@ public class Player : MonoBehaviour {
     [HideInInspector]
     public bool isLive = true;
 
+    private Animator kartAnimator;
+
+    private IEnumerator Death()
+    {
+        kartAnimator.SetBool("isDead", true);
+        Destroy(Instantiate(DeathParticlePrefab, transform.position, transform.rotation), _deathParticleDuration);
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
+        StopCoroutine("Death");
+    }
+
     private void Awake()
     {
         movement = GetComponentInChildren<KartMovement>();
         pulse = GetComponentInChildren<KartPulse>();
+        kartAnimator = GetComponentInChildren<Animator>();
+        _deathParticleDuration = DeathParticlePrefab.GetComponent<ParticleSystem>().main.duration + 0.7f;
     }
 
     public void Die()
@@ -39,6 +56,6 @@ public class Player : MonoBehaviour {
         myWall.player = this;
         myWall.playerGoal = myGoal;
         isLive = false;
-        gameObject.SetActive(false);
+        StartCoroutine("Death");
     }
 }

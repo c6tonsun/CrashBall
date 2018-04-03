@@ -14,7 +14,9 @@ public class KartPulse : MonoBehaviour
     private float pulseCooldown;
     private float pulseTimer;
     private bool canPulse;
-    private ParticleSystem my_ParticleSystem;
+    private ParticleSystem pulseParticles;
+    [SerializeField]
+    private ParticleSystem magnetParticles;
 
     [SerializeField]
     private MeshRenderer my_meshRenderer;
@@ -29,9 +31,27 @@ public class KartPulse : MonoBehaviour
         pulseCooldown = gameManager.pulseCooldown;
         maxMagnetTime = gameManager.maxMagnetTime;
 
-        my_ParticleSystem = GetComponent<ParticleSystem>();
-        var colour = my_ParticleSystem.main;
+        pulseParticles = GetComponent<ParticleSystem>();
+        var colour = pulseParticles.main;
         colour.startColor = my_meshRenderer.material.color;
+
+        magnetParticles = FindPulseOrigin();
+        var magnetColour = magnetParticles.main;
+        magnetColour.startColor = my_meshRenderer.material.color;
+    }
+
+    private ParticleSystem FindPulseOrigin()
+    {
+        var PS_array = GetComponentsInChildren<ParticleSystem>();
+        foreach (var PS in PS_array)
+        {
+            if (PS.gameObject.name.Contains("PulseOrigin"))
+            {
+                return PS;
+            }
+        }
+        Debug.Log("Error: PulseOrigin not found in children");
+        return null;
     }
 
     private void Update()
@@ -50,6 +70,7 @@ public class KartPulse : MonoBehaviour
         if (magnetTimer > maxMagnetTime)
         {
             Pulse();
+            magnetParticles.Stop();
             return;
         }
 
@@ -58,6 +79,7 @@ public class KartPulse : MonoBehaviour
         if (magnetTimer < 0.1f)
             return;
 
+        if(!magnetParticles.isPlaying) magnetParticles.Play();
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
         Ball[] balls = new Ball[colliders.Length];
         for (int i = 0; i < balls.Length; i++)
@@ -82,21 +104,24 @@ public class KartPulse : MonoBehaviour
                     direction.y = 0f;
 
                 ball.Rb.AddForce(direction.normalized * inForce * 0.4f, ForceMode.Impulse);
+                
             }
         }
     }
 
     public void Pulse()
     {
+        
         if (!canPulse)
             return;
         else
             canPulse = false;
+            magnetParticles.Stop();
 
         pulseTimer = 0f;
         magnetTimer = 0f;
 
-        my_ParticleSystem.Play(withChildren:false);
+        pulseParticles.Play(withChildren:false);
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
         Ball[] balls = new Ball[colliders.Length];
         for (int i = 0; i < balls.Length; i++)
