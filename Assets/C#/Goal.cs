@@ -38,7 +38,7 @@ public class Goal : MonoBehaviour {
             currentLives--;
             if (currentLives <= 0)
             {
-                cameraShake.SetShakeTime(0.5f);
+                cameraShake.SetShakeTime(0.3f);
                 _scoreHandler.KillPlayer((int)currentPlayer);
             }
             ball.canScore = false;

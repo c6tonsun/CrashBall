@@ -21,6 +21,8 @@ public class Player : MonoBehaviour {
     private GameObject DeathParticlePrefab;
     private float _deathParticleDuration;
 
+    private CameraShake cameraShake;
+
     [HideInInspector]
     public KartMovement movement;
     [HideInInspector]
@@ -37,7 +39,17 @@ public class Player : MonoBehaviour {
     {
         kartAnimator.SetBool("isDead", true);
         Destroy(Instantiate(DeathParticlePrefab, transform.position, transform.rotation), _deathParticleDuration);
-        yield return new WaitForSeconds(2f);
+        if (kartAnimator.GetBool("Bonus"))
+        {
+            yield return new WaitForSeconds(0.45f);
+            cameraShake.SetShakeTime(0.5f);
+            yield return new WaitForSeconds(1.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(2f);
+        }
+        
         gameObject.SetActive(false);
         StopCoroutine("Death");
     }
@@ -47,6 +59,7 @@ public class Player : MonoBehaviour {
         movement = GetComponentInChildren<KartMovement>();
         pulse = GetComponentInChildren<KartPulse>();
         kartAnimator = GetComponentInChildren<Animator>();
+        cameraShake = FindObjectOfType<CameraShake>();
         _deathParticleDuration = DeathParticlePrefab.GetComponent<ParticleSystem>().main.duration + 0.7f;
     }
 

@@ -129,14 +129,25 @@ public class BallSpawner : MonoBehaviour {
 
     private void PrepareFire(Ball ball)
     {
-        var cannon = nextCannon;
-        var offsetDirection = (Random.Range(0, 2) == 0) ? -2 : 2;  // optimized :D
-        ball.transform.position = cannon.position;
-        Destroy(Instantiate(ballRespawn, cannon.transform.position+cannon.forward, cannon.transform.rotation), 2.4f);
-        ball.gameObject.SetActive(true);        
-        ball.Rb.AddForce((cannon.forward * (_fireForce)), ForceMode.Impulse); // TODO: This works irregurarily, no idea why. Possible fix: actually lerp the cannon to turn around.
-        ball.transform.parent = transform;
+        StartCoroutine(Shoot(ball));        
         nextCannon = RandomizeCannon();
+    }
+
+    private IEnumerator Shoot(Ball ball)
+    {
+
+        //TODO: Add ground markings to tell this cannon is going to fire. 
+        var cannon = nextCannon;
+        var TurretAnimation = nextCannon.GetComponentInParent<TurretAnimSpeed>();
+        TurretAnimation.PauseAnimation(true); //This stops the cannons rotation for a while
+        Destroy(Instantiate(ballRespawn, cannon.transform.position + cannon.forward, cannon.transform.rotation), 2.4f);
+        yield return new WaitForSeconds(0.4f);
+        ball.transform.position = cannon.position;
+        ball.gameObject.SetActive(true);
+        ball.Rb.AddForce((cannon.forward * (_fireForce)), ForceMode.Impulse);
+        ball.transform.parent = transform;
+        TurretAnimation.PauseAnimation(false); //Returns cannon movemnt
+        StopCoroutine("Shoot");
     }
 
     private void OnDrawGizmos()
