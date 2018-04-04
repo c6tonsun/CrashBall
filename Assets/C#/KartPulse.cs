@@ -67,15 +67,15 @@ public class KartPulse : MonoBehaviour
         if (pulseTimer < pulseCooldown)
             return;
 
+        canPulse = true;
+
         if (magnetTimer > maxMagnetTime)
         {
             Pulse();
             magnetParticles.Stop();
             return;
         }
-
-        canPulse = true;
-
+        
         if (magnetTimer < 0.1f)
             return;
 

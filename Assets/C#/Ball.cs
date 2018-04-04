@@ -47,7 +47,7 @@ public class Ball : MonoBehaviour {
             Rb.velocity = Rb.velocity.normalized * minSpeed;
 
         RaycastHit hit;
-        bool isOverStage = Physics.SphereCast(transform.position, transform.localScale.x, Vector3.down, out hit, 1f, LayerMask.NameToLayer("Floor"), QueryTriggerInteraction.Ignore);
+        bool isOverStage = Physics.SphereCast(transform.position, transform.localScale.x, Vector3.down, out hit, 2f, LayerMask.NameToLayer("Floor"), QueryTriggerInteraction.Ignore);
 
         if (isFixedY && isOverStage)
             Rb.velocity = new Vector3(Rb.velocity.x, 0f, Rb.velocity.z);

@@ -8,6 +8,9 @@ public class Curve : MonoBehaviour
     public Transform middle;
     public Transform end;
 
+    public Transform LookAtTarget;
+    public bool Inverse;
+
     private void OnDrawGizmos()
     {
         float t = 0;
@@ -24,6 +27,23 @@ public class Curve : MonoBehaviour
             Debug.DrawLine(startPoint, endPoint, Color.black);
 
             startPoint = endPoint;
+        }
+    }
+
+    private void Start()
+    {
+        if (LookAtTarget != null)
+        {
+            start.LookAt(LookAtTarget);
+            middle.LookAt(LookAtTarget);
+            end.LookAt(LookAtTarget);
+
+            if (Inverse)
+            {
+                start.Rotate(Vector3.up, 180);
+                middle.Rotate(Vector3.up, 180);
+                end.Rotate(Vector3.up, 180);
+            }
         }
     }
 }

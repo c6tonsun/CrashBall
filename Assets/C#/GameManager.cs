@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
     [Range(2.5f, 4f)]
     public float pulseArea;
     [Range(0f, 5f)]
-    public int maxMagnetTime;
+    public float maxMagnetTime;
     
     // ball options
     public bool ballCanFly;

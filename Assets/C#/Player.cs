@@ -65,9 +65,12 @@ public class Player : MonoBehaviour {
 
     public void Die()
     {
-        myWall.gameObject.SetActive(true);
-        myWall.player = this;
-        myWall.playerGoal = myGoal;
+        if (myWall != null)
+        {
+            myWall.gameObject.SetActive(true);
+            myWall.player = this;
+            myWall.playerGoal = myGoal;
+        }
         isLive = false;
         StartCoroutine("Death");
     }

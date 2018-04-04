@@ -87,13 +87,20 @@ public class BallSpawner : MonoBehaviour {
     //Randomizes the next cannon to be fired. Cannot give same number twice in a row
     Transform RandomizeCannon()
     {
-        _lastCannon = System.Array.IndexOf(Cannons, nextCannon);
-        int new_random = Random.Range (0, CannonAmount);
-        while (_lastCannon == new_random)
+        if (Cannons.Length > 1)
         {
-            new_random = Random.Range(0, CannonAmount);
+            _lastCannon = System.Array.IndexOf(Cannons, nextCannon);
+            int new_random = Random.Range(0, CannonAmount);
+            while (_lastCannon == new_random)
+            {
+                new_random = Random.Range(0, CannonAmount);
+            }
+            return Cannons[new_random];
         }
-        return Cannons [new_random];
+        else
+        {
+            return Cannons[0];
+        }
     }
 	
 	// Physics related stuff in fixed update
@@ -139,14 +146,14 @@ public class BallSpawner : MonoBehaviour {
         //TODO: Add ground markings to tell this cannon is going to fire. 
         var cannon = nextCannon;
         var TurretAnimation = nextCannon.GetComponentInParent<TurretAnimSpeed>();
-        TurretAnimation.PauseAnimation(true); //This stops the cannons rotation for a while
+        if(TurretAnimation!=null)TurretAnimation.PauseAnimation(true); //This stops the cannons rotation for a while
         Destroy(Instantiate(ballRespawn, cannon.transform.position + cannon.forward, cannon.transform.rotation), 2.4f);
         yield return new WaitForSeconds(0.4f);
         ball.transform.position = cannon.position;
         ball.gameObject.SetActive(true);
         ball.Rb.AddForce((cannon.forward * (_fireForce)), ForceMode.Impulse);
         ball.transform.parent = transform;
-        TurretAnimation.PauseAnimation(false); //Returns cannon movemnt
+        if (TurretAnimation != null) TurretAnimation.PauseAnimation(false); //Returns cannon movemnt
         StopCoroutine("Shoot");
     }
 
