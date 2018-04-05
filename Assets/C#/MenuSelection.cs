@@ -26,6 +26,9 @@ public class MenuSelection : MonoBehaviour {
     public Material[] _materials;
     bool _holding = false;
 
+    [SerializeField]
+    Animator animator;
+
 	[SerializeField]
 	GameObject[] _mainMenu;
 
@@ -50,17 +53,23 @@ public class MenuSelection : MonoBehaviour {
 	[SerializeField]
 	GameObject[] _ballMenu;
 
-	string _currentMenu = "main";
+	string _currentMenu = "PressStart";
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		switch (_currentMenu) 
 		{
+            case "PressStart":
+                if (Input.anyKeyDown)
+                {
+                    animator.SetInteger("StartPresses", 1);
+                    _currentMenu = "main";
+                }
+                break;
 			case "main":
 				if (Input.GetAxisRaw ("Vertical") > 0.5f && !_holding) 
 				{
