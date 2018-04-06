@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Collections;
 
 public class ScoreHandler : MonoBehaviour {
+
+    // InputManager sets players
     [HideInInspector]
     public Player[] players;
     private Goal[] _goals;
+
+    public int[] scores;
+    public int[] lives;
 
     private void Start()
     {
@@ -17,6 +22,15 @@ public class ScoreHandler : MonoBehaviour {
         {
             _goals[(int)goal.currentPlayer - 1] = goal;
         }
+
+        scores = new int[4] { 0, 0, 0, 0 };
+        int playerlives = FindObjectOfType<GameManager>().playerLives;
+        lives = new int[4] { playerlives, playerlives, playerlives, playerlives };
+    }
+
+    public void LostLive(int player)
+    {
+        lives[player - 1] = _goals[player - 1].GetCurrentLives();
     }
 
     public void KillPlayer(int player)
@@ -35,14 +49,26 @@ public class ScoreHandler : MonoBehaviour {
         }
 
         if (livingPLayerCount == 1)
-        {
-            Debug.Log("Winner is p" + winner);
-            StartCoroutine(Restart());
-        }
+            StartCoroutine(Restart(winner));
     }
 
-    IEnumerator Restart()
+    public void AddToScore(int player)
     {
+        if (player < 1)
+            return;
+        _goals[player - 1].AddToScore();
+        scores[player - 1] = _goals[player - 1].GetCurrentScore();
+    }
+
+    public void ScoreReached(int player)
+    {
+        StartCoroutine(Restart(player));
+    }
+
+    IEnumerator Restart(int winner)
+    {
+        Debug.Log("Winner is p" + winner);
+
         yield return new WaitForSeconds(2);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

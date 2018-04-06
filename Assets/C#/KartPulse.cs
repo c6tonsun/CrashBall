@@ -14,12 +14,16 @@ public class KartPulse : MonoBehaviour
     private float pulseCooldown;
     private float pulseTimer;
     private bool canPulse;
+
     private ParticleSystem pulseParticles;
     [SerializeField]
     private ParticleSystem magnetParticles;
 
     [SerializeField]
     private MeshRenderer my_meshRenderer;
+
+    private IEnumerator secondPulse;
+    private int playerNumber;
 
     Collider[] colliders;
 
@@ -38,6 +42,9 @@ public class KartPulse : MonoBehaviour
         magnetParticles = FindPulseOrigin();
         var magnetColour = magnetParticles.main;
         magnetColour.startColor = my_meshRenderer.material.color;
+
+        secondPulse = SecondPulse();
+        playerNumber = (int)GetComponentInParent<Player>().currentPlayer;
     }
 
     private ParticleSystem FindPulseOrigin()
@@ -72,7 +79,6 @@ public class KartPulse : MonoBehaviour
         if (magnetTimer > maxMagnetTime)
         {
             Pulse();
-            magnetParticles.Stop();
             return;
         }
         
@@ -80,6 +86,7 @@ public class KartPulse : MonoBehaviour
             return;
 
         if(!magnetParticles.isPlaying) magnetParticles.Play();
+
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
         Ball[] balls = new Ball[colliders.Length];
         for (int i = 0; i < balls.Length; i++)
@@ -104,7 +111,7 @@ public class KartPulse : MonoBehaviour
                     direction.y = 0f;
 
                 ball.Rb.AddForce(direction.normalized * inForce * 0.4f, ForceMode.Impulse);
-                
+                ball.SetLastPlayerHit(playerNumber);
             }
         }
     }
@@ -121,8 +128,10 @@ public class KartPulse : MonoBehaviour
         pulseTimer = 0f;
         magnetTimer = 0f;
 
+        magnetParticles.Stop();
         pulseParticles.Play(withChildren:false);
-        colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
+
+        colliders = Physics.OverlapSphere(transform.position, PulseRadius * 0.75f, layerMask);
         Ball[] balls = new Ball[colliders.Length];
         for (int i = 0; i < balls.Length; i++)
             balls[i] = colliders[i].GetComponent<Ball>();
@@ -131,18 +140,53 @@ public class KartPulse : MonoBehaviour
         {
             if (ball.canBePulsed)
             {
-                float oldVelocity = ball.Rb.velocity.magnitude;
                 ball.Rb.velocity = Vector3.zero;
                 Vector3 direction = ball.transform.position - transform.position;
                 if (ball.isFixedY)
                     direction.y = 0f;
                 ball.Rb.AddForce(direction.normalized * (PulseForce), ForceMode.Impulse);
+                ball.SetLastPlayerHit(playerNumber);
             }
         }
+
+        StartCoroutine(secondPulse);
+    }
+
+    IEnumerator SecondPulse()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        pulseParticles.Play(withChildren: false);
+
+        colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
+        Ball[] balls = new Ball[colliders.Length];
+        for (int i = 0; i < balls.Length; i++)
+            balls[i] = colliders[i].GetComponent<Ball>();
+
+        foreach (Ball ball in balls)
+        {
+            float distanceNow = (ball.transform.position - transform.position).sqrMagnitude;
+            float distanceNext = ((ball.transform.position + (ball.Rb.velocity * Time.fixedDeltaTime)) - transform.position).sqrMagnitude;
+
+            if (distanceNow < distanceNext)
+                continue;
+
+            if (ball.canBePulsed)
+            {
+                ball.Rb.velocity = Vector3.zero;
+                Vector3 direction = ball.transform.position - transform.position;
+                if (ball.isFixedY)
+                    direction.y = 0f;
+                ball.Rb.AddForce(direction.normalized * (PulseForce), ForceMode.Impulse);
+                ball.SetLastPlayerHit(playerNumber);
+            }
+        }
+        
+        StopCoroutine(secondPulse);
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(PulseOrigin.position, PulseRadius);
+        Gizmos.DrawWireSphere(transform.position, PulseRadius);
     }
 }

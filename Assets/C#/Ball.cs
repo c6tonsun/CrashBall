@@ -22,6 +22,9 @@ public class Ball : MonoBehaviour {
     [HideInInspector]
     public Rigidbody Rb;
 
+    private int lastPlayerHit;
+    private int secondLastPlayerHit;
+
     private void Awake()
     {
         Rb = GetComponent<Rigidbody>();
@@ -32,6 +35,9 @@ public class Ball : MonoBehaviour {
         canScore = true;
         canBePulsed = false;
         isFixedY = false;
+
+        lastPlayerHit = -1;
+        secondLastPlayerHit = -1;
     }
 
     private void OnDisable()
@@ -60,6 +66,10 @@ public class Ball : MonoBehaviour {
 
     protected void OnCollisionStay(Collision collision)
     {
+        Player player = collision.collider.GetComponentInParent<Player>();
+        if (player != null)
+            SetLastPlayerHit((int)player.currentPlayer);
+
         if (canBePulsed) return;
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
@@ -68,5 +78,19 @@ public class Ball : MonoBehaviour {
 
             canBePulsed = true;
         }
+    }
+
+    public void SetLastPlayerHit(int player)
+    {
+        if (lastPlayerHit == player)
+            return;
+
+        secondLastPlayerHit = lastPlayerHit;
+        lastPlayerHit = player;
+    }
+
+    public int[] GetLastPlayerHits()
+    {
+        return new int[2] { lastPlayerHit, secondLastPlayerHit };
     }
 }

@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
     public float firingInterval;
     
     // game mode selection
-    public enum GameMode                // implement
+    public enum GameMode
     {
         ERROR = 0,
         Elimination = 1,
@@ -41,5 +41,5 @@ public class GameManager : MonoBehaviour {
     }
     public GameMode currentMode = GameMode.Elimination;
     public int playerLives;
-    public int targetScore;             // implement
+    public int targetScore;
 }

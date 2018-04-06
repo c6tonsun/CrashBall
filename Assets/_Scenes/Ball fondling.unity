@@ -586,7 +586,32 @@ Prefab:
     - target: {fileID: 114950008291133912, guid: 3cafc6ec78feaf947a977857f200a26e,
         type: 2}
       propertyPath: playerLives
-      value: 3
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114950008291133912, guid: 3cafc6ec78feaf947a977857f200a26e,
+        type: 2}
+      propertyPath: pulseForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114950008291133912, guid: 3cafc6ec78feaf947a977857f200a26e,
+        type: 2}
+      propertyPath: stunBallLikelyness
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114950008291133912, guid: 3cafc6ec78feaf947a977857f200a26e,
+        type: 2}
+      propertyPath: normalBallCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114950008291133912, guid: 3cafc6ec78feaf947a977857f200a26e,
+        type: 2}
+      propertyPath: currentMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114950008291133912, guid: 3cafc6ec78feaf947a977857f200a26e,
+        type: 2}
+      propertyPath: targetScore
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3cafc6ec78feaf947a977857f200a26e, type: 2}

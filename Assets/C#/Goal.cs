@@ -16,17 +16,25 @@ public class Goal : MonoBehaviour {
     
     private ScoreHandler _scoreHandler;
     private CameraShake cameraShake;
-
+    private GameManager gameManager;
+    
     private int lives;
     private int currentLives;
     private bool canComeback;
 
+    private int score;
+    private int currentScore = 0;
+
     private void Start()
     {
         _scoreHandler = FindObjectOfType<ScoreHandler>();
-        lives = FindObjectOfType<GameManager>().playerLives;
-        currentLives = lives;
         cameraShake = FindObjectOfType<CameraShake>();
+        gameManager = FindObjectOfType<GameManager>();
+
+        lives = gameManager.playerLives;
+        currentLives = lives;
+
+        score = gameManager.targetScore;
     }
 
     private void OnTriggerStay(Collider other)
@@ -36,12 +44,35 @@ public class Goal : MonoBehaviour {
         {
             cameraShake.SetShakeTime(0.125f);
             currentLives--;
-            if (currentLives <= 0)
+            _scoreHandler.LostLive((int)currentPlayer);
+            ball.canScore = false;
+
+            // Eliminate player
+            if (gameManager.currentMode == GameManager.GameMode.Elimination && currentLives <= 0)
             {
                 cameraShake.SetShakeTime(0.3f);
                 _scoreHandler.KillPlayer((int)currentPlayer);
             }
-            ball.canScore = false;
+            // ScoreRun winner
+            if (gameManager.currentMode == GameManager.GameMode.ScoreRun)
+            {
+                int[] players = ball.GetLastPlayerHits();
+                if (players[0] != (int)currentPlayer)
+                    _scoreHandler.AddToScore(players[0]);
+                else
+                    _scoreHandler.AddToScore(players[1]);
+            }
+        }
+    }
+
+    public void AddToScore()
+    {
+        currentScore++;
+
+        if (currentScore >= score)
+        {
+            cameraShake.SetShakeTime(0.3f);
+            _scoreHandler.ScoreReached((int)currentPlayer);
         }
     }
 
@@ -59,5 +90,10 @@ public class Goal : MonoBehaviour {
     public int GetCurrentLives()
     {
         return currentLives;
+    }
+
+    public int GetCurrentScore()
+    {
+        return currentScore;
     }
 }
