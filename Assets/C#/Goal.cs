@@ -42,7 +42,7 @@ public class Goal : MonoBehaviour {
         Ball ball = other.GetComponent<Ball>();
         if (ball.canScore)
         {
-            cameraShake.SetShakeTime(0.125f);
+            cameraShake.SetShakeTime(0.25f);
             currentLives--;
             _scoreHandler.LostLive((int)currentPlayer);
             ball.canScore = false;
@@ -50,7 +50,7 @@ public class Goal : MonoBehaviour {
             // Eliminate player
             if (gameManager.currentMode == GameManager.GameMode.Elimination && currentLives <= 0)
             {
-                cameraShake.SetShakeTime(0.3f);
+                cameraShake.SetShakeTime(0.5f);
                 _scoreHandler.KillPlayer((int)currentPlayer);
             }
             // ScoreRun winner
@@ -71,7 +71,7 @@ public class Goal : MonoBehaviour {
 
         if (currentScore >= score)
         {
-            cameraShake.SetShakeTime(0.3f);
+            cameraShake.SetShakeTime(0.5f);
             _scoreHandler.ScoreReached((int)currentPlayer);
         }
     }

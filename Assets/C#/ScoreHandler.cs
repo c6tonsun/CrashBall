@@ -62,6 +62,14 @@ public class ScoreHandler : MonoBehaviour {
 
     public void ScoreReached(int player)
     {
+        foreach (Player p in players)
+        {
+            if (player == (int)p.currentPlayer)
+                continue;
+
+            p.Die();
+        }
+
         StartCoroutine(Restart(player));
     }
 

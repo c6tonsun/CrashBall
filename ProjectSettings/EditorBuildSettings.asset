@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/MaxMenu.unity
     guid: ed5a958ab7c33ba49a45bb32671f98b8
   - enabled: 1
