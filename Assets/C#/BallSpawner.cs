@@ -77,7 +77,6 @@ public class BallSpawner : MonoBehaviour {
             //Instantiates all balls to somewhere far away
             Ball ball = Instantiate(prefab, new Vector3(-25, 100, 25), transform.rotation, transform);
             ball.gameObject.SetActive(false);
-            ball.canFly = gameManager.ballCanFly;
             ball.minSpeed = gameManager.ballMinSpeed;
 
             list.Add(ball);

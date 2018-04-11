@@ -19,7 +19,7 @@ public class ScoreHandler : MonoBehaviour {
     public int[] p3Kills;
     public int[] p4Kills;
 
-    public ContinuesCurve leaderSpotLight;
+    private ContinuesCurve _leaderSpotLight;
     private GameManager _gameManager;
 
     private void Start()
@@ -45,6 +45,7 @@ public class ScoreHandler : MonoBehaviour {
     public void StageStart()
     {
         Start();
+        _leaderSpotLight = GameObject.FindGameObjectWithTag("Player").GetComponent<ContinuesCurve>();
     }
 
     public void LostLive(int player)
@@ -132,7 +133,7 @@ public class ScoreHandler : MonoBehaviour {
             }
         }
 
-        leaderSpotLight.MoveToPlayer(playerToLight, true);
+        _leaderSpotLight.MoveToPlayer(playerToLight, true);
         return;
     }
 

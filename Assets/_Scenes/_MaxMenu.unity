@@ -10704,8 +10704,8 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 180948114}
-  m_LocalRotation: {x: 0.24140291, y: -0, z: -0, w: 0.970425}
-  m_LocalPosition: {x: 0, y: 16.43, z: -24.962967}
+  m_LocalRotation: {x: 0.29450065, y: -0, z: -0, w: 0.9556513}
+  m_LocalPosition: {x: 0, y: 17, z: -24.962982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 514269429}
@@ -52847,14 +52847,13 @@ MonoBehaviour:
   pulseForce: 15
   pulseArea: 3.25
   maxMagnetTime: 2
-  ballCanFly: 0
   ballMinSpeed: 3
   normalBallCount: 10
-  normalBallLikelyness: 0.75
+  normalBallLikelyness: 0.195
   stunBallCount: 2
-  stunBallLikelyness: 0.25
+  stunBallLikelyness: 1
   firingInterval: 4
-  currentMode: 1
+  currentMode: 2
   playerLives: 10
   targetScore: 10
 --- !u!4 &1608021251
@@ -52888,7 +52887,6 @@ MonoBehaviour:
   p2Kills: 
   p3Kills: 
   p4Kills: 
-  leaderSpotLight: {fileID: 0}
 --- !u!1 &1623541188
 GameObject:
   m_ObjectHideFlags: 0
@@ -63453,8 +63451,8 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1934493858}
-  m_LocalRotation: {x: 0.24140291, y: -0, z: -0, w: 0.970425}
-  m_LocalPosition: {x: 0, y: 16.43, z: -24.962967}
+  m_LocalRotation: {x: 0.29450077, y: -0, z: -0, w: 0.9556512}
+  m_LocalPosition: {x: 0, y: 17, z: -24.962967}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 656869432}

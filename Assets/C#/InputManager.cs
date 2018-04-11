@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour {
         PairConrollersToPlayers();
 
         _scoreHandler = FindObjectOfType<ScoreHandler>();
+        _scoreHandler.StageStart();
         _scoreHandler.players = _players;
     }
 	

@@ -35,6 +35,9 @@ public class ContinuesCurve : MonoBehaviour
         {
             InitCurvePoints();
         }
+        
+        go.transform.position = curvePoints[0].position;
+        go.transform.LookAt(LookAtTarget);
 
         Color color;
         #region draw curve
@@ -156,7 +159,7 @@ public class ContinuesCurve : MonoBehaviour
         // skip odds
         if ((int)_totalTime % 2 == 1)
         {
-            if (_growing) _totalTime++;
+            if (_growing || staticLoop) _totalTime++;
             else _totalTime--;
         }
         // looping
@@ -206,6 +209,14 @@ public class ContinuesCurve : MonoBehaviour
     {
         if (_targetIndex == player * 2 - 2)
             return;
+
+        // fix player
+        if (player == 2)
+            player = 3;
+        else if (player == 3)
+            player = 4;
+        else if (player == 4)
+            player = 2;
 
         _targetIndex = player * 2 - 2;
         // numeral distanse

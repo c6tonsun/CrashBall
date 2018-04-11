@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour {
     public float maxMagnetTime;
     
     // ball options
-    public bool ballCanFly;
     [Range(3f, 7f)]
     public float ballMinSpeed;
     public int normalBallCount;

@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 114728162085344574}
   m_Layer: 0
   m_Name: Light Curve
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,7 +208,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1705558438826628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 17, z: 0}
+  m_LocalPosition: {x: 0, y: 16.43, z: 0}
   m_LocalScale: {x: 24.96298, y: 24.962969, z: 24.962969}
   m_Children:
   - {fileID: 4924524152776150}

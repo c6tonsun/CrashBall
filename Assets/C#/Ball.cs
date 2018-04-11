@@ -11,8 +11,6 @@ public class Ball : MonoBehaviour {
     [HideInInspector]
     public bool canScore = true;
     [HideInInspector]
-    public bool canFly = false;
-    [HideInInspector]
     public bool canBePulsed = false;
     [HideInInspector]
     public bool isFixedY = false;
@@ -73,9 +71,7 @@ public class Ball : MonoBehaviour {
         if (canBePulsed) return;
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
-            if (!canFly)
-                isFixedY = true;
-
+            isFixedY = true;
             canBePulsed = true;
         }
     }

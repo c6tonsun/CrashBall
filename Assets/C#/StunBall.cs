@@ -12,7 +12,8 @@ public class StunBall : Ball {
     protected new void FixedUpdate() 
     {
         base.FixedUpdate();
-        Rb.velocity = Rb.velocity.normalized * minSpeed * 2;
+        if (canBePulsed)
+            Rb.velocity = Rb.velocity.normalized * minSpeed * 2;
     }
 
     private void OnCollisionEnter(Collision collision)
