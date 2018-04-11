@@ -46,6 +46,7 @@ public class ScoreHandler : MonoBehaviour {
     {
         Start();
         _leaderSpotLight = GameObject.FindGameObjectWithTag("Player").GetComponent<ContinuesCurve>();
+        StartCoroutine(StartCountdown());
     }
 
     public void LostLive(int player)
@@ -135,6 +136,16 @@ public class ScoreHandler : MonoBehaviour {
 
         _leaderSpotLight.MoveToPlayer(playerToLight, true);
         return;
+    }
+
+    IEnumerator StartCountdown()
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 1f;
+        StopCoroutine(StartCountdown());
     }
 
     IEnumerator Restart(int winner)
