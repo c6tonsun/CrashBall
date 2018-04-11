@@ -42,4 +42,12 @@ public class GameManager : MonoBehaviour {
     public GameMode currentMode = GameMode.Elimination;
     public int playerLives;
     public int targetScore;
+
+    private void Awake()
+    {
+        if (FindObjectsOfType<GameManager>().Length == 1)
+            DontDestroyOnLoad(gameObject);
+        else
+            Destroy(gameObject);
+    }
 }

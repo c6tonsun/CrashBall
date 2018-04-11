@@ -43,25 +43,32 @@ public class Goal : MonoBehaviour {
         if (ball.canScore)
         {
             cameraShake.SetShakeTime(0.25f);
-            currentLives--;
-            _scoreHandler.LostLive((int)currentPlayer);
             ball.canScore = false;
 
-            // Eliminate player
+            // live and death
+            currentLives--;
+            _scoreHandler.LostLive((int)currentPlayer);
+
             if (gameManager.currentMode == GameManager.GameMode.Elimination && currentLives <= 0)
             {
                 cameraShake.SetShakeTime(0.5f);
                 _scoreHandler.KillPlayer((int)currentPlayer);
             }
-            // ScoreRun winner
-            if (gameManager.currentMode == GameManager.GameMode.ScoreRun)
+
+            // score and kill
+            int[] players = ball.GetLastPlayerHits();
+            if (players[0] != (int)currentPlayer)
             {
-                int[] players = ball.GetLastPlayerHits();
-                if (players[0] != (int)currentPlayer)
-                    _scoreHandler.AddToScore(players[0]);
-                else
-                    _scoreHandler.AddToScore(players[1]);
+                _scoreHandler.AddScore(players[0]);
+                _scoreHandler.AddKill(players[0], (int)currentPlayer);
             }
+            else
+            {
+                _scoreHandler.AddScore(players[1]);
+                _scoreHandler.AddKill(players[1], (int)currentPlayer);
+            }
+
+            _scoreHandler.UpdateSpotLight();
         }
     }
 

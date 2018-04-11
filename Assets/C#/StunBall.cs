@@ -9,7 +9,7 @@ public class StunBall : Ball {
         canBeMagneted = false;
     }
     
-    protected void FixedUpdate() 
+    protected new void FixedUpdate() 
     {
         base.FixedUpdate();
         Rb.velocity = Rb.velocity.normalized * minSpeed * 2;

@@ -67,7 +67,7 @@ InputManager:
     snap: 1
     invert: 1
     type: 2
-    axis: 1
+    axis: 0
     joyNum: 4
   - serializedVersion: 3
     m_Name: Key1

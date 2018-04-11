@@ -15,6 +15,10 @@ public class ContinuesCurve : MonoBehaviour
     [SerializeField][Tooltip("Target you want object to turn to. Leave null if you want to keep rotation")]
     private Transform LookAtTarget;
 
+    public bool staticLoop;
+    [Range(0f, 1f)]
+    public float staticSpeed;
+
     public GameObject go;
     public float speed = 0.5f;
     private float _speedFactor;
@@ -24,7 +28,6 @@ public class ContinuesCurve : MonoBehaviour
     private int _targetIndex;
     private bool _growing;
     private bool _willLoop = false;
-    private bool _shortPath = false;
 
     private void OnDrawGizmos()
     {
@@ -125,27 +128,23 @@ public class ContinuesCurve : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            MoveToPlayer(1, _shortPath);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            MoveToPlayer(2, _shortPath);
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            MoveToPlayer(3, _shortPath);
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            MoveToPlayer(4, _shortPath);
-
-        if (_totalTime == _targetIndex) { } // do nothing
-        else if (_growing)
-        {
-            _totalTime += Time.deltaTime * speed * _speedFactor;
-            if (_totalTime > _targetIndex && !_willLoop)
-                _totalTime = _targetIndex;
-        }
+        if (staticLoop)
+            _totalTime += Time.deltaTime * staticSpeed;
         else
         {
-            _totalTime -= Time.deltaTime * speed * _speedFactor;
-            if (_totalTime < _targetIndex && !_willLoop)
-                _totalTime = _targetIndex;
+            if (_totalTime == _targetIndex) { } // do nothing
+            else if (_growing)
+            {
+                _totalTime += Time.deltaTime * speed * _speedFactor;
+                if (_totalTime > _targetIndex && !_willLoop)
+                    _totalTime = _targetIndex;
+            }
+            else
+            {
+                _totalTime -= Time.deltaTime * speed * _speedFactor;
+                if (_totalTime < _targetIndex && !_willLoop)
+                    _totalTime = _targetIndex;
+            }
         }
 
         // looping

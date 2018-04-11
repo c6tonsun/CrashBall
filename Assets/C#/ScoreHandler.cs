@@ -14,6 +14,14 @@ public class ScoreHandler : MonoBehaviour {
     public int[] scores;
     public int[] lives;
 
+    public int[] p1Kills;
+    public int[] p2Kills;
+    public int[] p3Kills;
+    public int[] p4Kills;
+
+    public ContinuesCurve leaderSpotLight;
+    private GameManager _gameManager;
+
     private void Start()
     {
         Goal[] unorderedGoals = FindObjectsOfType<Goal>();
@@ -24,8 +32,19 @@ public class ScoreHandler : MonoBehaviour {
         }
 
         scores = new int[4] { 0, 0, 0, 0 };
-        int playerlives = FindObjectOfType<GameManager>().playerLives;
+        _gameManager = FindObjectOfType<GameManager>();
+        int playerlives = _gameManager.playerLives;
         lives = new int[4] { playerlives, playerlives, playerlives, playerlives };
+
+        p1Kills = new int[4] { 0, 0, 0, 0 };
+        p2Kills = new int[4] { 0, 0, 0, 0 };
+        p3Kills = new int[4] { 0, 0, 0, 0 };
+        p4Kills = new int[4] { 0, 0, 0, 0 };
+    }
+
+    public void StageStart()
+    {
+        Start();
     }
 
     public void LostLive(int player)
@@ -52,7 +71,7 @@ public class ScoreHandler : MonoBehaviour {
             StartCoroutine(Restart(winner));
     }
 
-    public void AddToScore(int player)
+    public void AddScore(int player)
     {
         if (player < 1)
             return;
@@ -73,13 +92,60 @@ public class ScoreHandler : MonoBehaviour {
         StartCoroutine(Restart(player));
     }
 
+    public void AddKill(int killer, int victim)
+    {
+        if (killer == 1)
+            p1Kills[victim - 1]++;
+        if (killer == 2)
+            p2Kills[victim - 1]++;
+        if (killer == 3)
+            p3Kills[victim - 1]++;
+        if (killer == 4)
+            p4Kills[victim - 1]++;
+    }
+
+    public void UpdateSpotLight()
+    {
+        int temp = 0;
+        int playerToLight = 1;
+
+        if (_gameManager.currentMode == GameManager.GameMode.Elimination)
+        {
+            for (int i = 0; i < lives.Length; i++)
+            {
+                if (lives[i] > temp)
+                {
+                    temp = lives[i];
+                    playerToLight = i + 1;
+                }
+            }
+        }
+        if (_gameManager.currentMode == GameManager.GameMode.ScoreRun)
+        {
+            for (int i = 0; i < scores.Length; i++)
+            {
+                if (scores[i] > temp)
+                {
+                    temp = scores[i];
+                    playerToLight = i + 1;
+                }
+            }
+        }
+
+        leaderSpotLight.MoveToPlayer(playerToLight, true);
+        return;
+    }
+
     IEnumerator Restart(int winner)
     {
         Debug.Log("Winner is p" + winner);
 
         yield return new WaitForSeconds(2);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // Loads active scene
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        SceneManager.LoadScene(0);
         StopAllCoroutines();
     }
 }

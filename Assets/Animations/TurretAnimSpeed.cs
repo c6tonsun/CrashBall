@@ -6,9 +6,7 @@ public class TurretAnimSpeed : MonoBehaviour {
 
     private Animator turretAnimator;
     private float timer;
-    private float timerMax = 2;
-
-
+    
 	void Start () {
         turretAnimator = GetComponent<Animator>();
 	}

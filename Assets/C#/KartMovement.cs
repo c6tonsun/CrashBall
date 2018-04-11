@@ -16,8 +16,6 @@ public class KartMovement : MonoBehaviour
     private ParticleSystem stunParticles;
     private Animator kartAnimator;
 
-    private bool debugshit = false;
-
     private void Start()
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
@@ -57,7 +55,7 @@ public class KartMovement : MonoBehaviour
         if (kartAnimator != null)
         {
             kartAnimator.SetFloat("Input", _input);
-            var bonus = (_curveTime < 0.55 && _curveTime > 0.45) ? true : false;
+            var bonus = (_curveTime < 0.55 && _curveTime > 0.45);
             kartAnimator.SetBool("Bonus", bonus);
         }
     }
