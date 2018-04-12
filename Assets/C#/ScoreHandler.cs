@@ -6,40 +6,45 @@ using UnityEngine.Collections;
 
 public class ScoreHandler : MonoBehaviour {
 
-    // InputManager sets players
-    [HideInInspector]
-    public Player[] players;
+    
+    private Player[] _players;
     private Goal[] _goals;
 
     public int[] scores;
     public int[] lives;
-
-    public int[] p1Kills;
-    public int[] p2Kills;
-    public int[] p3Kills;
-    public int[] p4Kills;
 
     private ContinuesCurve _leaderSpotLight;
     private GameManager _gameManager;
 
     private void Start()
     {
+        Player[] unorderedPlayers = FindObjectsOfType<Player>();
+        _players = new Player[unorderedPlayers.Length];
+        foreach (Player player in unorderedPlayers)
+        {
+            player.kills = new int[unorderedPlayers.Length];
+            for (int i = 0; i < unorderedPlayers.Length; i++)
+                player.kills[i] = 0;
+
+            _players[(int)player.currentPlayer - 1] = player;
+        }
+
         Goal[] unorderedGoals = FindObjectsOfType<Goal>();
         _goals = new Goal[unorderedGoals.Length];
         foreach (Goal goal in unorderedGoals)
-        {
             _goals[(int)goal.currentPlayer - 1] = goal;
-        }
+        
+        scores = new int[_players.Length];
+        lives = new int[_players.Length];
 
-        scores = new int[4] { 0, 0, 0, 0 };
         _gameManager = FindObjectOfType<GameManager>();
         int playerlives = _gameManager.playerLives;
-        lives = new int[4] { playerlives, playerlives, playerlives, playerlives };
 
-        p1Kills = new int[4] { 0, 0, 0, 0 };
-        p2Kills = new int[4] { 0, 0, 0, 0 };
-        p3Kills = new int[4] { 0, 0, 0, 0 };
-        p4Kills = new int[4] { 0, 0, 0, 0 };
+        for (int i = 0; i < _players.Length; i++)
+        {
+            scores[i] = 0;
+            lives[i] = playerlives;
+        }
     }
 
     public void StageStart()
@@ -56,11 +61,11 @@ public class ScoreHandler : MonoBehaviour {
 
     public void KillPlayer(int player)
     {
-        players[player - 1].Die();
+        _players[player - 1].Die();
 
         int livingPLayerCount = 0;
         int winner = -1;
-        foreach (Player p in players)
+        foreach (Player p in _players)
         {
             if (p.isLive)
             {
@@ -83,7 +88,7 @@ public class ScoreHandler : MonoBehaviour {
 
     public void ScoreReached(int player)
     {
-        foreach (Player p in players)
+        foreach (Player p in _players)
         {
             if (player == (int)p.currentPlayer)
                 continue;
@@ -96,14 +101,7 @@ public class ScoreHandler : MonoBehaviour {
 
     public void AddKill(int killer, int victim)
     {
-        if (killer == 1)
-            p1Kills[victim - 1]++;
-        if (killer == 2)
-            p2Kills[victim - 1]++;
-        if (killer == 3)
-            p3Kills[victim - 1]++;
-        if (killer == 4)
-            p4Kills[victim - 1]++;
+        _players[killer - 1].kills[victim - 1]++;
     }
 
     public void UpdateSpotLight()

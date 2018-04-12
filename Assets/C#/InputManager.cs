@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour {
+    
+    /**
+     * Rewrite when implementing Rewired
+     */
 
     private string[] _controllerNames;
     private Player[] _players;
-    private ScoreHandler _scoreHandler;
-
     public float inputDeadzone = 0.5f;
-
     private int oldTriggerInput = 0;
 
     [SerializeField]
@@ -24,12 +25,11 @@ public class InputManager : MonoBehaviour {
         {
             _players[(int)player.currentPlayer - 1] = player;
         }
-
         PairConrollersToPlayers();
-
-        _scoreHandler = FindObjectOfType<ScoreHandler>();
+        
+        ScoreHandler _scoreHandler = FindObjectOfType<ScoreHandler>();
         _scoreHandler.StageStart();
-        _scoreHandler.players = _players;
+        //_scoreHandler._players = _players;
     }
 	
 	private void Update () {
@@ -61,7 +61,7 @@ public class InputManager : MonoBehaviour {
 
     private void ActPlayerInput(Player player)
     {
-        if (player.gameObject.activeSelf == false)
+        if (player.gameObject.activeSelf == false || player.isLive == false)
         {
             return;
         }

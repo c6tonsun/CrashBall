@@ -5,6 +5,7 @@ using UnityEngine;
 public class ContinuesCurve : MonoBehaviour
 {
     // OnDrawGismos stuff
+    public bool debugPosAndRot;
     public bool initDone = false;
     public Transform[] curvePoints;
     public bool isLoop = false;
@@ -32,12 +33,13 @@ public class ContinuesCurve : MonoBehaviour
     private void OnDrawGizmos()
     {
         if (!initDone)
-        {
             InitCurvePoints();
+
+        if (debugPosAndRot)
+        {
+            go.transform.position = curvePoints[0].position;
+            go.transform.LookAt(LookAtTarget);
         }
-        
-        go.transform.position = curvePoints[0].position;
-        go.transform.LookAt(LookAtTarget);
 
         Color color;
         #region draw curve
@@ -131,6 +133,9 @@ public class ContinuesCurve : MonoBehaviour
 
     private void Update()
     {
+        if (debugPosAndRot)
+            debugPosAndRot = false;
+
         if (staticLoop)
             _totalTime += Time.deltaTime * staticSpeed;
         else
@@ -207,9 +212,6 @@ public class ContinuesCurve : MonoBehaviour
 
     public void MoveToPlayer(int player, bool longPath)
     {
-        if (_targetIndex == player * 2 - 2)
-            return;
-
         // fix player
         if (player == 2)
             player = 3;
@@ -218,6 +220,9 @@ public class ContinuesCurve : MonoBehaviour
         else if (player == 4)
             player = 2;
 
+        if (_targetIndex == player * 2 - 2)
+            return;
+        
         _targetIndex = player * 2 - 2;
         // numeral distanse
         _speedFactor = _totalTime - _targetIndex;

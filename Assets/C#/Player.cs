@@ -17,6 +17,8 @@ public class Player : MonoBehaviour {
 
     public bool hasController;
 
+    public int[] kills;
+
     [SerializeField]
     private GameObject DeathParticlePrefab;
     private float _deathParticleDuration;
@@ -28,7 +30,7 @@ public class Player : MonoBehaviour {
     [HideInInspector]
     public KartPulse pulse;
 
-    public PlayerWall myWall;
+    //public PlayerWall myWall;
     public Goal myGoal;
     [HideInInspector]
     public bool isLive = true;
@@ -65,12 +67,14 @@ public class Player : MonoBehaviour {
 
     public void Die()
     {
+        /*
         if (myWall != null)
         {
             myWall.gameObject.SetActive(true);
             myWall.player = this;
             myWall.playerGoal = myGoal;
         }
+        */
         isLive = false;
         StartCoroutine("Death");
     }
