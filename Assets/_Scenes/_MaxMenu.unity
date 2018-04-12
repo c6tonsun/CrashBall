@@ -53572,19 +53572,19 @@ MonoBehaviour:
   playerCount: 0
   playerSpeed: 3
   maxStunTime: 0.5
-  pulseCooldown: 0.5
-  pulseForce: 15
-  pulseArea: 3.25
+  pulseCooldown: 0.3
+  pulseForce: 20
+  pulseArea: 3.5
   maxMagnetTime: 2
-  ballMinSpeed: 3
+  ballMinSpeed: 5
   normalBallCount: 10
   normalBallLikelyness: 0.195
   stunBallCount: 2
   stunBallLikelyness: 1
-  firingInterval: 4
-  currentMode: 2
-  playerLives: 10
-  targetScore: 10
+  firingInterval: 3
+  currentMode: 1
+  playerLives: 5
+  targetScore: 5
 --- !u!4 &1608021251
 Transform:
   m_ObjectHideFlags: 0
