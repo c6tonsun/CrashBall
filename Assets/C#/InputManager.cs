@@ -41,21 +41,6 @@ public class InputManager : MonoBehaviour {
         {
             ActPlayerInput(player);
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Paused = !Paused;
-        }
-        if (Paused)
-        {
-            Time.timeScale = 0.0f;
-            pauseMenu.SetActive(true);
-        }
-        else
-        {
-            Time.timeScale = 1.0f;
-            pauseMenu.SetActive(false);
-        }
     }
 
     private void PairConrollersToPlayers()
