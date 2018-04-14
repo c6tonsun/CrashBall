@@ -31,7 +31,7 @@ public class MenuInput : MonoBehaviour {
 
     private float highlightScaleMulti = 1;
    
-
+    private GameManager gameManager;
 
     public enum Select
     {
@@ -76,6 +76,7 @@ public class MenuInput : MonoBehaviour {
     void Start () {
         //mainCamera = FindObjectOfType<Camera>().gameObject;
         mainCamera.transform.position = cameraPoints[0].position;
+        gameManager = FindObjectOfType<GameManager> ();
     }
 	
 	// Update is called once per frame
@@ -160,7 +161,8 @@ public class MenuInput : MonoBehaviour {
 
     private void GetInput()
     {
-        var input = Input.GetAxis("Vertical");
+        var input = (Mathf.Abs(Input.GetAxis("Vertical"))>Mathf.Abs(Input.GetAxis("Horizontal"))? 
+            Input.GetAxis("Vertical") : Input.GetAxis("Horizontal"));
         if (Mathf.Abs(input)>0.25f)
         {
 #region downwards
@@ -262,9 +264,16 @@ public class MenuInput : MonoBehaviour {
             {
                 if (selected == Select.first)
                 {
-                    Debug.Log("start map");
-                    if(mapID != -1) SceneManager.LoadScene(mapID);
+                    gameManager.currentMode = GameManager.GameMode.Elimination;
+                    Debug.Log("mode: Elimination");
                 }
+                if (selected == Select.second)
+                {
+                    gameManager.currentMode = GameManager.GameMode.ScoreRun;
+                    Debug.Log("mode: ScoreRun");
+                }
+                Debug.Log("start map");
+                if(mapID != -1) SceneManager.LoadScene(mapID);
             }
         }
         if (Input.GetButtonDown("Cancel"))
