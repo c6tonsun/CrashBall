@@ -17539,7 +17539,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &344873168
 GameObject:
@@ -56512,6 +56512,30 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 1411069677}
+    - target: {fileID: 114577600374492232, guid: ce441fe4618ae2a4d8fdcbec0c6a5e67,
+        type: 2}
+      propertyPath: GoalConfetti
+      value: 
+      objectReference: {fileID: 1976610406406736, guid: 2ed8be70f8b897040a9699011c9f7621,
+        type: 2}
+    - target: {fileID: 114680209459068204, guid: ce441fe4618ae2a4d8fdcbec0c6a5e67,
+        type: 2}
+      propertyPath: GoalConfetti
+      value: 
+      objectReference: {fileID: 1907929720786778, guid: 0a61e915e74703b4aaa1492fd7c59f4d,
+        type: 2}
+    - target: {fileID: 114685589069495992, guid: ce441fe4618ae2a4d8fdcbec0c6a5e67,
+        type: 2}
+      propertyPath: GoalConfetti
+      value: 
+      objectReference: {fileID: 1753877655639648, guid: 699efaba76e88284a9cdc3ced8b53946,
+        type: 2}
+    - target: {fileID: 114434145401769726, guid: ce441fe4618ae2a4d8fdcbec0c6a5e67,
+        type: 2}
+      propertyPath: GoalConfetti
+      value: 
+      objectReference: {fileID: 1420789447479266, guid: e13c0731aa5d74143ba38e164a722f62,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce441fe4618ae2a4d8fdcbec0c6a5e67, type: 2}
   m_IsPrefabParent: 0
@@ -77213,10 +77237,10 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 20
+  m_Color: {r: 1, g: 0.89705884, b: 0.9588235, a: 1}
+  m_Intensity: 8.61
   m_Range: 30
-  m_SpotAngle: 80
+  m_SpotAngle: 86.5
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -77232,7 +77256,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294965247
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0

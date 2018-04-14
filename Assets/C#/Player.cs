@@ -21,6 +21,8 @@ public class Player : MonoBehaviour {
 
     [SerializeField]
     private GameObject DeathParticlePrefab;
+    [SerializeField]
+    public GameObject GoalConfetti;
     private float _deathParticleDuration;
 
     private CameraShake cameraShake;
@@ -54,6 +56,10 @@ public class Player : MonoBehaviour {
         
         gameObject.SetActive(false);
         StopCoroutine("Death");
+    }
+
+    public void GoalCelebration(){
+        Destroy(Instantiate (GoalConfetti, this.transform), 5.5f);
     }
 
     private void Awake()
