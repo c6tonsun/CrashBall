@@ -167,7 +167,6 @@ GameObject:
   - component: {fileID: 4063175717165010}
   - component: {fileID: 33825108651617186}
   - component: {fileID: 23213103993778122}
-  - component: {fileID: 64599311512490122}
   - component: {fileID: 95230131764699112}
   m_Layer: 11
   m_Name: Cart
@@ -188,6 +187,22 @@ GameObject:
   - component: {fileID: 199062417554150552}
   m_Layer: 11
   m_Name: Stunned
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1907985040760758
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4787571094576634}
+  - component: {fileID: 64280258504957708}
+  m_Layer: 11
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +245,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1878518378777178}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4739471991772480}
@@ -252,6 +267,7 @@ Transform:
   - {fileID: 4701939605956178}
   - {fileID: 4485436880834284}
   - {fileID: 4401960707964318}
+  - {fileID: 4787571094576634}
   m_Father: {fileID: 4989077457373242}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -320,6 +336,19 @@ Transform:
   m_Father: {fileID: 4063175717165010}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4787571094576634
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907985040760758}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4179936881593810}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4831503066246540
 Transform:
   m_ObjectHideFlags: 1
@@ -494,12 +523,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1790264723972252}
   m_Mesh: {fileID: 4300004, guid: a57dcea8f89c9464fae1d163bbf9f6aa, type: 3}
---- !u!64 &64599311512490122
+--- !u!64 &64280258504957708
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1878518378777178}
+  m_GameObject: {fileID: 1907985040760758}
   m_Material: {fileID: 13400000, guid: f440fcdbcd036574f8d5c5880c7fe6b7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -576,8 +605,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   PulseOrigin: {fileID: 4485436880834284}
-  magnetParticles: {fileID: 0}
-  my_meshRenderer: {fileID: 23123231966055784}
+  magnetParticles: {fileID: 198424705687321522}
 --- !u!114 &114061491287560516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -605,11 +633,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPlayer: 1
   hasController: 0
+  kills: 
   DeathParticlePrefab: {fileID: 1805521677653922, guid: 3c0bf701129030642b513d4ada1cbb6e,
+    type: 2}
+  GoalConfetti: {fileID: 1976610406406736, guid: 2ed8be70f8b897040a9699011c9f7621,
     type: 2}
   movement: {fileID: 0}
   pulse: {fileID: 0}
-  myWall: {fileID: 0}
+  my_meshRenderer: {fileID: 23123231966055784}
   myGoal: {fileID: 0}
   isLive: 1
 --- !u!114 &114220147616861308
@@ -687,14 +718,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 397042234
+  randomSeed: -841815567
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.4
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -777,7 +808,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.17586207, g: 0.7205882, b: 1, a: 1}
+      maxColor: {r: 0.97794116, g: 0.9139683, b: 0.050335195, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1083,7 +1114,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 200
+    maxNumParticles: 25
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -1329,8 +1360,8 @@ ParticleSystem:
     m_BurstCount: 1
     m_Bursts:
     - time: 0
-      minCount: 3
-      maxCount: 3
+      minCount: 1
+      maxCount: 1
       cycleCount: 1
       repeatInterval: 0.01
   SizeModule:
@@ -1345,15 +1376,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0.21212387
-          inSlope: 2
-          outSlope: 2
+          value: 0.6
+          inSlope: 1.2208749
+          outSlope: 1.2208749
           tangentMode: 0
         - serializedVersion: 2
-          time: 1
+          time: 0.25
           value: 1
           inSlope: 0
           outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 1
+          value: 0.60243905
+          inSlope: -0.56956595
+          outSlope: -0.56956595
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1612,7 +1649,7 @@ ParticleSystem:
         ctime7: 0
         atime0: 0
         atime1: 6554
-        atime2: 49922
+        atime2: 32768
         atime3: 65535
         atime4: 0
         atime5: 0
@@ -2964,7 +3001,7 @@ ParticleSystem:
   CollisionModule:
     enabled: 0
     serializedVersion: 3
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -3020,7 +3057,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3101,11 +3138,11 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 10000
-    radiusScale: 1
+    radiusScale: 0.62
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
-    maxCollisionShapes: 256
+      m_Bits: 256
+    maxCollisionShapes: 113
     quality: 0
     voxelSize: 0.5
     collisionMessages: 0
@@ -3960,7 +3997,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -496009389
+  randomSeed: -699540412
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -7232,7 +7269,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1614530011
+  randomSeed: 154071045
   InitialModule:
     serializedVersion: 3
     enabled: 1

@@ -19,6 +19,9 @@ public class Ball : MonoBehaviour {
 
     [HideInInspector]
     public Rigidbody Rb;
+    private TrailRenderer trail;
+    [SerializeField]
+    private Color neutralColor;
 
     private int lastPlayerHit;
     private int secondLastPlayerHit;
@@ -26,6 +29,8 @@ public class Ball : MonoBehaviour {
     private void Awake()
     {
         Rb = GetComponent<Rigidbody>();
+        trail = GetComponent<TrailRenderer>();
+        neutralColor = new Color(0.5f,0.5f,0.5f,1f);
     }
 
     private void OnEnable()
@@ -41,6 +46,7 @@ public class Ball : MonoBehaviour {
     private void OnDisable()
     {
         Rb.velocity = Vector3.zero;
+        trail.material.SetColor("_TintColor", neutralColor);
     }
 
     protected void FixedUpdate()
@@ -65,15 +71,26 @@ public class Ball : MonoBehaviour {
     protected void OnCollisionStay(Collision collision)
     {
         Player player = collision.collider.GetComponentInParent<Player>();
-        if (player != null)
+        if (player != null){
             SetLastPlayerHit((int)player.currentPlayer);
+            ChangeTrailColor(player);           
+        } 
 
         if (canBePulsed) return;
+        
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
             isFixedY = true;
             canBePulsed = true;
         }
+    }
+
+    protected void OnCollisionExit(Collision collision){
+        OnCollisionStay(collision);
+    }
+
+    public void ChangeTrailColor(Player player){
+        trail.material.SetColor("_TintColor", player.GetColor());
     }
 
     public void SetLastPlayerHit(int player)

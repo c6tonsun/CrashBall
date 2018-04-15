@@ -19,8 +19,8 @@ public class KartPulse : MonoBehaviour
     [SerializeField]
     private ParticleSystem magnetParticles;
 
-    [SerializeField]
-    private MeshRenderer my_meshRenderer;
+    private Player player;
+
 
     private IEnumerator secondPulse;
     private int playerNumber;
@@ -35,16 +35,18 @@ public class KartPulse : MonoBehaviour
         pulseCooldown = gameManager.pulseCooldown;
         maxMagnetTime = gameManager.maxMagnetTime;
 
+        player = GetComponentInParent<Player>();
+
         pulseParticles = GetComponent<ParticleSystem>();
         var colour = pulseParticles.main;
-        colour.startColor = my_meshRenderer.material.color;
+        colour.startColor = player.GetColor();
 
         magnetParticles = FindPulseOrigin();
         var magnetColour = magnetParticles.main;
-        magnetColour.startColor = my_meshRenderer.material.color;
+        magnetColour.startColor = player.GetColor();
 
         secondPulse = SecondPulse();
-        playerNumber = (int)GetComponentInParent<Player>().currentPlayer;
+        playerNumber = (int)player.currentPlayer;
     }
 
     private ParticleSystem FindPulseOrigin()
@@ -146,6 +148,7 @@ public class KartPulse : MonoBehaviour
                     direction.y = 0f;
                 ball.Rb.AddForce(direction.normalized * (PulseForce), ForceMode.Impulse);
                 ball.SetLastPlayerHit(playerNumber);
+                ball.ChangeTrailColor(player);
             }
         }
 
@@ -156,7 +159,7 @@ public class KartPulse : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        pulseParticles.Play(withChildren: false);
+        //pulseParticles.Play(withChildren: false);
 
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
         Ball[] balls = new Ball[colliders.Length];
@@ -179,6 +182,7 @@ public class KartPulse : MonoBehaviour
                     direction.y = 0f;
                 ball.Rb.AddForce(direction.normalized * (PulseForce), ForceMode.Impulse);
                 ball.SetLastPlayerHit(playerNumber);
+                ball.ChangeTrailColor(player);
             }
         }
         

@@ -227,7 +227,7 @@ public class MenuInput : MonoBehaviour {
                 }
                 else if (selected == Select.second)
                 {
-                    //Application.Quit();
+                    Application.Quit();
                     Debug.Log("application quit");
                 }
                 else if (selected == Select.preStart)

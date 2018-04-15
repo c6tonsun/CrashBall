@@ -42418,13 +42418,13 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 749073912}
-  m_LocalRotation: {x: 0.33471158, y: -0, z: -0, w: 0.94232064}
-  m_LocalPosition: {x: 0.5, y: 6.54, z: -14.96}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0.5, y: 8.37, z: -13.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 39.11, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!114 &749073914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49407,7 +49407,7 @@ Prefab:
         type: 2}
       propertyPath: go
       value: 
-      objectReference: {fileID: 1535984739}
+      objectReference: {fileID: 1021520425}
     - target: {fileID: 114728162085344574, guid: 52bb1b6eb5435254aad177ecf12cfda0,
         type: 2}
       propertyPath: staticLoop
@@ -56540,7 +56540,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 536bad37461859b4a83db6e9426d344f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce441fe4618ae2a4d8fdcbec0c6a5e67, type: 2}
   m_IsPrefabParent: 0
@@ -77232,7 +77232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1535984740
 Light:
   m_ObjectHideFlags: 0
@@ -91120,6 +91120,21 @@ Prefab:
     - target: {fileID: 4036552812930434, guid: d9bbc65ace897394d8857d257321517d, type: 2}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 198625218495336300, guid: d9bbc65ace897394d8857d257321517d,
+        type: 2}
+      propertyPath: RotationModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198625218495336300, guid: d9bbc65ace897394d8857d257321517d,
+        type: 2}
+      propertyPath: randomSeed
+      value: -735588430
+      objectReference: {fileID: 0}
+    - target: {fileID: 198625218495336300, guid: d9bbc65ace897394d8857d257321517d,
+        type: 2}
+      propertyPath: RotationModule.curve.scalar
+      value: 0.08726646
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9bbc65ace897394d8857d257321517d, type: 2}
