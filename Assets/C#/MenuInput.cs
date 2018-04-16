@@ -138,10 +138,12 @@ public class MenuInput : MonoBehaviour {
         {
             foreach (var button in MenuArray)
             {
-                button.GetComponentInParent<Animator>().SetFloat("AnimSpeed", 1f);
-                if (button == MenuArray[(int)selected])
-                {
-                    button.GetComponentInParent<Animator>().SetFloat("AnimSpeed", 2f);
+                if(button.GetComponentInParent<Animator>()!=null){
+                    button.GetComponentInParent<Animator>().SetFloat("AnimSpeed", 1f);
+                    if (button == MenuArray[(int)selected])
+                    {
+                        button.GetComponentInParent<Animator>().SetFloat("AnimSpeed", 2f);
+                    }
                 }
             }
 
@@ -161,8 +163,7 @@ public class MenuInput : MonoBehaviour {
 
     private void GetInput()
     {
-        var input = (Mathf.Abs(Input.GetAxis("Vertical"))>Mathf.Abs(Input.GetAxis("Horizontal"))? 
-            Input.GetAxis("Vertical") : Input.GetAxis("Horizontal"));
+        var input = Input.GetAxisRaw("Vertical");
         if (Mathf.Abs(input)>0.25f)
         {
 #region downwards
@@ -209,8 +210,14 @@ public class MenuInput : MonoBehaviour {
                 selected = Select.fifth;
             }
             #endregion
+            
             Debug.Log(selected);
         }
+        if(menus == Menu.mapselect){
+                if(Input.GetAxisRaw("Horizontal")<-0.5){
+                    selected = Select.second;
+                }
+            }
         if (Input.GetButtonDown("Submit"))
         {
 
@@ -227,8 +234,8 @@ public class MenuInput : MonoBehaviour {
                 }
                 else if (selected == Select.second)
                 {
-                    Application.Quit();
                     Debug.Log("application quit");
+                    Application.Quit();                  
                 }
                 else if (selected == Select.preStart)
                 {
@@ -244,9 +251,9 @@ public class MenuInput : MonoBehaviour {
                     Debug.Log("select map1");
                     mapID = 1;
                     StartCoroutine(LerpCamera(cameraPoints[1],  //Start point 
-                        cameraPoints[2],                        //End point
-                        lerpTime,                               //Lerp length in seconds
-                        Menu.options));                       //Next menu
+                    cameraPoints[2],                        //End point
+                    lerpTime,                               //Lerp length in seconds
+                    Menu.options));                       //Next menu   
                 }
                 if (selected == Select.second)
                 {
@@ -254,10 +261,21 @@ public class MenuInput : MonoBehaviour {
                     Debug.Log("select map2");
                     mapID = 2;
                     StartCoroutine(LerpCamera(cameraPoints[1],  //Start point 
-                        cameraPoints[2],                        //End point
-                        lerpTime,                               //Lerp length in seconds
-                        Menu.options));                       //Next menu
+                    cameraPoints[2],                        //End point
+                    lerpTime,                               //Lerp length in seconds
+                    Menu.options));                       //Next menu   
                 }
+                if (selected == Select.third)
+                {
+                    selected = Select.first;
+                    Debug.Log("select map3");
+                    mapID = 3;
+                    StartCoroutine(LerpCamera(cameraPoints[1],  //Start point 
+                    cameraPoints[2],                        //End point
+                    lerpTime,                               //Lerp length in seconds
+                    Menu.options));                       //Next menu                  
+                }
+
             }
 
             if (menus == Menu.options) //If current select is game options menu

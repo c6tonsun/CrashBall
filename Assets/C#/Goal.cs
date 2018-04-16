@@ -17,6 +17,8 @@ public class Goal : MonoBehaviour {
     private ScoreHandler _scoreHandler;
     private CameraShake cameraShake;
     private GameManager gameManager;
+
+    private ParticleSystem goalLines;
     
     private int lives;
     private int currentLives;
@@ -30,11 +32,27 @@ public class Goal : MonoBehaviour {
         _scoreHandler = FindObjectOfType<ScoreHandler>();
         cameraShake = FindObjectOfType<CameraShake>();
         gameManager = FindObjectOfType<GameManager>();
+        goalLines = GetComponentInChildren<ParticleSystem>();
 
         lives = gameManager.playerLives;
         currentLives = lives;
 
         score = gameManager.targetScore;
+    }
+
+    IEnumerator FlashLines(){
+        var variable = goalLines.main;
+        var oldColor = goalLines.main.startColor;
+        var time = 0f;
+        variable.startColor = Color.red;
+        yield return new WaitForSeconds(0.3f);
+        while(time<1){
+        variable.startColor = Color.Lerp(Color.red, oldColor.colorMax, time);
+        yield return new WaitForEndOfFrame();
+        time += Time.deltaTime;        
+        }
+        variable.startColor = oldColor;
+        StopCoroutine("FlashLines");
     }
 
     private void OnTriggerStay(Collider other)
@@ -48,6 +66,8 @@ public class Goal : MonoBehaviour {
             // live and death
             currentLives--;
             _scoreHandler.LostLive((int)currentPlayer);
+
+            StartCoroutine("FlashLines");
 
             if (gameManager.currentMode == GameManager.GameMode.Elimination && currentLives <= 0)
             {

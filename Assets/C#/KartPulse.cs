@@ -149,6 +149,8 @@ public class KartPulse : MonoBehaviour
                 ball.Rb.AddForce(direction.normalized * (PulseForce), ForceMode.Impulse);
                 ball.SetLastPlayerHit(playerNumber);
                 ball.ChangeTrailColor(player);
+                ball.SpawnPulseBlastOff(player, direction.normalized);
+                
             }
         }
 
@@ -183,6 +185,7 @@ public class KartPulse : MonoBehaviour
                 ball.Rb.AddForce(direction.normalized * (PulseForce), ForceMode.Impulse);
                 ball.SetLastPlayerHit(playerNumber);
                 ball.ChangeTrailColor(player);
+                ball.SpawnPulseBlastOff(player, direction.normalized);
             }
         }
         
