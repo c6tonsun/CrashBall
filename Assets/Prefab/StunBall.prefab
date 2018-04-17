@@ -179,16 +179,16 @@ TrailRenderer:
       - serializedVersion: 2
         time: 1
         value: 0
-        inSlope: -4.0053
-        outSlope: -4.0053
+        inSlope: -3.5555556
+        outSlope: -3.5555556
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.3451319, g: 0, b: 0.60294116, a: 0.24313726}
-      key1: {r: 0.4823529, g: 0.06271627, b: 0.85294116, a: 0.43529412}
+      key0: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 0.24313726}
+      key1: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 0.43529412}
       key2: {r: 0.86206913, g: 0, b: 1, a: 0.9019608}
       key3: {r: 0.86206913, g: 0, b: 1, a: 0.5647059}
       key4: {r: 0.86206913, g: 0, b: 1, a: 0}
@@ -196,7 +196,7 @@ TrailRenderer:
       key6: {r: 0, g: 1, b: 0.9172416, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 21588
+      ctime1: 65535
       ctime2: 50115
       ctime3: 50115
       ctime4: 63608
@@ -212,7 +212,7 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_NumColorKeys: 3
+      m_NumColorKeys: 2
       m_NumAlphaKeys: 5
     numCornerVertices: 0
     numCapVertices: 0
@@ -235,11 +235,13 @@ MonoBehaviour:
   minSpeed: 0
   magnetedTime: 0
   canScore: 1
-  canFly: 0
   canBePulsed: 0
   isFixedY: 0
+  canBeMagneted: 1
   Rb: {fileID: 0}
-  constantSpeed: 0
+  neutralColor: {r: 0, g: 0, b: 0, a: 0}
+  BallBlastEffect: {fileID: 198472580756262000, guid: 38b0347354f1ee84daa7b46f339c6ad1,
+    type: 2}
 --- !u!135 &135859239051163648
 SphereCollider:
   m_ObjectHideFlags: 1

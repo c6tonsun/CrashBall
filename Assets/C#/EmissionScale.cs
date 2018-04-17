@@ -39,23 +39,14 @@ public class EmissionScale : MonoBehaviour {
         float emission = (1f - (playerHP / playerMaxHP));
         if (playerHP != oldPlayerHP)
         {
-            Color finalColor = baseColor * Mathf.LinearToGammaSpace(0);
-            if (emission > 0.1f)
-            {
-                finalColor = baseColor * Mathf.LinearToGammaSpace(0.2f);
-            }
-            if (emission > 0.3f)
-            {
-                finalColor = baseColor * Mathf.LinearToGammaSpace(0.5f);
-            }
+            Color finalColor = baseColor * Mathf.LinearToGammaSpace(emission);
             if (emission > 0.6)
             {
-                finalColor = baseColor * Mathf.LinearToGammaSpace(1f);
                 if (!BeamPrepare.isPlaying) BeamPrepare.Play();
             }
             if (emission >= 1f)
             {
-                finalColor = baseColor * Mathf.LinearToGammaSpace(1.5f);
+                
                 if (BeamPrepare.isPlaying) BeamPrepare.Stop();
                 if (!BeamOn.isPlaying) BeamOn.Play();
             }

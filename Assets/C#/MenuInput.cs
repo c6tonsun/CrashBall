@@ -31,7 +31,7 @@ public class MenuInput : MonoBehaviour {
 
     private float highlightScaleMulti = 1;
    
-
+    private GameManager gameManager;
 
     public enum Select
     {
@@ -76,6 +76,7 @@ public class MenuInput : MonoBehaviour {
     void Start () {
         //mainCamera = FindObjectOfType<Camera>().gameObject;
         mainCamera.transform.position = cameraPoints[0].position;
+        gameManager = FindObjectOfType<GameManager> ();
     }
 	
 	// Update is called once per frame
@@ -137,10 +138,12 @@ public class MenuInput : MonoBehaviour {
         {
             foreach (var button in MenuArray)
             {
-                button.GetComponentInParent<Animator>().SetFloat("AnimSpeed", 1f);
-                if (button == MenuArray[(int)selected])
-                {
-                    button.GetComponentInParent<Animator>().SetFloat("AnimSpeed", 2f);
+                if(button.GetComponentInParent<Animator>()!=null){
+                    button.GetComponentInParent<Animator>().SetFloat("AnimSpeed", 1f);
+                    if (button == MenuArray[(int)selected])
+                    {
+                        button.GetComponentInParent<Animator>().SetFloat("AnimSpeed", 2f);
+                    }
                 }
             }
 
@@ -160,7 +163,7 @@ public class MenuInput : MonoBehaviour {
 
     private void GetInput()
     {
-        var input = Input.GetAxis("Vertical");
+        var input = Input.GetAxisRaw("Vertical");
         if (Mathf.Abs(input)>0.25f)
         {
 #region downwards
@@ -207,8 +210,14 @@ public class MenuInput : MonoBehaviour {
                 selected = Select.fifth;
             }
             #endregion
+            
             Debug.Log(selected);
         }
+        if(menus == Menu.mapselect){
+                if(Input.GetAxisRaw("Horizontal")<-0.5){
+                    selected = Select.second;
+                }
+            }
         if (Input.GetButtonDown("Submit"))
         {
 
@@ -225,8 +234,8 @@ public class MenuInput : MonoBehaviour {
                 }
                 else if (selected == Select.second)
                 {
-                    //Application.Quit();
                     Debug.Log("application quit");
+                    Application.Quit();                  
                 }
                 else if (selected == Select.preStart)
                 {
@@ -242,9 +251,9 @@ public class MenuInput : MonoBehaviour {
                     Debug.Log("select map1");
                     mapID = 1;
                     StartCoroutine(LerpCamera(cameraPoints[1],  //Start point 
-                        cameraPoints[2],                        //End point
-                        lerpTime,                               //Lerp length in seconds
-                        Menu.options));                       //Next menu
+                    cameraPoints[2],                        //End point
+                    lerpTime,                               //Lerp length in seconds
+                    Menu.options));                       //Next menu   
                 }
                 if (selected == Select.second)
                 {
@@ -252,19 +261,37 @@ public class MenuInput : MonoBehaviour {
                     Debug.Log("select map2");
                     mapID = 2;
                     StartCoroutine(LerpCamera(cameraPoints[1],  //Start point 
-                        cameraPoints[2],                        //End point
-                        lerpTime,                               //Lerp length in seconds
-                        Menu.options));                       //Next menu
+                    cameraPoints[2],                        //End point
+                    lerpTime,                               //Lerp length in seconds
+                    Menu.options));                       //Next menu   
                 }
+                if (selected == Select.third)
+                {
+                    selected = Select.first;
+                    Debug.Log("select map3");
+                    mapID = 3;
+                    StartCoroutine(LerpCamera(cameraPoints[1],  //Start point 
+                    cameraPoints[2],                        //End point
+                    lerpTime,                               //Lerp length in seconds
+                    Menu.options));                       //Next menu                  
+                }
+
             }
 
             if (menus == Menu.options) //If current select is game options menu
             {
                 if (selected == Select.first)
                 {
-                    Debug.Log("start map");
-                    if(mapID != -1) SceneManager.LoadScene(mapID);
+                    gameManager.currentMode = GameManager.GameMode.Elimination;
+                    Debug.Log("mode: Elimination");
                 }
+                if (selected == Select.second)
+                {
+                    gameManager.currentMode = GameManager.GameMode.ScoreRun;
+                    Debug.Log("mode: ScoreRun");
+                }
+                Debug.Log("start map");
+                if(mapID != -1) SceneManager.LoadScene(mapID);
             }
         }
         if (Input.GetButtonDown("Cancel"))

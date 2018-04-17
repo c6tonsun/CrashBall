@@ -21,6 +21,8 @@ public class Player : MonoBehaviour {
 
     [SerializeField]
     private GameObject DeathParticlePrefab;
+    [SerializeField]
+    public GameObject GoalConfetti;
     private float _deathParticleDuration;
 
     private CameraShake cameraShake;
@@ -30,12 +32,22 @@ public class Player : MonoBehaviour {
     [HideInInspector]
     public KartPulse pulse;
 
+    [SerializeField]
+    private MeshRenderer my_meshRenderer;
+    [SerializeField]
+    private Color playerColour;
+
     //public PlayerWall myWall;
     public Goal myGoal;
     [HideInInspector]
     public bool isLive = true;
 
     private Animator kartAnimator;
+
+    public Color GetColor()
+    {
+        return playerColour;
+    }
 
     private IEnumerator Death()
     {
@@ -56,6 +68,10 @@ public class Player : MonoBehaviour {
         StopCoroutine("Death");
     }
 
+    public void GoalCelebration(){
+        Destroy(Instantiate (GoalConfetti, this.transform), 5.5f);
+    }
+
     private void Awake()
     {
         movement = GetComponentInChildren<KartMovement>();
@@ -63,7 +79,10 @@ public class Player : MonoBehaviour {
         kartAnimator = GetComponentInChildren<Animator>();
         cameraShake = FindObjectOfType<CameraShake>();
         _deathParticleDuration = DeathParticlePrefab.GetComponent<ParticleSystem>().main.duration + 0.7f;
+        playerColour = my_meshRenderer.material.color;
     }
+
+    
 
     public void Die()
     {

@@ -19,6 +19,12 @@ public class Ball : MonoBehaviour {
 
     [HideInInspector]
     public Rigidbody Rb;
+    private TrailRenderer trail;
+    [SerializeField]
+    private Color neutralColor;
+
+    [SerializeField]
+    protected ParticleSystem BallBlastEffect;
 
     private int lastPlayerHit;
     private int secondLastPlayerHit;
@@ -26,6 +32,8 @@ public class Ball : MonoBehaviour {
     private void Awake()
     {
         Rb = GetComponent<Rigidbody>();
+        trail = GetComponent<TrailRenderer>();
+        neutralColor = new Color(0.5f,0.5f,0.5f,1f);
     }
 
     private void OnEnable()
@@ -41,6 +49,7 @@ public class Ball : MonoBehaviour {
     private void OnDisable()
     {
         Rb.velocity = Vector3.zero;
+        trail.material.SetColor("_TintColor", neutralColor);
     }
 
     protected void FixedUpdate()
@@ -59,21 +68,52 @@ public class Ball : MonoBehaviour {
             gameObject.SetActive(false);
 
         //Makes balls turn towards their velocity direction. Prevents balls from rolling
-        //transform.rotation = Quaternion.LookRotation(Rb.velocity);
+        transform.rotation = Quaternion.LookRotation(Rb.velocity, Vector3.up);
     }
 
     protected void OnCollisionStay(Collision collision)
     {
         Player player = collision.collider.GetComponentInParent<Player>();
-        if (player != null)
+        if (player != null){
             SetLastPlayerHit((int)player.currentPlayer);
+            ChangeTrailColor(player);           
+        } 
 
         if (canBePulsed) return;
+        
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
             isFixedY = true;
             canBePulsed = true;
         }
+    }
+
+    protected void OnCollisionExit(Collision collision){
+        OnCollisionStay(collision);
+    }
+
+    //TODO: Trailcolour should be that color who gets the score. Pulse always changes Trail Colour.
+    public void ChangeTrailColor(Player player){
+        trail.material.SetColor("_TintColor", player.GetColor());
+    }
+
+    //TODO: Maybe make it save the effects first time it makes em, to reduce extra calcs.
+    //TODO: Get the quaternion spawn right.
+    
+    public void SpawnPulseBlastOff(Player player, Vector3 direction){
+        StartCoroutine(BlastOff(player, direction));
+    }
+
+    protected IEnumerator BlastOff(Player player, Vector3 direction){
+        var BallBlastParts = BallBlastEffect.GetComponentsInChildren<ParticleSystem>();
+        foreach(var part in BallBlastParts){
+            var partStartColor = part.main;
+            partStartColor.startColor = player.GetColor();        
+        }
+
+        yield return new WaitForFixedUpdate();
+        Destroy(Instantiate(BallBlastEffect, transform.position, Quaternion.LookRotation(direction)), 1.8f);
+        StopCoroutine("BlastOff");
     }
 
     public void SetLastPlayerHit(int player)
@@ -88,5 +128,9 @@ public class Ball : MonoBehaviour {
     public int[] GetLastPlayerHits()
     {
         return new int[2] { lastPlayerHit, secondLastPlayerHit };
+    }
+
+    void OnDrawGizmos(){
+        Gizmos.DrawLine(transform.position, transform.position+transform.forward*3);
     }
 }

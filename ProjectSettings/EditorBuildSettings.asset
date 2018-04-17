@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/_MaxMenu.unity
+    path: Assets/_Scenes/_MainMenu.unity
     guid: ed5a958ab7c33ba49a45bb32671f98b8
   - enabled: 1
     path: Assets/_Scenes/_FuturisticStage.unity
@@ -14,3 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/_WireFrameStage.unity
     guid: cdcbb47e26624784faf56bb4365a2174
+  - enabled: 1
+    path: Assets/_Scenes/_2PlayerFuture.unity
+    guid: 89b102d24b3c1b74ead6ee819d0e362d

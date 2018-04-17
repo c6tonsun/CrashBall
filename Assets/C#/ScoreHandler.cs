@@ -84,6 +84,7 @@ public class ScoreHandler : MonoBehaviour {
             return;
         _goals[player - 1].AddToScore();
         scores[player - 1] = _goals[player - 1].GetCurrentScore();
+        _players [player - 1].GoalCelebration ();
     }
 
     public void ScoreReached(int player)
