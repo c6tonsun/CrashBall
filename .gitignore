@@ -35,3 +35,13 @@ sysinfo.txt
 Library/
 .vs/
 Temp/
+
+#FMOD Studio
+/Assets/FMODStudioCache.asset
+/Assets/FMODStudioCache.asset.meta
+fmod.log
+fmod_editor.log
+/FMOD/NotCrashBash/**.user
+/FMOD/NotCrashBash/**.unsaved
+/FMOD/NotCrashBash/**.cache
+/FMOD/NotCrashBash/**.restore
