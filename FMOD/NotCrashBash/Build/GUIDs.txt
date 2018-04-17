@@ -1,0 +1,6 @@
+{9c93da28-6a51-4cc4-818e-f52a5b5438f4} event:/Test Event/LOUDHAMMER
+{7c47df7a-184d-4c3f-92fc-755256662a90} event:/Test Event/TestHammer
+{27e7cc52-d73c-416a-8a77-1347ea3d8e6a} bus:/
+{0aa1d8a7-b32b-4567-a74d-ba30e37af74f} bus:/Reverb
+{ed0b71a4-8cc5-4baf-8127-1701dacb0a50} bank:/Test
+{32acb6ba-b713-46ab-8d8f-bc2fca4d6738} bank:/Master Bank
