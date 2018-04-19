@@ -21,8 +21,7 @@ public class KartPulse : MonoBehaviour
 
     private Player player;
 
-
-    private IEnumerator secondPulse;
+    private Coroutine secondPulse;
     private int playerNumber;
 
     Collider[] colliders;
@@ -44,8 +43,7 @@ public class KartPulse : MonoBehaviour
         magnetParticles = FindPulseOrigin();
         var magnetColour = magnetParticles.main;
         magnetColour.startColor = player.GetColor();
-
-        secondPulse = SecondPulse();
+        
         playerNumber = (int)player.currentPlayer;
     }
 
@@ -113,7 +111,7 @@ public class KartPulse : MonoBehaviour
                     direction.y = 0f;
 
                 ball.Rb.AddForce(direction.normalized * inForce * 0.4f, ForceMode.Impulse);
-                ball.SetLastPlayerHit(playerNumber);
+                ball.SetLastHitPlayer(player, false);
             }
         }
     }
@@ -147,21 +145,18 @@ public class KartPulse : MonoBehaviour
                 if (ball.isFixedY)
                     direction.y = 0f;
                 ball.Rb.AddForce(direction.normalized * (PulseForce), ForceMode.Impulse);
-                ball.SetLastPlayerHit(playerNumber);
-                ball.ChangeTrailColor(player);
+                ball.SetLastHitPlayer(player, true);
                 ball.SpawnPulseBlastOff(player, direction.normalized);
                 
             }
         }
 
-        StartCoroutine(secondPulse);
+        secondPulse = StartCoroutine(SecondPulse());
     }
 
     IEnumerator SecondPulse()
     {
         yield return new WaitForSeconds(0.1f);
-
-        //pulseParticles.Play(withChildren: false);
 
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
         Ball[] balls = new Ball[colliders.Length];
@@ -183,8 +178,7 @@ public class KartPulse : MonoBehaviour
                 if (ball.isFixedY)
                     direction.y = 0f;
                 ball.Rb.AddForce(direction.normalized * (PulseForce), ForceMode.Impulse);
-                ball.SetLastPlayerHit(playerNumber);
-                ball.ChangeTrailColor(player);
+                ball.SetLastHitPlayer(player, true);
                 ball.SpawnPulseBlastOff(player, direction.normalized);
             }
         }

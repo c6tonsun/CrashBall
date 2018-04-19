@@ -21,6 +21,7 @@ public class Player : MonoBehaviour {
 
     [SerializeField]
     private GameObject DeathParticlePrefab;
+    private IEnumerator playerDeath;
     [SerializeField]
     public GameObject GoalConfetti;
     private float _deathParticleDuration;
@@ -33,12 +34,10 @@ public class Player : MonoBehaviour {
     public KartPulse pulse;
 
     [SerializeField]
-    private MeshRenderer my_meshRenderer;
+    private MeshRenderer playerColorMesh;
     [SerializeField]
     private Color playerColour;
-
-    //public PlayerWall myWall;
-    public Goal myGoal;
+    
     [HideInInspector]
     public bool isLive = true;
 
@@ -47,6 +46,18 @@ public class Player : MonoBehaviour {
     public Color GetColor()
     {
         return playerColour;
+    }
+
+    private void Awake()
+    {
+        movement = GetComponentInChildren<KartMovement>();
+        pulse = GetComponentInChildren<KartPulse>();
+        kartAnimator = GetComponentInChildren<Animator>();
+        cameraShake = FindObjectOfType<CameraShake>();
+        _deathParticleDuration = DeathParticlePrefab.GetComponent<ParticleSystem>().main.duration + 0.7f;
+        playerColour = playerColorMesh.material.color;
+
+        playerDeath = Death();
     }
 
     private IEnumerator Death()
@@ -65,36 +76,17 @@ public class Player : MonoBehaviour {
         }
         
         gameObject.SetActive(false);
-        StopCoroutine("Death");
+        StopCoroutine(playerDeath);
     }
 
     public void GoalCelebration(){
         Destroy(Instantiate (GoalConfetti, this.transform), 5.5f);
     }
-
-    private void Awake()
-    {
-        movement = GetComponentInChildren<KartMovement>();
-        pulse = GetComponentInChildren<KartPulse>();
-        kartAnimator = GetComponentInChildren<Animator>();
-        cameraShake = FindObjectOfType<CameraShake>();
-        _deathParticleDuration = DeathParticlePrefab.GetComponent<ParticleSystem>().main.duration + 0.7f;
-        playerColour = my_meshRenderer.material.color;
-    }
-
     
-
     public void Die()
     {
-        /*
-        if (myWall != null)
-        {
-            myWall.gameObject.SetActive(true);
-            myWall.player = this;
-            myWall.playerGoal = myGoal;
-        }
-        */
+        if (isLive)
+            StartCoroutine(playerDeath);
         isLive = false;
-        StartCoroutine("Death");
     }
 }

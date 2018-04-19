@@ -15,44 +15,54 @@ public class Goal : MonoBehaviour {
     public Number currentPlayer;
     
     private ScoreHandler _scoreHandler;
-    private CameraShake cameraShake;
-    private GameManager gameManager;
+    private CameraShake _cameraShake;
+    private GameManager _gameManager;
+
+    private Collider[] _colliders;
 
     private ParticleSystem goalLines;
+    private Color _defaultColor;
+    private Coroutine flashlines;
     
     private int lives;
     private int currentLives;
     private bool canComeback;
 
-    private int score;
+    private int targetScore;
     private int currentScore = 0;
 
     private void Start()
     {
         _scoreHandler = FindObjectOfType<ScoreHandler>();
-        cameraShake = FindObjectOfType<CameraShake>();
-        gameManager = FindObjectOfType<GameManager>();
-        goalLines = GetComponentInChildren<ParticleSystem>();
+        _cameraShake = FindObjectOfType<CameraShake>();
+        _gameManager = FindObjectOfType<GameManager>();
 
-        lives = gameManager.playerLives;
+        _colliders = GetComponents<Collider>();
+        foreach (Collider c in _colliders)
+            c.enabled = c.isTrigger;
+
+        goalLines = GetComponentInChildren<ParticleSystem>();
+        _defaultColor = goalLines.main.startColor.colorMax;
+
+        lives = _gameManager.playerLives;
         currentLives = lives;
 
-        score = gameManager.targetScore;
+        targetScore = _gameManager.targetScore;
     }
 
     IEnumerator FlashLines(){
-        var variable = goalLines.main;
-        var oldColor = goalLines.main.startColor;
-        var time = 0f;
-        variable.startColor = Color.red;
+        ParticleSystem.MainModule main = goalLines.main;
+        float time = 0f;
+        main.startColor = Color.red;
         yield return new WaitForSeconds(0.3f);
-        while(time<1){
-        variable.startColor = Color.Lerp(Color.red, oldColor.colorMax, time);
-        yield return new WaitForEndOfFrame();
-        time += Time.deltaTime;        
+        while (time < 1)
+        {
+            main.startColor = Color.Lerp(Color.red, _defaultColor, time);
+            yield return new WaitForEndOfFrame();
+            time += Time.deltaTime;        
         }
-        variable.startColor = oldColor;
-        StopCoroutine("FlashLines");
+        main.startColor = _defaultColor;
+        StopCoroutine(flashlines);
     }
 
     private void OnTriggerStay(Collider other)
@@ -60,19 +70,22 @@ public class Goal : MonoBehaviour {
         Ball ball = other.GetComponent<Ball>();
         if (ball.canScore)
         {
-            cameraShake.SetShakeTime(0.25f);
+            _cameraShake.SetShakeTime(0.25f);
             ball.canScore = false;
 
             // live and death
             currentLives--;
             _scoreHandler.LostLive((int)currentPlayer);
 
-            StartCoroutine("FlashLines");
+            flashlines = StartCoroutine(FlashLines());
 
-            if (gameManager.currentMode == GameManager.GameMode.Elimination && currentLives <= 0)
+            if (_gameManager.currentMode == GameManager.GameMode.Elimination && currentLives <= 0)
             {
-                cameraShake.SetShakeTime(0.5f);
+                _cameraShake.SetShakeTime(0.5f);
                 _scoreHandler.KillPlayer((int)currentPlayer);
+                foreach (Collider c in _colliders)
+                    c.enabled = !c.isTrigger;
+
             }
 
             // score and kill
@@ -96,22 +109,11 @@ public class Goal : MonoBehaviour {
     {
         currentScore++;
 
-        if (currentScore >= score)
+        if (currentScore >= targetScore)
         {
-            cameraShake.SetShakeTime(0.5f);
+            _cameraShake.SetShakeTime(0.5f);
             _scoreHandler.ScoreReached((int)currentPlayer);
         }
-    }
-
-    public bool ResetLives()
-    {
-        if (canComeback)
-        {
-            currentLives = lives;
-            canComeback = false;
-            return true;
-        }
-        return false;
     }
 
     public int GetCurrentLives()

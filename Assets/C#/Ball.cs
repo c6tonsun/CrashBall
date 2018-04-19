@@ -26,8 +26,10 @@ public class Ball : MonoBehaviour {
     [SerializeField]
     protected ParticleSystem BallBlastEffect;
 
-    private int lastPlayerHit;
-    private int secondLastPlayerHit;
+    private bool justPulsed;
+    private int lastHitPlayer;
+    private int secondLastHitPlayer;
+    Color lastHitPlayerColor;
 
     private void Awake()
     {
@@ -42,8 +44,9 @@ public class Ball : MonoBehaviour {
         canBePulsed = false;
         isFixedY = false;
 
-        lastPlayerHit = -1;
-        secondLastPlayerHit = -1;
+        justPulsed = false;
+        lastHitPlayer = -1;
+        secondLastHitPlayer = -1;
     }
 
     private void OnDisable()
@@ -74,10 +77,15 @@ public class Ball : MonoBehaviour {
     protected void OnCollisionStay(Collision collision)
     {
         Player player = collision.collider.GetComponentInParent<Player>();
-        if (player != null){
-            SetLastPlayerHit((int)player.currentPlayer);
-            ChangeTrailColor(player);           
-        } 
+        if (player != null)
+            SetLastHitPlayer(player, false);
+
+        Ball ball = collision.collider.GetComponent<Ball>();
+        if (ball != null && justPulsed)
+            ball.SetLastHitPlayer(lastHitPlayer, lastHitPlayerColor);
+
+        if (collision.collider.gameObject.layer != LayerMask.NameToLayer("Floor"))
+            justPulsed = false;
 
         if (canBePulsed) return;
         
@@ -92,42 +100,47 @@ public class Ball : MonoBehaviour {
         OnCollisionStay(collision);
     }
 
-    //TODO: Trailcolour should be that color who gets the score. Pulse always changes Trail Colour.
-    public void ChangeTrailColor(Player player){
-        trail.material.SetColor("_TintColor", player.GetColor());
-    }
-
-    //TODO: Maybe make it save the effects first time it makes em, to reduce extra calcs.
-    //TODO: Get the quaternion spawn right.
-    
-    public void SpawnPulseBlastOff(Player player, Vector3 direction){
-        StartCoroutine(BlastOff(player, direction));
-    }
-
-    protected IEnumerator BlastOff(Player player, Vector3 direction){
-        var BallBlastParts = BallBlastEffect.GetComponentsInChildren<ParticleSystem>();
-        foreach(var part in BallBlastParts){
-            var partStartColor = part.main;
-            partStartColor.startColor = player.GetColor();        
-        }
-
-        yield return new WaitForFixedUpdate();
-        Destroy(Instantiate(BallBlastEffect, transform.position, Quaternion.LookRotation(direction)), 1.8f);
-        StopCoroutine("BlastOff");
-    }
-
-    public void SetLastPlayerHit(int player)
+    public void SpawnPulseBlastOff(Player player, Vector3 direction)
     {
-        if (lastPlayerHit == player)
+        var BallBlastParts = BallBlastEffect.GetComponentsInChildren<ParticleSystem>();
+        lastHitPlayerColor = player.GetColor();
+        foreach (var part in BallBlastParts)
+        {
+            var partStartColor = part.main;
+            partStartColor.startColor = lastHitPlayerColor;
+        }
+        
+        Destroy(Instantiate(BallBlastEffect, transform.position, Quaternion.LookRotation(direction)), 1.8f);
+    }
+
+    public void SetLastHitPlayer(Player player, bool fromPulse)
+    {
+        int playerNumber = (int)player.currentPlayer;
+        if (lastHitPlayer == playerNumber)
             return;
 
-        secondLastPlayerHit = lastPlayerHit;
-        lastPlayerHit = player;
+        secondLastHitPlayer = lastHitPlayer;
+        lastHitPlayer = playerNumber;
+        lastHitPlayerColor = player.GetColor();
+        trail.material.SetColor("_TintColor", lastHitPlayerColor);
+
+        justPulsed = fromPulse;
+    }
+
+    public void SetLastHitPlayer(int playerNumber, Color playerColor)
+    {
+        if (lastHitPlayer == playerNumber)
+            return;
+
+        secondLastHitPlayer = lastHitPlayer;
+        lastHitPlayer = playerNumber;
+        lastHitPlayerColor = playerColor;
+        trail.material.SetColor("_TintColor", lastHitPlayerColor);
     }
 
     public int[] GetLastPlayerHits()
     {
-        return new int[2] { lastPlayerHit, secondLastPlayerHit };
+        return new int[2] { lastHitPlayer, secondLastHitPlayer };
     }
 
     void OnDrawGizmos(){

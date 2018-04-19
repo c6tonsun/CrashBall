@@ -102,6 +102,8 @@ public class ScoreHandler : MonoBehaviour {
 
     public void AddKill(int killer, int victim)
     {
+        if (killer < 1)
+            return;
         _players[killer - 1].kills[victim - 1]++;
     }
 

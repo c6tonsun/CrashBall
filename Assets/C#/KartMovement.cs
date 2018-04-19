@@ -43,7 +43,7 @@ public class KartMovement : MonoBehaviour
             if (stunParticles.isPlaying) stunParticles.Stop();
         }
 
-        _curveTime += _input * speed * Time.deltaTime;
+        _curveTime += _input * speed * Time.unscaledDeltaTime;
         if (_curveTime < 0)
             _curveTime = 0;
         if (_curveTime > 1)
