@@ -33,7 +33,11 @@ public class EmissionScale : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
+        if (playerGoal == null)
+            return;
+
         playerHP = playerGoal.GetCurrentLives();
 
         float emission = (1f - (playerHP / playerMaxHP));

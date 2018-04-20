@@ -53719,6 +53719,7 @@ GameObject:
   - component: {fileID: 1608021251}
   - component: {fileID: 1608021250}
   - component: {fileID: 1608021252}
+  - component: {fileID: 1608021253}
   m_Layer: 0
   m_Name: Game manager
   m_TagString: Untagged
@@ -53779,6 +53780,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scores: 
   lives: 
+  isElimination: 0
+--- !u!114 &1608021253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1608021249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc4dd81ede63454782b387b135ec930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1623541188
 GameObject:
   m_ObjectHideFlags: 0

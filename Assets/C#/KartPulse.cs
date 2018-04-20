@@ -22,7 +22,6 @@ public class KartPulse : MonoBehaviour
     private Player player;
 
     private Coroutine secondPulse;
-    private int playerNumber;
 
     Collider[] colliders;
 
@@ -43,8 +42,6 @@ public class KartPulse : MonoBehaviour
         magnetParticles = FindPulseOrigin();
         var magnetColour = magnetParticles.main;
         magnetColour.startColor = player.GetColor();
-        
-        playerNumber = (int)player.currentPlayer;
     }
 
     private ParticleSystem FindPulseOrigin()

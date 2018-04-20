@@ -71,7 +71,7 @@ public class Ball : MonoBehaviour {
             gameObject.SetActive(false);
 
         //Makes balls turn towards their velocity direction. Prevents balls from rolling
-        transform.rotation = Quaternion.LookRotation(Rb.velocity, Vector3.up);
+        //transform.rotation = Quaternion.LookRotation(Rb.velocity, Vector3.up);
     }
 
     protected void OnCollisionStay(Collision collision)

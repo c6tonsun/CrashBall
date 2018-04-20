@@ -42,7 +42,8 @@ public class Goal : MonoBehaviour {
             c.enabled = c.isTrigger;
 
         goalLines = GetComponentInChildren<ParticleSystem>();
-        _defaultColor = goalLines.main.startColor.colorMax;
+        if (goalLines != null)
+            _defaultColor = goalLines.main.startColor.colorMax;
 
         lives = _gameManager.playerLives;
         currentLives = lives;
@@ -72,35 +73,25 @@ public class Goal : MonoBehaviour {
         {
             _cameraShake.SetShakeTime(0.25f);
             ball.canScore = false;
-
-            // live and death
             currentLives--;
-            _scoreHandler.LostLive((int)currentPlayer);
 
-            flashlines = StartCoroutine(FlashLines());
-
-            if (_gameManager.currentMode == GameManager.GameMode.Elimination && currentLives <= 0)
+            if (goalLines != null)
+                flashlines = StartCoroutine(FlashLines());
+            // if died
+            if (_scoreHandler.isElimination && currentLives <= 0)
             {
                 _cameraShake.SetShakeTime(0.5f);
                 _scoreHandler.KillPlayer((int)currentPlayer);
                 foreach (Collider c in _colliders)
                     c.enabled = !c.isTrigger;
-
             }
-
-            // score and kill
+            // killer and victim
             int[] players = ball.GetLastPlayerHits();
             if (players[0] != (int)currentPlayer)
-            {
-                _scoreHandler.AddScore(players[0]);
-                _scoreHandler.AddKill(players[0], (int)currentPlayer);
-            }
+                _scoreHandler.KillerHitVictim(players[0], (int)currentPlayer, currentLives <= 0);
             else
-            {
-                _scoreHandler.AddScore(players[1]);
-                _scoreHandler.AddKill(players[1], (int)currentPlayer);
-            }
-
+                _scoreHandler.KillerHitVictim(players[1], (int)currentPlayer, currentLives <= 0);
+            
             _scoreHandler.UpdateSpotLight();
         }
     }
