@@ -69,12 +69,13 @@ public class InputManager : MonoBehaviour {
 
         float movementInput = 0f;
         bool pulseInput = false;
+        bool magnetInput = false;
 
         if (player.hasController)
         {
             movementInput = Input.GetAxisRaw("P" + playerNumber);
-            pulseInput = Input.GetButton("FireP" + playerNumber);
-            pulseInput = ActTriggerInput(playerNumber, pulseInput);
+            pulseInput = Input.GetButtonDown("FireP" + playerNumber);
+            magnetInput = Input.GetButton("FireM" + playerNumber);
         }
         else
         {
@@ -85,7 +86,7 @@ public class InputManager : MonoBehaviour {
         if (movementInput > -inputDeadzone && movementInput < inputDeadzone)
             movementInput = 0f;
 
-        if (pulseInput)
+        if (magnetInput)
         {
             player.movement.Move(movementInput * 0.5f);
             player.pulse.Magnet();
@@ -93,8 +94,14 @@ public class InputManager : MonoBehaviour {
         else
         {
             player.movement.Move(movementInput);
+            player.pulse.ResetMagnet();
+        }
+
+        if (pulseInput)
+        {
             player.pulse.Pulse();
         }
+
     }
 
     private bool ActTriggerInput(int playerNumber, bool doPulse)

@@ -90,6 +90,7 @@ public class ScoreHandler : MonoBehaviour {
     public void KillPlayer(int player)
     {
         _players[player - 1].Die();
+        _goals[player - 1].GoalToWall();
         // check living player count
         int livingPLayerCount = 0;
         int winner = -1;
@@ -114,6 +115,7 @@ public class ScoreHandler : MonoBehaviour {
                 continue;
 
             p.Die();
+            _goals[(int)p.currentPlayer - 1].GoalToWall();
         }
 
         StartCoroutine(EndStage(player));

@@ -67,7 +67,7 @@ public class BallSpawner : MonoBehaviour {
             _ballTimer = _firingInterval;
         }
 
-        _firingInterval += -(Time.deltaTime/90f);
+        if(_firingInterval>0.7f) _firingInterval += -(Time.deltaTime/90f);
     }
 
     private void MakeBallList(List<Ball> list, Ball prefab, int listLenght, GameManager gameManager)

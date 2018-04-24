@@ -74,6 +74,11 @@ public class Ball : MonoBehaviour {
         //transform.rotation = Quaternion.LookRotation(Rb.velocity, Vector3.up);
     }
 
+    protected void OnCollisionEnter(Collision collision)
+    {
+        OnCollisionStay(collision);
+    }
+
     protected void OnCollisionStay(Collision collision)
     {
         Player player = collision.collider.GetComponentInParent<Player>();
