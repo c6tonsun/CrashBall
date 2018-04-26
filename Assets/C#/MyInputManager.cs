@@ -2,22 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour {
+public class MyInputManager : MonoBehaviour {
 
     private static int HORIZONTAL_INPUT = 6;
-    private static int VERTICAL_INPUT = 9;
-    private static int MAGNET_INPUT = 7;
+    private static int VERTICAL_INPUT = 7;
+    private static int MAGNET_INPUT = 9;
     private static int PULSE_INPUT = 8;
     private static int PAUSE_INPUT = 10;
 
     private Rewired.Player[] _playersRewired;
     private Player[] _players;
-    public float inputDeadzone = 0.5f;
-    private int oldTriggerInput = 0;
-
-    [SerializeField]
-    GameObject pauseMenu;
-    public bool Paused = false;
     
 	private void Start ()
     {
@@ -67,6 +61,7 @@ public class InputManager : MonoBehaviour {
         else
         {
             player.movement.Move(movementInput);
+            player.pulse.ResetMagnet();
         }
 
         if (pulseInput)
