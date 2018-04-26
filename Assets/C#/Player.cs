@@ -34,9 +34,9 @@ public class Player : MonoBehaviour {
     public KartPulse pulse;
 
     [SerializeField]
-    private MeshRenderer playerColorMesh;
-    [SerializeField]
     private Color playerColour;
+
+    private int stacheID;
     
     [HideInInspector]
     public bool isLive = true;
@@ -48,14 +48,19 @@ public class Player : MonoBehaviour {
         return playerColour;
     }
 
+    public int GetStache()
+    {
+        return stacheID;
+    }
+
     private void Awake()
     {
         movement = GetComponentInChildren<KartMovement>();
         pulse = GetComponentInChildren<KartPulse>();
         kartAnimator = GetComponentInChildren<Animator>();
         cameraShake = FindObjectOfType<CameraShake>();
+        //stacheID = FindObjectOfType<GameManager>().Mustaches[(int)currentPlayer];
         _deathParticleDuration = DeathParticlePrefab.GetComponent<ParticleSystem>().main.duration + 0.7f;
-        playerColour = playerColorMesh.material.color;
 
         playerDeath = Death();
     }

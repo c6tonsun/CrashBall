@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour {
     public float pulseArea;
     [Range(0f, 5f)]
     public float maxMagnetTime;
+    [Range(0, 9)]
+    public int[] Mustaches;
     
     // ball options
     [Range(3f, 7f)]
