@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
     
     public Number currentPlayer;
 
-    public bool hasController;
+    public bool isVerticalCurve;
 
     public int[] kills;
 
