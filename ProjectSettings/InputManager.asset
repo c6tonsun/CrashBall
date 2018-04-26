@@ -182,7 +182,7 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
-    m_Name: FireP1
+    m_Name: FireM1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 1 button 4
@@ -230,7 +230,7 @@ InputManager:
     axis: 0
     joyNum: 2
   - serializedVersion: 3
-    m_Name: FireP2
+    m_Name: FireM2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 2 button 4
@@ -278,7 +278,7 @@ InputManager:
     axis: 0
     joyNum: 3
   - serializedVersion: 3
-    m_Name: FireP3
+    m_Name: FireM3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 3 button 4
@@ -326,7 +326,7 @@ InputManager:
     axis: 0
     joyNum: 4
   - serializedVersion: 3
-    m_Name: FireP4
+    m_Name: FireM4
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 4 button 4

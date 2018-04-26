@@ -22,6 +22,8 @@ public class MenuInput : MonoBehaviour {
     [SerializeField]
     private GameObject[] OptionsButtons;
 
+    private MeshFilter _selectedMesh;
+
     [SerializeField]
     private Transform[] cameraPoints;
     [SerializeField]
@@ -77,6 +79,7 @@ public class MenuInput : MonoBehaviour {
         //mainCamera = FindObjectOfType<Camera>().gameObject;
         mainCamera.transform.position = cameraPoints[0].position;
         gameManager = FindObjectOfType<GameManager> ();
+        _selectedMesh = SelectedButton.GetComponent<MeshFilter>();
     }
 	
 	// Update is called once per frame
@@ -128,11 +131,16 @@ public class MenuInput : MonoBehaviour {
             SetButtonsActive(MenuArray, true);
             SelectedButton.transform.position = MenuArray[(int)selected].transform.position;
             SelectedButton.transform.rotation = MenuArray[(int)selected].transform.rotation;
+            var _currentlySelectedMesh = MenuArray[(int)selected].GetComponent<MeshFilter>().mesh;
+            if(_currentlySelectedMesh != _selectedMesh)
+            {
+                _selectedMesh.mesh = _currentlySelectedMesh;
+            }
             var buttonScale = MenuArray[(int)selected].transform.localScale;
             SelectedButton.transform.localScale = new Vector3(
                 buttonScale.x * highlightScaleMulti,
-                buttonScale.y * highlightScaleMulti,
-                buttonScale.z * 0.85f);
+                buttonScale.y * 0.85f,
+                buttonScale.z * highlightScaleMulti);
         }
         if (menus == Menu.mapselect)
         {

@@ -19,6 +19,8 @@ public class Goal : MonoBehaviour {
     private GameManager _gameManager;
 
     private Collider[] _colliders;
+    [SerializeField]
+    private DeathWallParticleHandler deathWallPS;
 
     private ParticleSystem goalLines;
     private Color _defaultColor;
@@ -82,8 +84,7 @@ public class Goal : MonoBehaviour {
             {
                 _cameraShake.SetShakeTime(0.5f);
                 _scoreHandler.KillPlayer((int)currentPlayer);
-                foreach (Collider c in _colliders)
-                    c.enabled = !c.isTrigger;
+                GoalToWall();
             }
             // killer and victim
             int[] players = ball.GetLastPlayerHits();
@@ -105,6 +106,16 @@ public class Goal : MonoBehaviour {
             _cameraShake.SetShakeTime(0.5f);
             _scoreHandler.ScoreReached((int)currentPlayer);
         }
+    }
+
+    public void GoalToWall()
+    {
+        //Activates death wall particles
+        if(deathWallPS!=null)deathWallPS.ActivateParticleWall();
+        if (goalLines != null) goalLines.Stop();
+
+        foreach (Collider c in _colliders)
+            c.enabled = !c.isTrigger;
     }
 
     public int GetCurrentLives()

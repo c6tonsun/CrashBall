@@ -16,8 +16,9 @@ public class StunBall : Ball {
             Rb.velocity = Rb.velocity.normalized * minSpeed * 2;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private new void OnCollisionEnter(Collision collision)
     {
+        base.OnCollisionEnter(collision);
         StunPlayer(collision.collider.GetComponentInParent<Player>());
     }
 

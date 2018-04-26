@@ -11,9 +11,11 @@ public class KartPulse : MonoBehaviour
 
     private float maxMagnetTime;
     private float magnetTimer;
+    private float magnetCooldown = -1f;
     private float pulseCooldown;
     private float pulseTimer;
-    private bool canPulse;
+
+    private bool pulseHitsBalls;
 
     private ParticleSystem pulseParticles;
     [SerializeField]
@@ -60,27 +62,24 @@ public class KartPulse : MonoBehaviour
 
     private void Update()
     {
-        if (!canPulse)
-            pulseTimer += Time.deltaTime;
-        else
-            magnetTimer += Time.deltaTime;
+        pulseTimer += Time.deltaTime;
+        magnetTimer += Time.deltaTime;
     }
 
     public void Magnet()
     {
-        if (pulseTimer < pulseCooldown)
+        if ((pulseTimer < pulseCooldown) || magnetTimer < 0)
             return;
 
-        canPulse = true;
+        //canPulse = true;
 
         if (magnetTimer > maxMagnetTime)
         {
-            Pulse();
+            //Pulse();
+            magnetParticles.Stop();
+            magnetTimer = magnetCooldown;
             return;
         }
-        
-        if (magnetTimer < 0.1f)
-            return;
 
         if(!magnetParticles.isPlaying) magnetParticles.Play();
 
@@ -115,15 +114,21 @@ public class KartPulse : MonoBehaviour
 
     public void Pulse()
     {
-        
-        if (!canPulse)
+        pulseHitsBalls = false;
+        if (pulseTimer < pulseCooldown)
+        {
+            return;
+        }
+
+        /*if (!canPulse) Legacy
             return;
         else
             canPulse = false;
             magnetParticles.Stop();
+        */
 
         pulseTimer = 0f;
-        magnetTimer = 0f;
+        magnetTimer = magnetCooldown;
 
         magnetParticles.Stop();
         pulseParticles.Play(withChildren:false);
@@ -137,6 +142,7 @@ public class KartPulse : MonoBehaviour
         {
             if (ball.canBePulsed)
             {
+                pulseHitsBalls = true;
                 ball.Rb.velocity = Vector3.zero;
                 Vector3 direction = ball.transform.position - transform.position;
                 if (ball.isFixedY)
@@ -147,7 +153,6 @@ public class KartPulse : MonoBehaviour
                 
             }
         }
-
         secondPulse = StartCoroutine(SecondPulse());
     }
 
@@ -170,6 +175,7 @@ public class KartPulse : MonoBehaviour
 
             if (ball.canBePulsed)
             {
+                pulseHitsBalls = true;
                 ball.Rb.velocity = Vector3.zero;
                 Vector3 direction = ball.transform.position - transform.position;
                 if (ball.isFixedY)
@@ -179,8 +185,18 @@ public class KartPulse : MonoBehaviour
                 ball.SpawnPulseBlastOff(player, direction.normalized);
             }
         }
-        
+        if (!pulseHitsBalls) pulseTimer = -0.8f;
         StopCoroutine(secondPulse);
+    }
+
+    public void ResetMagnet()
+    {
+        if (magnetTimer > 0)
+        {
+            magnetTimer = 0f;
+            magnetParticles.Stop();
+        }
+
     }
 
     private void OnDrawGizmos()

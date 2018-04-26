@@ -68,6 +68,8 @@ public class ScoreHandler : MonoBehaviour {
     {
         // update lives
         lives[victim - 1] = _goals[victim - 1].GetCurrentLives();
+        // update UI
+        _UIHandler.KillFeed(killer, victim, victimDied);
         if (isElimination)
             _UIHandler.PositionalUpdate(lives);
 
@@ -81,8 +83,7 @@ public class ScoreHandler : MonoBehaviour {
         scores[killer - 1] = _goals[killer - 1].GetCurrentScore();
         // party
         _players[killer - 1].GoalCelebration();
-        // update UI
-        _UIHandler.KillFeed(killer, victim, victimDied);
+
         if (!isElimination)
             _UIHandler.PositionalUpdate(scores);
     }
@@ -90,6 +91,7 @@ public class ScoreHandler : MonoBehaviour {
     public void KillPlayer(int player)
     {
         _players[player - 1].Die();
+        _goals[player - 1].GoalToWall();
         // check living player count
         int livingPLayerCount = 0;
         int winner = -1;
@@ -114,6 +116,7 @@ public class ScoreHandler : MonoBehaviour {
                 continue;
 
             p.Die();
+            _goals[(int)p.currentPlayer - 1].GoalToWall();
         }
 
         StartCoroutine(EndStage(player));
@@ -182,6 +185,8 @@ public class ScoreHandler : MonoBehaviour {
         TMPro.TextMeshPro endFeed = _UIHandler.endFeed;
         endFeed.SetText("WINNER");
         endFeed.color = _players[winner - 1].GetColor();
+
+        Debug.Break();
 
         yield return new WaitForSeconds(2);
 
