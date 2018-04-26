@@ -86,7 +86,11 @@ public class MenuInput : MonoBehaviour {
         mainCamera.transform.position = cameraPoints[0].position;
         gameManager = FindObjectOfType<GameManager> ();
         _selectedMesh = SelectedButton.GetComponent<MeshFilter>();
-        _playersRewired = ((List<Rewired.Player>) Rewired.ReInput.players.GetPlayers()).ToArray();
+
+        // gets rewired players exgluding system
+        _playersRewired = new Rewired.Player[Rewired.ReInput.players.allPlayerCount - 1];
+        for (int i = 0; i < _playersRewired.Length; i++)
+            _playersRewired[i] = Rewired.ReInput.players.GetPlayer(i);
     }
 	
 	// Update is called once per frame
