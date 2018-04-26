@@ -21799,6 +21799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &406838420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21818,7 +21819,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: killed
+  m_text: '  got rekt'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d0325b67256987049b5acae6641fe304, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: d0325b67256987049b5acae6641fe304, type: 2}
@@ -21885,10 +21886,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 406838420}
-    characterCount: 6
+    characterCount: 10
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 3
+    wordCount: 3
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -28970,6 +28971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &481538567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36142,9 +36144,55 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 239490833}
+    - target: {fileID: 114989375827131376, guid: 522e15b388b8a174fb4763674de122b7,
+        type: 2}
+      propertyPath: playerColour.r
+      value: 0.6666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989375827131376, guid: 522e15b388b8a174fb4763674de122b7,
+        type: 2}
+      propertyPath: playerColour.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989375827131376, guid: 522e15b388b8a174fb4763674de122b7,
+        type: 2}
+      propertyPath: playerColour.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108958027266596830, guid: 522e15b388b8a174fb4763674de122b7,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.6666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 108958027266596830, guid: 522e15b388b8a174fb4763674de122b7,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108958027266596830, guid: 522e15b388b8a174fb4763674de122b7,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 522e15b388b8a174fb4763674de122b7, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &591916023 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1949757266987714, guid: 522e15b388b8a174fb4763674de122b7,
+    type: 2}
+  m_PrefabInternal: {fileID: 591916022}
+--- !u!114 &591916024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 591916023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d201ba533ea934db2f20632904079a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &602546698
 GameObject:
   m_ObjectHideFlags: 0
@@ -53401,6 +53449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &768155618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53420,7 +53469,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: P2
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d0325b67256987049b5acae6641fe304, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: d0325b67256987049b5acae6641fe304, type: 2}
@@ -53487,13 +53536,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 768155618}
-    characterCount: 2
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
@@ -53607,6 +53656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &776123680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60523,6 +60573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &794820970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85147,6 +85198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &1230870412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96334,6 +96386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &1521555429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96683,6 +96736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &1553858470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100237,6 +100291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &1557986657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148721,6 +148776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &2044817837
 MonoBehaviour:
   m_ObjectHideFlags: 0

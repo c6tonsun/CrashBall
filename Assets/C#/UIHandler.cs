@@ -57,6 +57,8 @@ public class UIHandler : MonoBehaviour {
                 break;
             }
         }
+
+        
         // set text
         if (victimDied)
         {
@@ -70,10 +72,23 @@ public class UIHandler : MonoBehaviour {
             doingText.text = "scored";
             victimText.text = "P" + victim;
         }
-        // set color
-        killerText.color = _playerColors[killer - 1];
-        doingText.color = new Color(doingText.color.r, doingText.color.g, doingText.color.b, 1f);
-        victimText.color = _playerColors[victim - 1];
+
+        if (killer>0)
+        {
+            // set color
+            killerText.color = _playerColors[killer - 1];
+            doingText.color = new Color(doingText.color.r, doingText.color.g, doingText.color.b, 1f);
+            victimText.color = _playerColors[victim - 1];
+        }
+        else // gray ball scores player
+        {
+            killerText.text = "P" + victim;
+            doingText.text = "  got rekt";
+            victimText.text = ":3";
+            killerText.color = _playerColors[victim - 1];
+            doingText.color = new Color(doingText.color.r, doingText.color.g, doingText.color.b, 1f);
+            victimText.color = new Color(doingText.color.r, doingText.color.g, doingText.color.b, 1f);
+        }
     }
 
     public void PositionalUpdate(int[] array)

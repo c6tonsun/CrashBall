@@ -3876,6 +3876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &85049393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4271,7 +4272,7 @@ Prefab:
     - target: {fileID: 198892204631853334, guid: 5d7472c3c42398740bd596f4ed4301f1,
         type: 2}
       propertyPath: randomSeed
-      value: 1785387129
+      value: 914937893
       objectReference: {fileID: 0}
     - target: {fileID: 4692174823778510, guid: 5d7472c3c42398740bd596f4ed4301f1, type: 2}
       propertyPath: m_LocalScale.x
@@ -4369,6 +4370,11 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.m_Scale.z
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 198892204631853334, guid: 5d7472c3c42398740bd596f4ed4301f1,
+        type: 2}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d7472c3c42398740bd596f4ed4301f1, type: 2}
@@ -4911,6 +4917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &253454794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8880,7 +8887,7 @@ Prefab:
     - target: {fileID: 198892204631853334, guid: 5d7472c3c42398740bd596f4ed4301f1,
         type: 2}
       propertyPath: randomSeed
-      value: -933388661
+      value: -324422078
       objectReference: {fileID: 0}
     - target: {fileID: 4692174823778510, guid: 5d7472c3c42398740bd596f4ed4301f1, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -8982,6 +8989,11 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.m_Scale.z
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 198892204631853334, guid: 5d7472c3c42398740bd596f4ed4301f1,
+        type: 2}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d7472c3c42398740bd596f4ed4301f1, type: 2}
@@ -9516,7 +9528,7 @@ Prefab:
     - target: {fileID: 198892204631853334, guid: 5d7472c3c42398740bd596f4ed4301f1,
         type: 2}
       propertyPath: randomSeed
-      value: 243323633
+      value: 318128378
       objectReference: {fileID: 0}
     - target: {fileID: 4692174823778510, guid: 5d7472c3c42398740bd596f4ed4301f1, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -9618,6 +9630,11 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.m_Scale.z
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 198892204631853334, guid: 5d7472c3c42398740bd596f4ed4301f1,
+        type: 2}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d7472c3c42398740bd596f4ed4301f1, type: 2}
@@ -9830,6 +9847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &496388116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13457,6 +13475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &543320861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13938,6 +13957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &643479370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26900,6 +26920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &1368444557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27530,6 +27551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &1645826923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31415,6 +31437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &1802969690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38692,6 +38715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &1953320004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42616,6 +42640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b3b9e44b6af3448a1744144d03075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeOutTime: 2
 --- !u!114 &2080901103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42862,7 +42887,7 @@ Prefab:
     - target: {fileID: 198892204631853334, guid: 5d7472c3c42398740bd596f4ed4301f1,
         type: 2}
       propertyPath: randomSeed
-      value: -341204398
+      value: -816145622
       objectReference: {fileID: 0}
     - target: {fileID: 4692174823778510, guid: 5d7472c3c42398740bd596f4ed4301f1, type: 2}
       propertyPath: m_LocalScale.x
@@ -42965,6 +42990,11 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.m_Scale.z
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 198892204631853334, guid: 5d7472c3c42398740bd596f4ed4301f1,
+        type: 2}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d7472c3c42398740bd596f4ed4301f1, type: 2}
