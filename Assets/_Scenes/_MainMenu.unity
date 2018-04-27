@@ -54669,12 +54669,13 @@ MonoBehaviour:
   pulseForce: 25
   pulseArea: 3.5
   maxMagnetTime: 1
+  Mustaches: 
   ballMinSpeed: 5
   normalBallCount: 16
   normalBallLikelyness: 0.75
   stunBallCount: 4
   stunBallLikelyness: 0.25
-  firingInterval: 2
+  firingInterval: 4
   currentMode: 1
   playerLives: 15
   targetScore: 20
