@@ -56,7 +56,7 @@ public class ScoreHandler : MonoBehaviour {
     public void StageStart()
     {
         Start();
-        isElimination = _gameManager.currentMode == GameManager.GameMode.Elimination;
+        isElimination = _gameManager.isElimination;
         _leaderSpotLight = GameObject.FindGameObjectWithTag("Player").GetComponent<ContinuesCurve>();
 
         _UIHandler.StageStart(_players, lives, scores, isElimination);

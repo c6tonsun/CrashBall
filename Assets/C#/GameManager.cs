@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour {
     public float pulseArea;
     [Range(0f, 5f)]
     public float maxMagnetTime;
-    [Range(0, 9)]
+
+    public Color[] Colors;
+    [Range(1, 9)]
     public int[] Mustaches;
     
     // ball options
@@ -32,17 +34,19 @@ public class GameManager : MonoBehaviour {
     public float stunBallLikelyness;
     [Range(2f, 5f)]
     public float firingInterval;
-    
+
     // game mode selection
-    public enum GameMode
-    {
-        ERROR = 0,
-        Elimination = 1,
-        ScoreRun = 2
-    }
-    public GameMode currentMode = GameMode.Elimination;
+    public bool isElimination;
+    public int stageSceneID;
+
+    // other
     public int playerLives;
     public int targetScore;
+    public UIMenu menuToLoad;
+
+    // noices
+    public float musicNoice;
+    public float soundNoice;
 
     private void Awake()
     {

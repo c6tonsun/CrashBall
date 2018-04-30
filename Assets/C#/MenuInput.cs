@@ -12,15 +12,7 @@ public class MenuInput : MonoBehaviour {
 
     private int mapID = -1;
 
-    // input
-    private static int SELECT_INPUT = 0;
-    private static int BACK_INPUT = 1;
-    private static int UP_INPUT = 2;
-    private static int DOWN_INPUT = 3;
-    private static int LEFT_INPUT = 4;
-    private static int RIGHT_INPUT = 5;
-    private bool[] _menuInputs;
-    private Rewired.Player[] _playersRewired;
+    
 
     [SerializeField]
     private GameObject SelectedButton;
@@ -86,11 +78,6 @@ public class MenuInput : MonoBehaviour {
         mainCamera.transform.position = cameraPoints[0].position;
         gameManager = FindObjectOfType<GameManager> ();
         _selectedMesh = SelectedButton.GetComponent<MeshFilter>();
-
-        // gets rewired players exgluding system
-        _playersRewired = new Rewired.Player[Rewired.ReInput.players.allPlayerCount - 1];
-        for (int i = 0; i < _playersRewired.Length; i++)
-            _playersRewired[i] = Rewired.ReInput.players.GetPlayer(i);
     }
 	
 	// Update is called once per frame
@@ -167,74 +154,7 @@ public class MenuInput : MonoBehaviour {
 
         }
     }
-
-    #region rewired
-    private void ActInputRewired()
-    {
-        for (int i = 0; i < _menuInputs.Length; i++)
-            _menuInputs[i] = false;
-
-        foreach (Rewired.Player p in _playersRewired)
-        {
-            if (p.GetButton(SELECT_INPUT))
-                _menuInputs[SELECT_INPUT] = true;
-            if (p.GetButton(BACK_INPUT))
-                _menuInputs[BACK_INPUT] = true;
-            if (p.GetButton(UP_INPUT))
-                _menuInputs[UP_INPUT] = true;
-            if (p.GetButton(DOWN_INPUT))
-                _menuInputs[DOWN_INPUT] = true;
-            if (p.GetButton(LEFT_INPUT))
-                _menuInputs[LEFT_INPUT] = true;
-            if (p.GetButton(RIGHT_INPUT))
-                _menuInputs[RIGHT_INPUT] = true;
-        }
-
-        if (_menuInputs[SELECT_INPUT])
-            DoSelect();
-        if (_menuInputs[BACK_INPUT])
-            DoBack();
-        if (_menuInputs[UP_INPUT])
-            DoUp();
-        if (_menuInputs[DOWN_INPUT])
-            DoDown();
-        if (_menuInputs[LEFT_INPUT])
-            DoLeft();
-        if (_menuInputs[RIGHT_INPUT])
-            DoRight();
-    }
-
-    private void DoSelect()
-    {
-        Debug.LogError("Not implemented error");
-    }
-
-    private void DoBack()
-    {
-        Debug.LogError("Not implemented error");
-    }
-
-    private void DoUp()
-    {
-        Debug.LogError("Not implemented error");
-    }
-
-    private void DoDown()
-    {
-        Debug.LogError("Not implemented error");
-    }
-
-    private void DoLeft()
-    {
-        Debug.LogError("Not implemented error");
-    }
-
-    private void DoRight()
-    {
-        Debug.LogError("Not implemented error");
-    }
-    #endregion
-
+    
     private void GetInput()
     {
         var input = Input.GetAxisRaw("Vertical");
@@ -356,13 +276,11 @@ public class MenuInput : MonoBehaviour {
             {
                 if (selected == Select.first)
                 {
-                    gameManager.currentMode = GameManager.GameMode.Elimination;
-                    Debug.Log("mode: Elimination");
+                    gameManager.isElimination = true;
                 }
                 if (selected == Select.second)
                 {
-                    gameManager.currentMode = GameManager.GameMode.ScoreRun;
-                    Debug.Log("mode: ScoreRun");
+                    gameManager.isElimination = false;
                 }
                 Debug.Log("start map");
                 if(mapID != -1) SceneManager.LoadScene(mapID);
