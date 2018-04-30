@@ -20,11 +20,23 @@ public class Curve : MonoBehaviour
 
         while (t < 1)
         {
-            t += 0.015625f; // 1 divided by 64
+            //t += 0.015625f; // 1 divided by 64
+            t += 0.001f;
             endPoint =
                 MathHelp.GetCurvePosition(start.position, middle.position, end.position, t);
 
-            Debug.DrawLine(startPoint, endPoint, Color.black);
+            if (t < 0.084)
+            {
+                Debug.DrawLine(startPoint, endPoint, Color.red);
+            }
+            else if (t > 1 - 0.084)
+            {
+                Debug.DrawLine(startPoint, endPoint, Color.red);
+            }
+            else
+            {
+                Debug.DrawLine(startPoint, endPoint, Color.black);
+            }
 
             startPoint = endPoint;
         }
