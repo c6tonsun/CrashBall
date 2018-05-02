@@ -5,7 +5,8 @@ using UnityEngine;
 public class UIMenu : MonoBehaviour {
 
     public bool allPlayersNeedToBeReady;
-    public UIMenuItem[] defaultItems;
+    public bool isColorPickMenu;
+    public UIMenuButton[] defaultItems;
 
     public Transform camTarget;
     private Transform camStart;
@@ -23,28 +24,28 @@ public class UIMenu : MonoBehaviour {
         menuHandler.activeItems = defaultItems;
 
         if (instanly)
-            time = 1f;
+            time = 2f;
 
         StartCoroutine(TransitionToThisMenu());
     }
 
     IEnumerator TransitionToThisMenu()
     {
-        time += Time.unscaledDeltaTime;
-
-        cam.transform.position = Vector3.Lerp(camStart.position, camTarget.position, time);
-        cam.transform.rotation = Quaternion.Lerp(camStart.rotation, camTarget.rotation, time);
-        
-        if (time > 1)
+        while (time < 1)
         {
-            camStart = null;
-            time = 0f;
-            cam.transform.position = camTarget.position;
-            cam.transform.rotation = camTarget.rotation;
-            menuHandler.isInTransition = false;
-            StopCoroutine(TransitionToThisMenu());
+            cam.transform.position = Vector3.Lerp(camStart.position, camTarget.position, time);
+            cam.transform.rotation = Quaternion.Lerp(camStart.rotation, camTarget.rotation, time);
+
+            time += Time.unscaledDeltaTime * 2;
+
+            yield return new WaitForEndOfFrame();
         }
 
-        yield return new WaitForEndOfFrame();
+        camStart = null;
+        time = 0f;
+        cam.transform.position = camTarget.position;
+        cam.transform.rotation = camTarget.rotation;
+        menuHandler.isInTransition = false;
+        StopCoroutine(TransitionToThisMenu());
     }
 }

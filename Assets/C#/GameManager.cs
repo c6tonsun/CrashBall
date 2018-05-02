@@ -54,5 +54,27 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
         else
             Destroy(gameObject);
+
+        if (SaveLoad.FindSaveFile())
+            SaveLoad.Load();
+        else
+            SaveLoad.MakeSaveFile();
+
+        musicNoice = SaveLoad.Noices[SaveLoad.MUSIC_NOICE];
+        soundNoice = SaveLoad.Noices[SaveLoad.SOUND_NOICE];
+    }
+
+    public void SaveMusicVolume(float volume)
+    {
+        musicNoice = volume;
+        SaveLoad.Noices[SaveLoad.MUSIC_NOICE] = musicNoice;
+        SaveLoad.Save();
+    }
+
+    public void SaveSoundVolume(float volume)
+    {
+        soundNoice = volume;
+        SaveLoad.Noices[SaveLoad.SOUND_NOICE] = soundNoice;
+        SaveLoad.Save();
     }
 }
