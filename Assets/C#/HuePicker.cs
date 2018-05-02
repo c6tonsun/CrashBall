@@ -43,7 +43,7 @@ public class HuePicker : MonoBehaviour {
 
     //Input methods
 
-    void DoLeft()
+    public void DoLeft()
     {
         if (!isSet) {
             moving = true;
@@ -55,7 +55,7 @@ public class HuePicker : MonoBehaviour {
         }
     }
 
-    void DoRight()
+    public void DoRight()
     {
         if (!isSet)
         {

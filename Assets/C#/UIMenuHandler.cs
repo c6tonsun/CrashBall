@@ -280,6 +280,11 @@ public class UIMenuHandler : MonoBehaviour {
         if (isInTransition || menu == null)
             return;
 
+        for (int i = 0; i < _playersRewired.Length; i++)
+        {
+            Debug.Log("P" + i +" has " + _playersRewired[i].controllers.joystickCount + " controllers");
+        }
+
         isInTransition = true;
         activeMenu = menu;
         menu.StartTransition(cam, this, instantly);
@@ -300,7 +305,7 @@ public class UIMenuHandler : MonoBehaviour {
             }
         }
 
-#region handle highlights
+        #region handle highlights
         for (int i = 0; i < highlightItems.Length; i++)
         {
             if (_playersRewired[i].controllers.hasKeyboard == false && _playersRewired[i].controllers.joystickCount == 0)
