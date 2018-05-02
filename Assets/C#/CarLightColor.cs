@@ -5,7 +5,6 @@ using UnityEngine;
 public class CarLightColor : MonoBehaviour {
 
     private MeshRenderer neonLightRender;
-    [SerializeField]
     private SkinnedMeshRenderer visorRender;
 
     [SerializeField]
@@ -28,12 +27,18 @@ public class CarLightColor : MonoBehaviour {
                 }
 
         playerSpotlight = GetComponent<Light>();
-        playerColor = GetComponentInParent<Player>().GetColor();      
+        playerColor = GetComponentInParent<Player>().GetColor();
 
         SetColours();
 	}
 
-    void SetColours()
+    public void RefreshColor()
+    {
+        playerColor = GetComponentInParent<Player>().GetColor();
+        SetColours();
+    }
+
+    public void SetColours()
     {
         if (playerSpotlight != null)
         {

@@ -14,6 +14,8 @@ public class KartMovement : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem stunParticles;
+    [SerializeField]
+    private ParticleSystem moveParticles;
     private Animator kartAnimator;
     private PlayerAnimator playerAnimator;
 
@@ -42,7 +44,12 @@ public class KartMovement : MonoBehaviour
         }
         else
         {
-            if (stunParticles.isPlaying) stunParticles.Stop();
+            if (stunParticles.isPlaying) stunParticles.Stop();            
+        }
+        if (moveParticles != null) {
+            if (Mathf.Abs(_input)>0.2f) {
+                if (!moveParticles.isPlaying) moveParticles.Play();
+            }
         }
 
         _curveTime += _input * speed * Time.unscaledDeltaTime;

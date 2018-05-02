@@ -16,6 +16,7 @@ public class KartPulse : MonoBehaviour
     private float pulseTimer;
 
     private bool pulseHitsBalls;
+    private bool pulseLongCooldown;
 
     private ParticleSystem pulseParticles;
     [SerializeField]
@@ -66,6 +67,9 @@ public class KartPulse : MonoBehaviour
         magnetTimer += Time.deltaTime;
     }
 
+    public float GetPulseTimer() { return pulseTimer; }
+    public bool isLongCooldown() { return pulseLongCooldown; }
+
     public void Magnet()
     {
         if ((pulseTimer < pulseCooldown) || magnetTimer < 0)
@@ -111,14 +115,16 @@ public class KartPulse : MonoBehaviour
 
     public void Pulse()
     {
-        pulseHitsBalls = false;
         if (pulseTimer < pulseCooldown)
         {
             return;
         }
 
+        pulseHitsBalls = false;
+
         pulseTimer = 0f;
         magnetTimer = magnetCooldown;
+        pulseLongCooldown = false;
 
         magnetParticles.Stop();
         pulseParticles.Play(withChildren:false);
@@ -175,7 +181,11 @@ public class KartPulse : MonoBehaviour
                 ball.SpawnPulseBlastOff(player, direction.normalized);
             }
         }
-        if (!pulseHitsBalls) pulseTimer = -0.8f;
+        if (!pulseHitsBalls)
+        {
+            pulseTimer = -0.8f;
+            pulseLongCooldown = true;
+        }
         StopCoroutine(secondPulse);
     }
 

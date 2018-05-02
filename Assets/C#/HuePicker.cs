@@ -13,7 +13,15 @@ public class HuePicker : MonoBehaviour {
     private float _curveTime = 0.5f;
 
     [SerializeField]
-    private float speed = 0.5f;
+    private Transform BlockArea;
+
+    [SerializeField]
+    private float moveSpeed = 0.5f;
+    private float maxSpeed;
+    private float currSpeed;
+
+    private bool moving = false;
+    private float moveTimer;
 
     [SerializeField]
     private Color picker;
@@ -25,28 +33,95 @@ public class HuePicker : MonoBehaviour {
 
     private static float[] playerHues = new float[4];
 
-    public static int currentPlayer = 0;
-
-    public void SetCurrentPlayer(int num)
-    {
-        currentPlayer = num;
-    }
-
     void Start()
     {
         HueManager = FindObjectOfType<HuePickerManager>();
+
+        maxSpeed = moveSpeed * 1.5f;
+        currSpeed = 0.1f;
     }
 
-    void Update()
-    {
-        if (currentPlayer == player)
-        {
-            var _input = 0f;                            //Get input from manager
-            _input = -Input.GetAxisRaw("Horizontal1");  //Ditto
+    //Input methods
 
-            if (Mathf.Abs(_input) > 0.2f && !isSet)
+    void DoLeft()
+    {
+        if (!isSet) {
+            moving = true;
+            _curveTime = CheckBlockedAreas(1, currSpeed);
+            if (currSpeed < maxSpeed)
             {
-                _curveTime = CheckBlockedAreas(_input);
+                currSpeed += Time.unscaledDeltaTime;
+            }
+        }
+    }
+
+    void DoRight()
+    {
+        if (!isSet)
+        {
+            moving = true;
+            _curveTime = CheckBlockedAreas(-1, currSpeed);
+            if (currSpeed < maxSpeed)
+            {
+                currSpeed += Time.unscaledDeltaTime * 2;
+            }
+        }
+    }
+
+    public void DoSelect(int index)
+    {
+        if (!isSet)
+        {
+            isSet = true;
+            playerHues[index] = _curveTime;
+            HueManager.colors[index] = picker;
+        }
+    }
+
+    public void DoDeselect(int index)
+    {
+        if (isSet)
+        {
+            isSet = false;
+            playerHues[index] = 0;
+        }
+    }
+
+    //update
+
+    public void DoUpdate()
+    {
+
+        BlockArea.gameObject.SetActive(isSet);
+
+        moving = false;
+        //var _input = 0f;
+        //_input = Input.GetAxisRaw("Horizontal1");
+
+        //if (_input < 0)
+        //{
+        //    DoLeft();
+        //}
+        //if(_input > 0)
+        //{
+        //    DoRight();
+        //}
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    DoSelect();
+        //}
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    DoDeselect();
+        //}
+
+        if (!moving && moveTimer<1f)
+        {
+            moveTimer += Time.unscaledDeltaTime;
+            if (moveTimer > 0.2f)
+            {
+                currSpeed = 0.1f;
+                moveTimer = 0f;
             }
         }
 
@@ -63,21 +138,12 @@ public class HuePicker : MonoBehaviour {
             temp[i].material.color = picker;
         }
 
-        if (Input.GetButtonDown("Fire1") && !isSet && currentPlayer == player) //Convert to Rewired
-        {
-            isSet = true;
-            playerHues[currentPlayer] = _curveTime;
-            HueManager.colors[currentPlayer] = picker;
-                
-        }
-        if(Input.GetButtonDown("Jump") && isSet && currentPlayer == player) //Convert to rewired
-        {
-            isSet = false;
-            playerHues[currentPlayer] = 0;
-        }
+
     }
 
-    private float CheckBlockedAreas(float input)
+    
+
+    private float CheckBlockedAreas(float input, float speed)
     {
         float result = _curveTime; 
         result += input * speed * Time.unscaledDeltaTime;

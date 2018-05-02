@@ -107,7 +107,8 @@ public class Ball : MonoBehaviour {
 
     public void SpawnPulseBlastOff(Player player, Vector3 direction)
     {
-        var BallBlastParts = BallBlastEffect.GetComponentsInChildren<ParticleSystem>();
+        ParticleSystem ballBlast = BallBlastEffect;
+        var BallBlastParts = ballBlast.GetComponentsInChildren<ParticleSystem>();
         lastHitPlayerColor = player.GetColor();
         foreach (var part in BallBlastParts)
         {
@@ -115,7 +116,7 @@ public class Ball : MonoBehaviour {
             partStartColor.startColor = lastHitPlayerColor;
         }
         
-        Destroy(Instantiate(BallBlastEffect, transform.position, Quaternion.LookRotation(direction)), 1.8f);
+        Instantiate(ballBlast, transform.position, Quaternion.LookRotation(direction));
     }
 
     public void SetLastHitPlayer(Player player, bool fromPulse)

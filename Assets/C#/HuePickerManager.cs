@@ -7,40 +7,27 @@ public class HuePickerManager : MonoBehaviour {
     [SerializeField]
     public Color[] colors;
 
-    public int[] players;
+    public HuePicker[] pickers;
 
-    public MeshRenderer[] playerColors;
+    public MeshRenderer[] playerMesh;
 
-	// Use this for initialization
-	void Start () {
-        players = new int[4];
-	}
+    private GameManager gameManager;
+
+    // Use this for initialization
+    void Start () {
+        pickers = GetComponentsInChildren<HuePicker>();
+        playerMesh = GetComponentsInChildren<MeshRenderer>();
+        gameManager = FindObjectOfType<GameManager>();
+    }
 	
 	// Update is called once per frame
-	void Update () {
-        for (int p = 0; p < players.Length; p++)
+	public void DoUpdate () {
+        for (int p = 0; p < pickers.Length; p++)
         {
-            playerColors[p].material.color = colors[p];
+            playerMesh[p].material.color = colors[p];
+            pickers[p].DoUpdate();
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            FindObjectOfType<HuePicker>().SetCurrentPlayer(0);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            FindObjectOfType<HuePicker>().SetCurrentPlayer(1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            FindObjectOfType<HuePicker>().SetCurrentPlayer(2);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            FindObjectOfType<HuePicker>().SetCurrentPlayer(3);
-        }
+        
+        gameManager.Colors = colors;
     }
 }
