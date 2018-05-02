@@ -18,13 +18,30 @@ public class PlayerPreview : MonoBehaviour {
 
     private GameManager GameManager;
 
+    private CarLightColor[] colorChangers;
+
     private void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
+        colorChangers = GetComponentsInChildren<CarLightColor>();
     }
+
+    //private IEnumerator refreshColors()
+    //{
+    //    foreach (CarLightColor changer in colorChangers)
+    //    {
+    //        changer.RefreshColor();
+    //    }
+    //    StopCoroutine(refreshColors());
+    //}
 
     // Update is called once per frame
     void Update () {
         playerColor = GameManager.Colors[(int)currentPlayer];
-	}
+
+        foreach (CarLightColor changer in colorChangers)
+        {
+            changer.RefreshColor();
+        }
+    }
 }
