@@ -16,25 +16,41 @@ public class CarLightColor : MonoBehaviour {
 	void Start () {
         var temp_meshRenderer = GetComponent<MeshRenderer>();
         var temp_skinnedRenderer = GetComponent<SkinnedMeshRenderer>();
-            if (temp_skinnedRenderer != null)
-                {
-                visorRender = temp_skinnedRenderer;
-                }
-            if(temp_meshRenderer)
-                {
-                //neonLight_mat = temp_meshRenderer.material;
-                neonLightRender = temp_meshRenderer;
-                }
+        var player = GetComponentInParent<Player>();
+
+        if (temp_skinnedRenderer != null)
+        {
+            visorRender = temp_skinnedRenderer;
+        }
+        if(temp_meshRenderer)
+        {
+            neonLightRender = temp_meshRenderer;
+        }
 
         playerSpotlight = GetComponent<Light>();
-        playerColor = GetComponentInParent<Player>().GetColor();
+        if (player != null)
+        {
+            playerColor = player.GetColor();
+        }
+        else
+        {
+            playerColor = GetComponentInParent<PlayerPreview>().playerColor;
+        } 
 
         SetColours();
 	}
 
     public void RefreshColor()
     {
-        playerColor = GetComponentInParent<Player>().GetColor();
+        var player = GetComponentInParent<Player>();
+        if (player != null)
+        {
+            playerColor = player.GetColor();
+        }
+        else
+        {
+            playerColor = GetComponentInParent<PlayerPreview>().playerColor;
+        }
         SetColours();
     }
 
