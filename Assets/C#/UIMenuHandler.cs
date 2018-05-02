@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Rewired;
 
 public class UIMenuHandler : MonoBehaviour {
     
@@ -20,12 +19,13 @@ public class UIMenuHandler : MonoBehaviour {
     public Camera cam;
     public GameObject[] highlightItems;
     [HideInInspector]
-    public UIMenuItem[] activeItems;
+    public UIMenuButton[] activeItems;
     private UIMenu activeMenu;
     [HideInInspector]
     public bool isInTransition;
 
     private GameManager _gameManager;
+    private HuePickerManager _colorManager;
 
     private void Start()
     {
@@ -40,6 +40,8 @@ public class UIMenuHandler : MonoBehaviour {
 
         _gameManager = FindObjectOfType<GameManager>();
         ToMenu(_gameManager.menuToLoad, instantly:true);
+
+        _colorManager = FindObjectOfType<HuePickerManager>();
     }
 
     private void Update()
@@ -47,40 +49,54 @@ public class UIMenuHandler : MonoBehaviour {
         if (isInTransition)
             return;
 
+        if (activeMenu.isColorPickMenu)
+            _colorManager.DoUpdate();
+
         for (int i = 0; i < _playersRewired.Length; i++)
         {
-            if (_playersRewired[i].GetButton(SELECT_INPUT))
+            if (i >= activeItems.Length || activeItems[i] == null)
+                break;
+
+            if (_playersRewired[i].GetButtonDown(SELECT_INPUT))
                 DoSelect(i);
-            if (_playersRewired[i].GetButton(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady == false)
+
+            if (_playersRewired[i].GetButtonDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady == true)
+                DoDeselect(i);
+
+            if (_playersRewired[i].GetButtonDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady == false)
                 DoBack(i);
             if (_playersRewired[i].GetButtonLongPressDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady)
                 DoBack(i);
-            if (_playersRewired[i].GetButton(UP_INPUT))
+
+            if (_playersRewired[i].GetButtonDown(UP_INPUT))
                 DoUp(i, activeItems[i]);
-            if (_playersRewired[i].GetButton(DOWN_INPUT))
+
+            if (_playersRewired[i].GetButtonDown(DOWN_INPUT))
                 DoDown(i, activeItems[i]);
-            if (_playersRewired[i].GetButton(LEFT_INPUT))
-                DoLeft(i, activeItems[i]);
-            if (_playersRewired[i].GetButton(RIGHT_INPUT))
-                DoRight(i, activeItems[i]);
+
+            if (activeItems[i].isMusicNoice || activeItems[i].isSoundNoice || activeMenu.isColorPickMenu)
+            {
+                if (_playersRewired[i].GetButton(LEFT_INPUT))
+                    DoLeft(i, activeItems[i]);
+                if (_playersRewired[i].GetButton(RIGHT_INPUT))
+                    DoRight(i, activeItems[i]);
+            }
+            else
+            {
+                if (_playersRewired[i].GetButtonDown(LEFT_INPUT))
+                    DoLeft(i, activeItems[i]);
+                if (_playersRewired[i].GetButtonDown(RIGHT_INPUT))
+                    DoRight(i, activeItems[i]);
+            }
         }
     }
 
     
     private void DoSelect(int index)
     {
-#region button stuff
+        #region button stuff
         if (activeItems[index].isQuit)
             Application.Quit();
-
-        if (activeItems[index].isMusicNoice)
-            _gameManager.musicNoice = activeItems[index].musicNoice;
-
-        if (activeItems[index].isSoundNoice)
-            _gameManager.soundNoice = activeItems[index].soundNoice;
-
-        if (activeItems[index].isHueValue)
-            _gameManager.Colors[index] = Color.HSVToRGB(activeItems[index].hueValue, 1f, 1f);
 
         if (activeItems[index].isMustach)
             _gameManager.Mustaches[index] = activeItems[index].mustach;
@@ -93,7 +109,11 @@ public class UIMenuHandler : MonoBehaviour {
             _gameManager.isElimination = activeItems[index].isElimination;
             SceneManager.LoadScene(_gameManager.stageSceneID, LoadSceneMode.Single);
         }
-#endregion
+        #endregion
+
+        if (activeMenu.isColorPickMenu)
+            _colorManager.pickers[index].DoSelect(index);
+
         if (activeMenu.allPlayersNeedToBeReady)
         {
             _readyPlayers[index] = true;
@@ -108,6 +128,14 @@ public class UIMenuHandler : MonoBehaviour {
         ToMenu(activeItems[index].nextMenu, instantly:false);
     }
 
+    private void DoDeselect(int index)
+    {
+        _readyPlayers[index] = false;
+
+        if (activeMenu.isColorPickMenu)
+            _colorManager.pickers[index].DoDeselect(index);
+    }
+
     private void DoBack(int index)
     {
         if (activeMenu.allPlayersNeedToBeReady)
@@ -117,77 +145,162 @@ public class UIMenuHandler : MonoBehaviour {
         ToMenu(activeItems[index].backMenu, instantly:false);
     }
 
-    private void DoUp(int index, UIMenuItem activeItem)
+    private void DoUp(int index, UIMenuButton activeItem)
     {
         if (index >= activeItems.Length)
             return;
 
-        UIMenuItem result = activeItem.upItem;
+        UIMenuButton result = activeItem.upItem;
         if (result == null)
             return;
 
         if (result.isHighlighted)
             DoUp(index, result);
         else
-            activeItems[index] = result;
+            MoveInMenu(result, index);
     }
 
-    private void DoDown(int index, UIMenuItem activeItem)
+    private void DoDown(int index, UIMenuButton activeItem)
     {
         if (index >= activeItems.Length)
             return;
 
-        UIMenuItem result = activeItem.downItem;
+        UIMenuButton result = activeItem.downItem;
         if (result == null)
             return;
 
         if (result.isHighlighted)
             DoDown(index, result);
         else
-            activeItems[index] = result;
+            MoveInMenu(result, index);
     }
 
-    private void DoLeft(int index, UIMenuItem activeItem)
+    private void DoLeft(int index, UIMenuButton activeItem)
     {
+        #region slider handling
+        if (activeItem.isMusicNoice)
+        {
+            activeItem.musicNoice -= Time.deltaTime;
+
+            if (activeItem.musicNoice < 0)
+                activeItem.musicNoice = 0;
+
+            activeItem.UpdateMusicSlider();
+            MoveInMenu(activeItem, index);
+            _gameManager.SaveMusicVolume(activeItem.musicNoice);
+            return;
+        }
+
+        if (activeItem.isSoundNoice)
+        {
+            activeItem.soundNoice -= Time.deltaTime;
+
+            if (activeItem.soundNoice < 0)
+                activeItem.soundNoice = 0;
+
+            activeItem.UpdateSoundSlider();
+            MoveInMenu(activeItem, index);
+            _gameManager.SaveSoundVolume(activeItem.soundNoice);
+            return;
+        }
+
+        if (activeMenu.isColorPickMenu)
+        {
+            _colorManager.pickers[index].DoLeft();
+            return;
+        }
+
+#endregion
+
         if (index >= activeItems.Length)
             return;
 
-        UIMenuItem result = activeItem.leftItem;
+        UIMenuButton result = activeItem.leftItem;
         if (result == null)
             return;
 
         if (result.isHighlighted)
             DoLeft(index, result);
         else
-            activeItems[index] = result;
+            MoveInMenu(result, index);
     }
 
-    private void DoRight(int index, UIMenuItem activeItem)
+    private void DoRight(int index, UIMenuButton activeItem)
     {
+        #region slider handling
+        if (activeItem.isMusicNoice)
+        {
+            activeItem.musicNoice += Time.deltaTime;
+
+            if (activeItem.musicNoice > 1)
+                activeItem.musicNoice = 1;
+
+            activeItem.UpdateMusicSlider();
+            MoveInMenu(activeItem, index);
+            _gameManager.SaveMusicVolume(activeItem.musicNoice);
+            return;
+        }
+
+        if (activeItem.isSoundNoice)
+        {
+            activeItem.soundNoice += Time.deltaTime;
+
+            if (activeItem.soundNoice > 1)
+                activeItem.soundNoice = 1;
+
+            activeItem.UpdateSoundSlider();
+            MoveInMenu(activeItem, index);
+            _gameManager.SaveSoundVolume(activeItem.soundNoice);
+            return;
+        }
+
+        if (activeMenu.isColorPickMenu)
+        {
+            _colorManager.pickers[index].DoRight();
+            return;
+        }
+        #endregion
+
         if (index >= activeItems.Length)
             return;
 
-        UIMenuItem result = activeItem.rightItem;
+        UIMenuButton result = activeItem.rightItem;
         if (result == null)
             return;
 
         if (result.isHighlighted)
             DoRight(index, result);
         else
-            activeItems[index] = result;
+            MoveInMenu(result, index);
     }
 
 
     public void ToMenu(UIMenu menu, bool instantly)
     {
-        if (isInTransition)
+        if (isInTransition || menu == null)
             return;
 
         isInTransition = true;
         activeMenu = menu;
         menu.StartTransition(cam, this, instantly);
 
-        // handle highlights
+        UIMenuButton[] buttons = activeMenu.transform.GetComponentsInChildren<UIMenuButton>();
+        foreach (UIMenuButton button in buttons)
+        {
+            if (button.isMusicNoice)
+            {
+                button.musicNoice = _gameManager.musicNoice;
+                button.UpdateMusicSlider();
+            }
+
+            if (button.isSoundNoice)
+            {
+                button.soundNoice = _gameManager.soundNoice;
+                button.UpdateSoundSlider();
+            }
+        }
+
+#region handle highlights
         for (int i = 0; i < highlightItems.Length; i++)
         {
             if (_playersRewired[i].controllers.hasKeyboard == false && _playersRewired[i].controllers.joystickCount == 0)
@@ -202,10 +315,14 @@ public class UIMenuHandler : MonoBehaviour {
             if (highlightItems[i].activeSelf)
                 MoveInMenu(activeItems[i], i);
         }
+#endregion
     }
 
-    public void MoveInMenu(UIMenuItem item, int index)
+    public void MoveInMenu(UIMenuButton item, int index)
     {
+        if (item == null)
+            return;
+
         activeItems[index].isHighlighted = false;
         activeItems[index] = item;
         activeItems[index].isHighlighted = true;
@@ -216,16 +333,5 @@ public class UIMenuHandler : MonoBehaviour {
             activeItems[index].transform.localScale.x * 1.2f,
             activeItems[index].transform.localScale.y * 1.2f,
             activeItems[index].transform.localScale.z * 0.8f);
-    }
-    
-
-    public void SetMusicVolume(float volume)
-    {
-        _gameManager.musicNoice = volume;
-    }
-
-    public void SetSoundVolume(float volume)
-    {
-        _gameManager.soundNoice = volume;
     }
 }
