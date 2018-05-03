@@ -30,15 +30,6 @@ public class UIMenuHandler : MonoBehaviour {
 
     public void Start()
     {
-        Camera[] cams = FindObjectsOfType<Camera>();
-        foreach (Camera c in cams)
-        {
-            if (c.tag.Contains("MainCamera"))
-            {
-                cam = c;
-                break;
-            }
-        }
         // gets rewired players exgluding system
         _playersRewired = new Rewired.Player[Rewired.ReInput.players.allPlayerCount - 1];
         for (int i = 0; i < _playersRewired.Length; i++)

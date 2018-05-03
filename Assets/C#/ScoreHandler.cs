@@ -190,7 +190,6 @@ public class ScoreHandler : MonoBehaviour {
         yield return new WaitForSeconds(2);
 
         transform.GetChild(0).gameObject.SetActive(true);
-        transform.GetChild(0).GetComponent<UIMenuHandler>().Start();
         SceneManager.LoadScene(0);
         StopAllCoroutines();
     }
