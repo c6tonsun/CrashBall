@@ -20,7 +20,6 @@ public class MustacheManager : MonoBehaviour {
         else
         {
             ChangeMustache(_defaultStyle);
-            Debug.Log("No GM or player");
         }
 	}
 
@@ -30,7 +29,6 @@ public class MustacheManager : MonoBehaviour {
             if (mustache == transform) continue;
             if (mustache == mustachios[Style]) {
                 mustache.gameObject.SetActive(true);
-                Debug.Log("Stachio: " + Style);
                 continue;
             }
             mustache.gameObject.SetActive(false);

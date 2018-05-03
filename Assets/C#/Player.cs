@@ -59,8 +59,8 @@ public class Player : MonoBehaviour {
         pulse = GetComponentInChildren<KartPulse>();
         kartAnimator = GetComponentInChildren<Animator>();
         cameraShake = FindObjectOfType<CameraShake>();
-        //stacheID = FindObjectOfType<GameManager>().Mustaches[(int)currentPlayer-1];
-        //playerColour = FindObjectOfType<GameManager>().Colors[(int)currentPlayer-1];
+        stacheID = FindObjectOfType<GameManager>().Mustaches[(int)currentPlayer-1];
+        playerColour = FindObjectOfType<GameManager>().Colors[(int)currentPlayer-1];
         _deathParticleDuration = DeathParticlePrefab.GetComponent<ParticleSystem>().main.duration + 0.7f;
 
         playerDeath = Death();

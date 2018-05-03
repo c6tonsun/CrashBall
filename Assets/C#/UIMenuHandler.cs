@@ -13,6 +13,7 @@ public class UIMenuHandler : MonoBehaviour {
     private static int LEFT_INPUT = 4;
     private static int RIGHT_INPUT = 5;
     private bool[] _readyPlayers;
+    private bool[] _isActivePlayer;
     private Rewired.Player[] _playersRewired;
 
     // menu
@@ -27,17 +28,25 @@ public class UIMenuHandler : MonoBehaviour {
     private GameManager _gameManager;
     private HuePickerManager _colorManager;
 
-    private void Start()
+    public void Start()
     {
+        Camera[] cams = FindObjectsOfType<Camera>();
+        foreach (Camera c in cams)
+        {
+            if (c.tag.Contains("MainCamera"))
+            {
+                cam = c;
+                break;
+            }
+        }
         // gets rewired players exgluding system
         _playersRewired = new Rewired.Player[Rewired.ReInput.players.allPlayerCount - 1];
         for (int i = 0; i < _playersRewired.Length; i++)
             _playersRewired[i] = Rewired.ReInput.players.GetPlayer(i);
-        // players ready array
+        
         _readyPlayers = new bool[_playersRewired.Length];
-        for (int i = 0; i < _readyPlayers.Length; i++)
-            _readyPlayers[i] = false;
-
+        _isActivePlayer = new bool[_playersRewired.Length];
+        
         _gameManager = FindObjectOfType<GameManager>();
         ToMenu(_gameManager.menuToLoad, instantly:true);
 
@@ -54,78 +63,98 @@ public class UIMenuHandler : MonoBehaviour {
 
         for (int i = 0; i < _playersRewired.Length; i++)
         {
-            if (i >= activeItems.Length || activeItems[i] == null)
-                break;
+            if (_isActivePlayer[i] == false)
+                continue;
+            if ((i >= activeItems.Length || activeItems[i] == null) && activeMenu.isColorPickMenu == false)
+                continue;
+
+            UIMenuButton activeItem;
+            if (activeMenu.isColorPickMenu)
+                activeItem = _colorManager.pickers[i];
+            else
+                activeItem = activeItems[i];
 
             if (_playersRewired[i].GetButtonDown(SELECT_INPUT))
-                DoSelect(i);
+                DoSelect(i, activeItem);
 
             if (_playersRewired[i].GetButtonDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady == true)
                 DoDeselect(i);
 
             if (_playersRewired[i].GetButtonDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady == false)
-                DoBack(i);
+                DoBack(i, activeItem);
             if (_playersRewired[i].GetButtonLongPressDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady)
-                DoBack(i);
+                DoBack(i, activeItem);
+
+            if (_readyPlayers[i])
+                continue;
+            if ((i >= activeItems.Length || activeItems[i] == null) && activeMenu.isColorPickMenu == false)
+                continue;
 
             if (_playersRewired[i].GetButtonDown(UP_INPUT))
-                DoUp(i, activeItems[i]);
+                DoUp(i, activeItem);
 
             if (_playersRewired[i].GetButtonDown(DOWN_INPUT))
-                DoDown(i, activeItems[i]);
+                DoDown(i, activeItem);
 
-            if (activeItems[i].isMusicNoice || activeItems[i].isSoundNoice || activeMenu.isColorPickMenu)
+            if (activeItem.isMusicNoice || activeItem.isSoundNoice || activeMenu.isColorPickMenu)
             {
                 if (_playersRewired[i].GetButton(LEFT_INPUT))
-                    DoLeft(i, activeItems[i]);
+                    DoLeft(i, activeItem);
                 if (_playersRewired[i].GetButton(RIGHT_INPUT))
-                    DoRight(i, activeItems[i]);
+                    DoRight(i, activeItem);
             }
             else
             {
                 if (_playersRewired[i].GetButtonDown(LEFT_INPUT))
-                    DoLeft(i, activeItems[i]);
+                    DoLeft(i, activeItem);
                 if (_playersRewired[i].GetButtonDown(RIGHT_INPUT))
-                    DoRight(i, activeItems[i]);
+                    DoRight(i, activeItem);
             }
         }
     }
 
     
-    private void DoSelect(int index)
+    private void DoSelect(int index, UIMenuButton activeItem)
     {
         #region button stuff
-        if (activeItems[index].isQuit)
+        if (activeItem.isQuit)
             Application.Quit();
 
-        if (activeItems[index].isMustach)
-            _gameManager.Mustaches[index] = activeItems[index].mustach;
+        if (activeItem.isMustach)
+            _gameManager.Mustaches[index] = activeItem.mustach;
 
-        if (activeItems[index].isSceneID)
-            _gameManager.stageSceneID = activeItems[index].sceneID;
+        if (activeItem.isSceneID)
+            _gameManager.stageSceneID = activeItem.sceneID;
 
-        if (activeItems[index].isModeSelection)
+        if (activeItem.isModeSelection)
         {
-            _gameManager.isElimination = activeItems[index].isElimination;
+            _gameManager.isElimination = activeItem.isElimination;
+            gameObject.SetActive(false);
             SceneManager.LoadScene(_gameManager.stageSceneID, LoadSceneMode.Single);
         }
         #endregion
 
-        if (activeMenu.isColorPickMenu)
+        if (activeMenu.isColorPickMenu && _readyPlayers[index] == false)
             _colorManager.pickers[index].DoSelect(index);
 
         if (activeMenu.allPlayersNeedToBeReady)
         {
             _readyPlayers[index] = true;
-            foreach (bool ready in _readyPlayers)
+            for (int i = 0; i < _playersRewired.Length; i++)
             {
-                if (!ready)
+                if (_isActivePlayer[i] && _readyPlayers[i] == false)
                     return;
             }
         }
 
+        if (activeMenu.isColorPickMenu)
+        {
+            ToMenu(activeMenu.nextMenu, instantly: false);
+            return;
+        }
+
         activeMenu.defaultItems = activeItems;
-        ToMenu(activeItems[index].nextMenu, instantly:false);
+        ToMenu(activeItem.nextMenu, instantly:false);
     }
 
     private void DoDeselect(int index)
@@ -136,13 +165,19 @@ public class UIMenuHandler : MonoBehaviour {
             _colorManager.pickers[index].DoDeselect(index);
     }
 
-    private void DoBack(int index)
+    private void DoBack(int index, UIMenuButton activeItem)
     {
         if (activeMenu.allPlayersNeedToBeReady)
             _readyPlayers[index] = false;
 
+        if (activeMenu.isColorPickMenu)
+        {
+            ToMenu(activeMenu.backMenu, instantly: false);
+            return;
+        }
+
         activeMenu.defaultItems = activeItems;
-        ToMenu(activeItems[index].backMenu, instantly:false);
+        ToMenu(activeItem.backMenu, instantly:false);
     }
 
     private void DoUp(int index, UIMenuButton activeItem)
@@ -256,7 +291,7 @@ public class UIMenuHandler : MonoBehaviour {
 
         if (activeMenu.isColorPickMenu)
         {
-            _colorManager.pickers[index].DoRight();
+            ((HuePicker)activeItem).DoRight();
             return;
         }
         #endregion
@@ -279,10 +314,12 @@ public class UIMenuHandler : MonoBehaviour {
     {
         if (isInTransition || menu == null)
             return;
-
-        for (int i = 0; i < _playersRewired.Length; i++)
+        
+        for (int i = 0; i < _isActivePlayer.Length; i++)
         {
-            Debug.Log("P" + i +" has " + _playersRewired[i].controllers.joystickCount + " controllers");
+            bool hasController = _playersRewired[i].controllers.hasKeyboard || _playersRewired[i].controllers.joystickCount > 0;
+            _isActivePlayer[i] = hasController;
+            _readyPlayers[i] = false;
         }
 
         isInTransition = true;
@@ -308,8 +345,11 @@ public class UIMenuHandler : MonoBehaviour {
         #region handle highlights
         for (int i = 0; i < highlightItems.Length; i++)
         {
-            if (_playersRewired[i].controllers.hasKeyboard == false && _playersRewired[i].controllers.joystickCount == 0)
+            if (_isActivePlayer[i] == false)
+            {
+                highlightItems[i].SetActive(false);
                 continue;
+            }
 
             highlightItems[i].SetActive(activeMenu.allPlayersNeedToBeReady);
         }

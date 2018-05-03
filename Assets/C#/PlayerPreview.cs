@@ -37,7 +37,7 @@ public class PlayerPreview : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        playerColor = GameManager.Colors[(int)currentPlayer];
+        playerColor = GameManager.Colors[(int)currentPlayer - 1];
 
         foreach (CarLightColor changer in colorChangers)
         {

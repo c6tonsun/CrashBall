@@ -19,6 +19,7 @@ public class HuePickerManager : MonoBehaviour {
         gameManager = FindObjectOfType<GameManager>();
 
         Transform[] tempQuads = transform.GetComponentsInChildren<Transform>();
+        floorMesh = new MeshRenderer[4];
         int index = 0;
         for (int i = 0; i < tempQuads.Length; i++)
         {
@@ -39,5 +40,16 @@ public class HuePickerManager : MonoBehaviour {
         }
         
         gameManager.Colors = colors;
+    }
+
+    public void RefreshAllPickers(HuePicker sender)
+    {
+        foreach (var picker in pickers)
+        {
+            if (picker != sender)
+            {
+                picker.RefreshSpot();
+            }
+        }
     }
 }

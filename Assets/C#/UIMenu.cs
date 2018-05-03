@@ -6,6 +6,8 @@ public class UIMenu : MonoBehaviour {
 
     public bool allPlayersNeedToBeReady;
     public bool isColorPickMenu;
+    public UIMenu nextMenu;
+    public UIMenu backMenu;
     public UIMenuButton[] defaultItems;
 
     public Transform camTarget;

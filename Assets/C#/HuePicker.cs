@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HuePicker : MonoBehaviour {
+public class HuePicker : UIMenuButton {
 
 
     private HuePickerManager HueManager;
@@ -25,6 +25,7 @@ public class HuePicker : MonoBehaviour {
 
     [SerializeField]
     private Color picker;
+    private Color pickerReal;
 
     private bool isSet = false;
 
@@ -47,11 +48,11 @@ public class HuePicker : MonoBehaviour {
     {
         if (!isSet) {
             moving = true;
-            _curveTime = CheckBlockedAreas(1, currSpeed);
-            if (currSpeed < maxSpeed)
-            {
-                currSpeed += Time.unscaledDeltaTime;
-            }
+            _curveTime = CheckBlockedAreas(1, moveSpeed);
+            //if (currSpeed < maxSpeed)
+            //{
+            //    currSpeed += Time.unscaledDeltaTime;
+            //}
         }
     }
 
@@ -60,11 +61,11 @@ public class HuePicker : MonoBehaviour {
         if (!isSet)
         {
             moving = true;
-            _curveTime = CheckBlockedAreas(-1, currSpeed);
-            if (currSpeed < maxSpeed)
-            {
-                currSpeed += Time.unscaledDeltaTime * 2;
-            }
+            _curveTime = CheckBlockedAreas(-1, moveSpeed);
+            //if (currSpeed < maxSpeed)
+            //{
+            //    currSpeed += Time.unscaledDeltaTime * 2;
+            //}
         }
     }
 
@@ -74,7 +75,8 @@ public class HuePicker : MonoBehaviour {
         {
             isSet = true;
             playerHues[index] = _curveTime;
-            HueManager.colors[index] = picker;
+            HueManager.colors[index] = pickerReal;
+            HueManager.RefreshAllPickers(this);
         }
     }
 
@@ -91,54 +93,38 @@ public class HuePicker : MonoBehaviour {
 
     public void DoUpdate()
     {
-
         BlockArea.gameObject.SetActive(isSet);
 
         moving = false;
-        //var _input = 0f;
-        //_input = Input.GetAxisRaw("Horizontal1");
 
-        //if (_input < 0)
+        //if (!moving && moveTimer<1f)
         //{
-        //    DoLeft();
-        //}
-        //if(_input > 0)
-        //{
-        //    DoRight();
-        //}
-        //if (Input.GetButtonDown("Fire1"))
-        //{
-        //    DoSelect();
-        //}
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    DoDeselect();
+        //    moveTimer += Time.unscaledDeltaTime;
+        //    if (moveTimer > 0.2f)
+        //    {
+        //        currSpeed = 0.1f;
+        //        moveTimer = 0f;
+        //    }
         //}
 
-        if (!moving && moveTimer<1f)
-        {
-            moveTimer += Time.unscaledDeltaTime;
-            if (moveTimer > 0.2f)
-            {
-                currSpeed = 0.1f;
-                moveTimer = 0f;
-            }
-        }
-
+        //_curveTime = CheckBlockedAreas(1, 0);
 
         transform.position = MathHelp.GetCurvePosition(movementCurve.start.position, movementCurve.middle.position, movementCurve.end.position, _curveTime);
         transform.rotation = MathHelp.GetCurveRotation(movementCurve.start.rotation, movementCurve.middle.rotation, movementCurve.end.rotation, _curveTime);
-
-
+        
         picker = Color.HSVToRGB(_curveTime, 1f, 1f);
+        pickerReal = Color.HSVToRGB(_curveTime, 0.9f, 0.9f);
 
         var temp = GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < 2; i++)
         {
             temp[i].material.color = picker;
         }
+    }
 
-
+    public void RefreshSpot()
+    {
+        _curveTime = CheckBlockedAreas(-0.1f, 0f);
     }
 
     
@@ -192,6 +178,4 @@ public class HuePicker : MonoBehaviour {
         return result;
 
     }
-
-
 }

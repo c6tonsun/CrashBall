@@ -156,6 +156,7 @@ public class ScoreHandler : MonoBehaviour {
 
     IEnumerator StartCountdown()
     {
+        transform.GetChild(0).gameObject.SetActive(false);
         TMPro.TextMeshPro stratFeed = _UIHandler.startFeed;
 
         Time.timeScale = 0f;
@@ -186,10 +187,10 @@ public class ScoreHandler : MonoBehaviour {
         endFeed.SetText("WINNER");
         endFeed.color = _players[winner - 1].GetColor();
 
-        Debug.Break();
-
         yield return new WaitForSeconds(2);
 
+        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(0).GetComponent<UIMenuHandler>().Start();
         SceneManager.LoadScene(0);
         StopAllCoroutines();
     }
