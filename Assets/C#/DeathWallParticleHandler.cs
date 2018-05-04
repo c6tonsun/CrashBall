@@ -14,6 +14,9 @@ public class DeathWallParticleHandler : MonoBehaviour {
 	
     public void ActivateParticleWall()
     {
+        if (goalParticles == null)
+            return;
+
         foreach(var goal in goalParticles)
         {
             goal.Play();

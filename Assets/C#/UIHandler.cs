@@ -30,6 +30,12 @@ public class UIHandler : MonoBehaviour {
             else if (feed.currentFeed == UIFeed.Feed.End)
                 endFeed = feed.GetComponentInChildren<TextMeshPro>();
         }
+        // correct position feed
+        for (int i = 0; i < _positionFeeds.Length; i++)
+        {
+            if (i >= players.Length)
+                _positionFeeds[i].gameObject.SetActive(false);
+        }
         // get colors
         _playerColors = new Color[players.Length];
         for (int i = 0; i < players.Length; i++)
@@ -57,7 +63,6 @@ public class UIHandler : MonoBehaviour {
                 break;
             }
         }
-
         
         // set text
         if (victimDied)

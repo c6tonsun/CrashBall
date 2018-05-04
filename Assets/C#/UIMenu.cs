@@ -11,8 +11,9 @@ public class UIMenu : MonoBehaviour {
     public UIMenuButton[] defaultItems;
 
     public Transform camTarget;
-    private Transform camStart;
-    private Camera cam;
+    private Vector3 camPosStart;
+    private Quaternion camRotStart;
+    public Camera cam;
     private UIMenuHandler menuHandler;
     
     private float time = 0f;
@@ -20,7 +21,9 @@ public class UIMenu : MonoBehaviour {
     public void StartTransition(Camera camera, UIMenuHandler handler, bool instanly)
     {
         cam = camera;
-        camStart = cam.transform;
+
+        camPosStart = cam.transform.position;
+        camRotStart = cam.transform.rotation;
 
         menuHandler = handler;
         menuHandler.activeItems = defaultItems;
@@ -35,15 +38,14 @@ public class UIMenu : MonoBehaviour {
     {
         while (time < 1)
         {
-            cam.transform.position = Vector3.Lerp(camStart.position, camTarget.position, time);
-            cam.transform.rotation = Quaternion.Lerp(camStart.rotation, camTarget.rotation, time);
+            cam.transform.position = Vector3.Lerp(camPosStart, camTarget.position, time);
+            cam.transform.rotation = Quaternion.Lerp(camRotStart, camTarget.rotation, time);
 
             time += Time.unscaledDeltaTime * 2;
 
             yield return new WaitForEndOfFrame();
         }
 
-        camStart = null;
         time = 0f;
         cam.transform.position = camTarget.position;
         cam.transform.rotation = camTarget.rotation;

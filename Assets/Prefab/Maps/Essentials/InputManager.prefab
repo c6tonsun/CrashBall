@@ -51,6 +51,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12caf5b9ac750a428b35a6fe86f23d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputDeadzone: 0.5
-  pauseMenu: {fileID: 0}
-  Paused: 0

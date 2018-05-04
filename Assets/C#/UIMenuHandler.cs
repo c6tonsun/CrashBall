@@ -19,16 +19,23 @@ public class UIMenuHandler : MonoBehaviour {
     // menu
     public Camera cam;
     public GameObject[] highlightItems;
+    public UIMenu pauseMenu;
+    public UIMenu scoreScreen;
+    private Vector3 defaultCamPos;
+    private Quaternion defaultCamRot;
     [HideInInspector]
     public UIMenuButton[] activeItems;
-    private UIMenu activeMenu;
+    [HideInInspector]
+    public UIMenu activeMenu;
     [HideInInspector]
     public bool isInTransition;
+    [HideInInspector]
+    public bool isGamePaused;
 
     private GameManager _gameManager;
     private HuePickerManager _colorManager;
 
-    public void Start()
+    private void Start()
     {
         // gets rewired players exgluding system
         _playersRewired = new Rewired.Player[Rewired.ReInput.players.allPlayerCount - 1];
@@ -37,16 +44,20 @@ public class UIMenuHandler : MonoBehaviour {
         
         _readyPlayers = new bool[_playersRewired.Length];
         _isActivePlayer = new bool[_playersRewired.Length];
-        
+
         _gameManager = FindObjectOfType<GameManager>();
-        ToMenu(_gameManager.menuToLoad, instantly:true);
 
         _colorManager = FindObjectOfType<HuePickerManager>();
     }
 
     private void Update()
     {
-        if (isInTransition)
+        if (isGamePaused)
+            Time.timeScale = 0f;
+        else
+            Time.timeScale = 1f;
+
+        if (isInTransition || isGamePaused == false)
             return;
 
         if (activeMenu.isColorPickMenu)
@@ -119,9 +130,19 @@ public class UIMenuHandler : MonoBehaviour {
 
         if (activeItem.isModeSelection)
         {
+            _gameManager.menuToLoad = activeItem.backMenu;
             _gameManager.isElimination = activeItem.isElimination;
-            gameObject.SetActive(false);
+            StopAllCoroutines();
             SceneManager.LoadScene(_gameManager.stageSceneID, LoadSceneMode.Single);
+        }
+
+        if (activeItem.isContinue)
+            DoUnpause();
+
+        if (activeItem.isExitToMenu)
+        {
+            StopAllCoroutines();
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
         }
         #endregion
 
@@ -206,7 +227,7 @@ public class UIMenuHandler : MonoBehaviour {
         #region slider handling
         if (activeItem.isMusicNoice)
         {
-            activeItem.musicNoice -= Time.deltaTime;
+            activeItem.musicNoice -= Time.unscaledDeltaTime;
 
             if (activeItem.musicNoice < 0)
                 activeItem.musicNoice = 0;
@@ -219,7 +240,7 @@ public class UIMenuHandler : MonoBehaviour {
 
         if (activeItem.isSoundNoice)
         {
-            activeItem.soundNoice -= Time.deltaTime;
+            activeItem.soundNoice -= Time.unscaledDeltaTime;
 
             if (activeItem.soundNoice < 0)
                 activeItem.soundNoice = 0;
@@ -256,7 +277,7 @@ public class UIMenuHandler : MonoBehaviour {
         #region slider handling
         if (activeItem.isMusicNoice)
         {
-            activeItem.musicNoice += Time.deltaTime;
+            activeItem.musicNoice += Time.unscaledDeltaTime;
 
             if (activeItem.musicNoice > 1)
                 activeItem.musicNoice = 1;
@@ -269,7 +290,7 @@ public class UIMenuHandler : MonoBehaviour {
 
         if (activeItem.isSoundNoice)
         {
-            activeItem.soundNoice += Time.deltaTime;
+            activeItem.soundNoice += Time.unscaledDeltaTime;
 
             if (activeItem.soundNoice > 1)
                 activeItem.soundNoice = 1;
@@ -301,17 +322,36 @@ public class UIMenuHandler : MonoBehaviour {
     }
 
 
+    public void SetCamera(Camera camera)
+    {
+        cam = camera;
+        defaultCamPos = cam.transform.position;
+        defaultCamRot = cam.transform.rotation;
+    }
+
+
     public void ToMenu(UIMenu menu, bool instantly)
     {
         if (isInTransition || menu == null)
             return;
-        
+
+        int activePlayerCount = 0;
         for (int i = 0; i < _isActivePlayer.Length; i++)
         {
             bool hasController = _playersRewired[i].controllers.hasKeyboard || _playersRewired[i].controllers.joystickCount > 0;
             _isActivePlayer[i] = hasController;
             _readyPlayers[i] = false;
+            
+            if (menu.isColorPickMenu)
+            {
+                _colorManager.pickers[i].DoDeselect(i);
+                if (hasController)
+                    activePlayerCount++;
+            }
         }
+
+        if (menu.isColorPickMenu)
+            _gameManager.playerCount = activePlayerCount;
 
         isInTransition = true;
         activeMenu = menu;
@@ -369,5 +409,42 @@ public class UIMenuHandler : MonoBehaviour {
             activeItems[index].transform.localScale.x * 1.2f,
             activeItems[index].transform.localScale.y * 1.2f,
             activeItems[index].transform.localScale.z * 0.8f);
+    }
+
+    public void DoPause()
+    {
+        isGamePaused = true;
+        ToMenu(pauseMenu, false);
+    }
+
+    public void DoUnpause()
+    {
+        isInTransition = true;
+        StartCoroutine(TransitionBackToGame());
+    }
+
+    IEnumerator TransitionBackToGame()
+    {
+        Vector3 camStartPos = cam.transform.position;
+        Quaternion camStartRot = cam.transform.rotation;
+        
+        float time = 0f;
+
+        while (time < 1)
+        {
+            cam.transform.position = Vector3.Lerp(camStartPos, defaultCamPos, time);
+            cam.transform.rotation = Quaternion.Lerp(camStartRot, defaultCamRot, time);
+
+            time += Time.unscaledDeltaTime * 2;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        time = 0f;
+        cam.transform.position = defaultCamPos;
+        cam.transform.rotation = defaultCamRot;
+        isInTransition = false;
+        isGamePaused = false;
+        StopCoroutine(TransitionBackToGame());
     }
 }

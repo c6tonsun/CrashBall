@@ -73,7 +73,7 @@ public class Player : MonoBehaviour {
         if (kartAnimator.GetBool("Bonus"))
         {
             yield return new WaitForSeconds(0.45f);
-            cameraShake.SetShakeTime(0.5f);
+            //cameraShake.SetShakeTime(0.5f);
             yield return new WaitForSeconds(1.5f);
         }
         else
@@ -88,11 +88,14 @@ public class Player : MonoBehaviour {
     public void GoalCelebration(){
         Destroy(Instantiate (GoalConfetti, this.transform), 5.5f);
     }
-    
+
     public void Die()
     {
         if (isLive)
+        {
+            gameObject.SetActive(true);
             StartCoroutine(playerDeath);
-        isLive = false;
+            isLive = false;
+        }
     }
 }

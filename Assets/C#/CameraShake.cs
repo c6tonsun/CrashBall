@@ -32,12 +32,11 @@ public class CameraShake : MonoBehaviour
 
             shakeTimer += Time.deltaTime;
             if (shakeTimer > maxShakeTime)
+            {
                 shake = false;
-        }
-        else
-        {
-            transform.position = _defaultPos;
-            transform.eulerAngles = _defaultRot;
+                transform.position = _defaultPos;
+                transform.eulerAngles = _defaultRot;
+            }
         }
     }
 

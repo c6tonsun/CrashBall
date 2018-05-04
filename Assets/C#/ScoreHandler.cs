@@ -16,21 +16,38 @@ public class ScoreHandler : MonoBehaviour {
     private ContinuesCurve _leaderSpotLight;
     private GameManager _gameManager;
     private UIHandler _UIHandler;
+    private UIMenuHandler _menuHandler;
 
     [HideInInspector]
     public bool isElimination;
 
     private void Start()
     {
-        Player[] unorderedPlayers = FindObjectsOfType<Player>();
-        _players = new Player[unorderedPlayers.Length];
-        foreach (Player player in unorderedPlayers)
-        {
-            player.kills = new int[unorderedPlayers.Length];
-            for (int i = 0; i < unorderedPlayers.Length; i++)
-                player.kills[i] = 0;
+        _UIHandler = GetComponent<UIHandler>();
+        _menuHandler = GetComponentInChildren<UIMenuHandler>();
+    }
 
-            _players[(int)player.currentPlayer - 1] = player;
+    public void StageStart(Player[] players, int playerCount)
+    {
+        InitArrays(players, playerCount);
+        KillExtraPlayers(playerCount);
+
+        isElimination = _gameManager.isElimination;
+        _leaderSpotLight = GameObject.FindGameObjectWithTag("Player").GetComponent<ContinuesCurve>();
+
+        _UIHandler.StageStart(_players, lives, scores, isElimination);
+
+        StartCoroutine(StartCountdown());
+    }
+
+    private void InitArrays(Player[] players, int playerCount)
+    {
+        _players = players;
+        foreach (Player player in _players)
+        {
+            player.kills = new int[_players.Length];
+            for (int i = 0; i < _players.Length; i++)
+                player.kills[i] = 0;
         }
 
         Goal[] unorderedGoals = FindObjectsOfType<Goal>();
@@ -40,7 +57,7 @@ public class ScoreHandler : MonoBehaviour {
         
         scores = new int[_players.Length];
         lives = new int[_players.Length];
-        
+
         _gameManager = GetComponent<GameManager>();
         int playerlives = _gameManager.playerLives;
 
@@ -49,20 +66,25 @@ public class ScoreHandler : MonoBehaviour {
             scores[i] = 0;
             lives[i] = playerlives;
         }
-        
-        _UIHandler = GetComponent<UIHandler>();
     }
 
-    public void StageStart()
+    private void KillExtraPlayers(int playerCount)
     {
-        Start();
-        isElimination = _gameManager.isElimination;
-        _leaderSpotLight = GameObject.FindGameObjectWithTag("Player").GetComponent<ContinuesCurve>();
+        Player[] allPlayers = FindObjectsOfType<Player>();
+        foreach (Player player in allPlayers)
+        {
+            if (playerCount < (int)player.currentPlayer)
+                player.Die();
+        }
 
-        _UIHandler.StageStart(_players, lives, scores, isElimination);
-
-        StartCoroutine(StartCountdown());
+        Goal[] allGoals = FindObjectsOfType<Goal>();
+        foreach (Goal goal in allGoals)
+        {
+            if (playerCount < (int)goal.currentPlayer)
+                goal.GoalToWall();
+        }
     }
+
 
     public void KillerHitVictim(int killer, int victim, bool victimDied)
     {
@@ -156,10 +178,8 @@ public class ScoreHandler : MonoBehaviour {
 
     IEnumerator StartCountdown()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
         TMPro.TextMeshPro stratFeed = _UIHandler.startFeed;
-
-        Time.timeScale = 0f;
+        
         yield return new WaitForSecondsRealtime(0.2f);
 
         stratFeed.SetText("3");
@@ -176,8 +196,8 @@ public class ScoreHandler : MonoBehaviour {
 
         stratFeed.SetText("GO");
         stratFeed.color = new Color(stratFeed.color.r, stratFeed.color.g, stratFeed.color.b, 1f);
+        _menuHandler.isGamePaused = false;
 
-        Time.timeScale = 1f;
         StopCoroutine(StartCountdown());
     }
 
@@ -186,11 +206,11 @@ public class ScoreHandler : MonoBehaviour {
         TMPro.TextMeshPro endFeed = _UIHandler.endFeed;
         endFeed.SetText("WINNER");
         endFeed.color = _players[winner - 1].GetColor();
-
+        
         yield return new WaitForSeconds(2);
 
-        transform.GetChild(0).gameObject.SetActive(true);
-        SceneManager.LoadScene(0);
-        StopAllCoroutines();
+        _menuHandler.isGamePaused = true;
+        _menuHandler.ToMenu(_menuHandler.scoreScreen, false);
+        StopCoroutine(EndStage(winner));
     }
 }

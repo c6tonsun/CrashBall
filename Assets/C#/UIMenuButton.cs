@@ -42,6 +42,12 @@ public class UIMenuButton : MonoBehaviour {
     public bool isQuit;
 
     [Space(15)]
+    public bool isContinue;
+
+    [Space(15)]
+    public bool isExitToMenu;
+    
+    [Space(15)]
     public Transform mute;
     public Transform noice;
     

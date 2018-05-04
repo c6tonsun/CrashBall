@@ -15,7 +15,6 @@ public class Goal : MonoBehaviour {
     public Number currentPlayer;
     
     private ScoreHandler _scoreHandler;
-    private CameraShake _cameraShake;
     private GameManager _gameManager;
 
     private Collider[] _colliders;
@@ -36,7 +35,6 @@ public class Goal : MonoBehaviour {
     private void Start()
     {
         _scoreHandler = FindObjectOfType<ScoreHandler>();
-        _cameraShake = FindObjectOfType<CameraShake>();
         _gameManager = FindObjectOfType<GameManager>();
 
         _colliders = GetComponents<Collider>();
@@ -73,7 +71,6 @@ public class Goal : MonoBehaviour {
         Ball ball = other.GetComponent<Ball>();
         if (ball.canScore)
         {
-            _cameraShake.SetShakeTime(0.25f);
             ball.canScore = false;
             currentLives--;
 
@@ -82,9 +79,7 @@ public class Goal : MonoBehaviour {
             // if died
             if (_scoreHandler.isElimination && currentLives <= 0)
             {
-                _cameraShake.SetShakeTime(0.5f);
                 _scoreHandler.KillPlayer((int)currentPlayer);
-                GoalToWall();
             }
             // killer and victim
             int[] players = ball.GetLastPlayerHits();
@@ -103,7 +98,6 @@ public class Goal : MonoBehaviour {
 
         if (currentScore >= targetScore)
         {
-            _cameraShake.SetShakeTime(0.5f);
             _scoreHandler.ScoreReached((int)currentPlayer);
         }
     }
