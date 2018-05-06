@@ -21,6 +21,9 @@ public class ScoreHandler : MonoBehaviour {
     [HideInInspector]
     public bool isElimination;
 
+	[SerializeField]
+	private AudioSource gameStartBoom;
+
     private void Start()
     {
         _UIHandler = GetComponent<UIHandler>();
@@ -197,6 +200,8 @@ public class ScoreHandler : MonoBehaviour {
         stratFeed.SetText("GO");
         stratFeed.color = new Color(stratFeed.color.r, stratFeed.color.g, stratFeed.color.b, 1f);
         _menuHandler.isGamePaused = false;
+
+		if(gameStartBoom!=null) gameStartBoom.Play();
 
         StopCoroutine(StartCountdown());
     }

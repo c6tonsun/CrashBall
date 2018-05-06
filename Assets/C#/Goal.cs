@@ -73,6 +73,7 @@ public class Goal : MonoBehaviour {
         {
             ball.canScore = false;
             currentLives--;
+			ball.goalSound.Play ();
 
             if (goalLines != null)
                 flashlines = StartCoroutine(FlashLines());
