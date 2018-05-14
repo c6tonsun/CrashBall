@@ -9,41 +9,23 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1957183209133568}
+  m_RootGameObject: {fileID: 1407653286047754}
   m_IsPrefabParent: 1
---- !u!1 &1851503856911252
+--- !u!1 &1407653286047754
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4946592889701274}
-  - component: {fileID: 198059663754180838}
-  - component: {fileID: 199829223771131066}
-  m_Layer: 8
-  m_Name: Electricity_is_like_magic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1957183209133568
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4492213054440428}
-  - component: {fileID: 33015926253459670}
-  - component: {fileID: 135859239051163648}
-  - component: {fileID: 23552063932092890}
-  - component: {fileID: 54190534818745218}
-  - component: {fileID: 114627934752554184}
-  - component: {fileID: 96925540528582168}
-  - component: {fileID: 114775374074659048}
-  - component: {fileID: 114075519121635534}
+  - component: {fileID: 4607009761950652}
+  - component: {fileID: 33851338167585814}
+  - component: {fileID: 135665504436579734}
+  - component: {fileID: 23145079925242856}
+  - component: {fileID: 54471299771827132}
+  - component: {fileID: 114969320023424366}
+  - component: {fileID: 96976227112366070}
+  - component: {fileID: 114664414871783432}
   m_Layer: 8
   m_Name: StunBall
   m_TagString: Untagged
@@ -51,39 +33,56 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4492213054440428
+--- !u!1 &1760268382750266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4988122468666384}
+  - component: {fileID: 198066986983100298}
+  - component: {fileID: 199280224899968544}
+  m_Layer: 8
+  m_Name: Electricity_is_like_magic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4607009761950652
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957183209133568}
+  m_GameObject: {fileID: 1407653286047754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.9736072, y: 1.5150145, z: -3.902259}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4946592889701274}
+  - {fileID: 4988122468666384}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4946592889701274
+--- !u!4 &4988122468666384
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1851503856911252}
+  m_GameObject: {fileID: 1760268382750266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4492213054440428}
+  m_Father: {fileID: 4607009761950652}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23552063932092890
+--- !u!23 &23145079925242856
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957183209133568}
+  m_GameObject: {fileID: 1407653286047754}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -110,19 +109,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33015926253459670
+--- !u!33 &33851338167585814
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957183209133568}
+  m_GameObject: {fileID: 1407653286047754}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54190534818745218
+--- !u!54 &54471299771827132
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957183209133568}
+  m_GameObject: {fileID: 1407653286047754}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -132,13 +131,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!96 &96925540528582168
+--- !u!96 &96976227112366070
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957183209133568}
+  m_GameObject: {fileID: 1407653286047754}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
@@ -223,34 +222,24 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!114 &114075519121635534
+--- !u!114 &114664414871783432
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957183209133568}
+  m_GameObject: {fileID: 1407653286047754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: event:/Sounds/Ball Hit
-  PlayEvent: 7
-  StopEvent: 0
-  CollisionTag: 
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!114 &114627934752554184
+  selectSound: event:/Sounds/Ball Hit
+--- !u!114 &114969320023424366
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957183209133568}
+  m_GameObject: {fileID: 1407653286047754}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccb6a34015f19b54193a7099871dfca9, type: 3}
@@ -266,46 +255,24 @@ MonoBehaviour:
   neutralColor: {r: 0, g: 0, b: 0, a: 0}
   BallBlastEffect: {fileID: 198472580756262000, guid: 4ac9550c307a1d44faaf806c39f2d60b,
     type: 2}
---- !u!114 &114775374074659048
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957183209133568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: event:/Sounds/Goal
-  PlayEvent: 3
-  StopEvent: 0
-  CollisionTag: Untagged
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!135 &135859239051163648
+--- !u!135 &135665504436579734
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957183209133568}
+  m_GameObject: {fileID: 1407653286047754}
   m_Material: {fileID: 13400000, guid: 6b39c5f9f08444048a7af5ddf0816047, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.7
   m_Center: {x: 0, y: 0, z: 0}
---- !u!198 &198059663754180838
+--- !u!198 &198066986983100298
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1851503856911252}
+  m_GameObject: {fileID: 1760268382750266}
   serializedVersion: 5
   lengthInSec: 2
   simulationSpeed: 1
@@ -3562,13 +3529,13 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
---- !u!199 &199829223771131066
+--- !u!199 &199280224899968544
 ParticleSystemRenderer:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1851503856911252}
+  m_GameObject: {fileID: 1760268382750266}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

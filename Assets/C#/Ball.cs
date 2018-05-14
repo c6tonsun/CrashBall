@@ -30,12 +30,16 @@ public class Ball : MonoBehaviour {
     private int lastHitPlayer;
     private int secondLastHitPlayer;
     Color lastHitPlayerColor;
+    
+    private PlayFMODEvent _collisionSound;
 
     private void Awake()
     {
         Rb = GetComponent<Rigidbody>();
         trail = GetComponent<TrailRenderer>();
         neutralColor = new Color(0.5f,0.5f,0.5f,1f);
+
+        _collisionSound = GetComponent<PlayFMODEvent>();
     }
 
     private void OnEnable()
@@ -57,7 +61,6 @@ public class Ball : MonoBehaviour {
 
     protected void FixedUpdate()
     {
-        minSpeed += Time.fixedDeltaTime * 0.125f;
         magnetedTime -= Time.fixedDeltaTime;
 
         if (Rb.velocity.magnitude < minSpeed && magnetedTime < 0)
@@ -78,6 +81,8 @@ public class Ball : MonoBehaviour {
     protected void OnCollisionEnter(Collision collision)
     {
         OnCollisionStay(collision);
+
+        _collisionSound.Play(playAnyway:false);
     }
 
     protected void OnCollisionStay(Collision collision)
@@ -148,9 +153,5 @@ public class Ball : MonoBehaviour {
     public int[] GetLastPlayerHits()
     {
         return new int[2] { lastHitPlayer, secondLastHitPlayer };
-    }
-
-    void OnDrawGizmos(){
-        Gizmos.DrawLine(transform.position, transform.position+transform.forward*3);
     }
 }

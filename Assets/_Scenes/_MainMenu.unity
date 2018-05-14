@@ -33932,6 +33932,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &580858859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 580858860}
+  - component: {fileID: 580858861}
+  m_Layer: 0
+  m_Name: Thunder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &580858860
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 580858859}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1608021251}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &580858861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 580858859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Sounds/Thunder
 --- !u!1 &583969166
 GameObject:
   m_ObjectHideFlags: 0
@@ -58302,6 +58343,7 @@ MonoBehaviour:
   activeMenu: {fileID: 0}
   isInTransition: 0
   isGamePaused: 0
+  isGameStarting: 0
 --- !u!4 &1138671904
 Transform:
   m_ObjectHideFlags: 0
@@ -76969,8 +77011,12 @@ MonoBehaviour:
   - {r: 0.6629529, g: 0, b: 1, a: 1}
   Mustaches: 01000000030000000500000007000000
   ballMinSpeed: 5
+  normalBallPrefab: {fileID: 114103952518715332, guid: a548c401c4c8b684082904c92f547886,
+    type: 2}
   normalBallCount: 8
   normalBallLikelyness: 0.75
+  stunBallPrefab: {fileID: 114969320023424366, guid: f2870901075625448926f14570ac0838,
+    type: 2}
   stunBallCount: 2
   stunBallLikelyness: 0.25
   firingInterval: 2
@@ -76992,6 +77038,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1138671904}
+  - {fileID: 580858860}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -77006,8 +77053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b373c9466340baf40b1982b6e15de85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scores: 
-  lives: 
+  thunder: {fileID: 580858861}
   isElimination: 0
 --- !u!114 &1608021253
 MonoBehaviour:

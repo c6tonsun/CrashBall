@@ -3,25 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BallSpawner : MonoBehaviour {
-
-    [SerializeField]
+    
     private Ball normalBallPrefab;
     public List<Ball> normalBalls;
     private int maxNormalBallCount;
     private float normalBallLikelyness;
-
-    [SerializeField]
+    
     private Ball stunBallPrefab;
     public List<Ball> stunBalls;
     private int maxStunBallCount;
     private float stunBallLikelyness;
-
-    [SerializeField]
-    private GameObject ballDeath;
+    
     [SerializeField]
     private GameObject ballRespawn;
-
-
+    
     public Transform[] Cannons;
     private Transform nextCannon;
     private int CannonAmount;
@@ -35,10 +30,15 @@ public class BallSpawner : MonoBehaviour {
 
     bool canFire = false;
 
+    private float ballMinSpeed;
+
     // Use this for initialization
     void Start ()
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
+        ballMinSpeed = gameManager.ballMinSpeed;
+        normalBallPrefab = gameManager.normalBallPrefab;
+        stunBallPrefab = gameManager.stunBallPrefab;
         // balls
         maxNormalBallCount = gameManager.normalBallCount;
         MakeBallList(normalBalls, normalBallPrefab, maxNormalBallCount, gameManager);
@@ -103,7 +103,10 @@ public class BallSpawner : MonoBehaviour {
     }
 	
 	// Physics related stuff in fixed update
-	void FixedUpdate () {
+	void FixedUpdate ()
+    {
+        ballMinSpeed += Time.fixedDeltaTime * 0.125f;
+
         if (canFire)
         {
             Ball ball = null;
@@ -144,7 +147,7 @@ public class BallSpawner : MonoBehaviour {
 
         //TODO: Add ground markings to tell this cannon is going to fire. 
         var cannon = nextCannon;
-        cannon.GetComponent<PlayFMODEvent>().Play();
+        cannon.GetComponent<PlayFMODEvent>().Play(playAnyway: false);
 
         var TurretAnimation = nextCannon.GetComponentInParent<TurretAnimSpeed>();
         if(TurretAnimation!=null)TurretAnimation.PauseAnimation(true); //This stops the cannons rotation for a while
@@ -152,6 +155,7 @@ public class BallSpawner : MonoBehaviour {
         yield return new WaitForSeconds(0.4f);
         ball.transform.position = cannon.position;
         ball.gameObject.SetActive(true);
+        ball.minSpeed = ballMinSpeed;
         ball.Rb.AddForce((cannon.forward * (_fireForce)), ForceMode.Impulse);
         ball.transform.parent = transform;
         if (TurretAnimation != null) TurretAnimation.PauseAnimation(false); //Returns cannon movemnt

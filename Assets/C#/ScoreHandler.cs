@@ -10,8 +10,10 @@ public class ScoreHandler : MonoBehaviour {
     private Player[] _players;
     private Goal[] _goals;
 
-    public int[] scores;
-    public int[] lives;
+    private int[] scores;
+    private int[] lives;
+
+    public PlayFMODEvent thunder;
 
     private ContinuesCurve _leaderSpotLight;
     private GameManager _gameManager;
@@ -114,6 +116,7 @@ public class ScoreHandler : MonoBehaviour {
     {
         _players[player - 1].Die();
         _goals[player - 1].GoalToWall();
+        thunder.Play(playAnyway: false);
         // check living player count
         int livingPLayerCount = 0;
         int winner = -1;
@@ -193,10 +196,14 @@ public class ScoreHandler : MonoBehaviour {
 
         stratFeed.SetText("1");
         stratFeed.color = new Color(stratFeed.color.r, stratFeed.color.g, stratFeed.color.b, 1f);
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.9f);
+
+        thunder.Play(playAnyway: false);
+        yield return new WaitForSecondsRealtime(0.1f);
 
         stratFeed.SetText("GO");
         stratFeed.color = new Color(stratFeed.color.r, stratFeed.color.g, stratFeed.color.b, 1f);
+
         _menuHandler.isGamePaused = false;
         _menuHandler.isGameStarting = false;
 

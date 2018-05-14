@@ -26,9 +26,11 @@ public class GameManager : MonoBehaviour {
     // ball options
     [Range(3f, 7f)]
     public float ballMinSpeed;
+    public Ball normalBallPrefab;
     public int normalBallCount;
     [Range(0f, 1f)]
     public float normalBallLikelyness;
+    public Ball stunBallPrefab;
     public int stunBallCount;
     [Range(0f, 1f)]
     public float stunBallLikelyness;

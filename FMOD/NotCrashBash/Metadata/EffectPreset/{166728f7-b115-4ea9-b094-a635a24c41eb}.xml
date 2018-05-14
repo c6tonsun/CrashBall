@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="EffectPreset" id="{166728f7-b115-4ea9-b094-a635a24c41eb}">
+        <property name="name">
+            <value>Spatializer</value>
+        </property>
+        <relationship name="folder">
+            <destination>{244e7d18-ae37-47f6-a5d0-d29c1514f17a}</destination>
+        </relationship>
+        <relationship name="effect">
+            <destination>{72dcd26d-eb31-4029-8e05-2d4916795963}</destination>
+        </relationship>
+    </object>
+    <object class="SpatialiserEffect" id="{72dcd26d-eb31-4029-8e05-2d4916795963}">
+        <property name="distanceRolloffType">
+            <value>4</value>
+        </property>
+        <property name="soundSize">
+            <value>80</value>
+        </property>
+    </object>
+</objects>

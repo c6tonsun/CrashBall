@@ -32,6 +32,8 @@ public class Goal : MonoBehaviour {
     private int targetScore;
     private int currentScore = 0;
 
+    private PlayFMODEvent _goalSound;
+
     private void Start()
     {
         _scoreHandler = FindObjectOfType<ScoreHandler>();
@@ -49,6 +51,8 @@ public class Goal : MonoBehaviour {
         currentLives = lives;
 
         targetScore = _gameManager.targetScore;
+
+        _goalSound = GetComponent<PlayFMODEvent>();
     }
 
     IEnumerator FlashLines(){
@@ -89,6 +93,8 @@ public class Goal : MonoBehaviour {
                 _scoreHandler.KillerHitVictim(players[1], (int)currentPlayer, currentLives <= 0);
             
             _scoreHandler.UpdateSpotLight();
+
+            _goalSound.Play(playAnyway: true);
         }
     }
 

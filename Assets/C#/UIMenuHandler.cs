@@ -67,6 +67,9 @@ public class UIMenuHandler : MonoBehaviour {
 
         for (int i = 0; i < _playersRewired.Length; i++)
         {
+            if (isInTransition)
+                break;
+
             if (_isActivePlayer[i] == false)
                 continue;
             if ((i >= activeItems.Length || activeItems[i] == null) && activeMenu.isColorPickMenu == false)

@@ -19,8 +19,15 @@ public class PlayFMODEvent : MonoBehaviour {
         _soundEvent.release();
     }
 
-    public void Play()
+    public void Play(bool playAnyway)
     {
+        if (playAnyway)
+        {
+            _soundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            _soundEvent.start();
+            return;
+        }
+
         _soundEvent.getPlaybackState(out _playBackState);
 
         if (_playBackState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
