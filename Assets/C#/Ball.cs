@@ -26,9 +26,6 @@ public class Ball : MonoBehaviour {
     [SerializeField]
     protected ParticleSystem BallBlastEffect;
 
-	public AudioSource goalSound;
-	public AudioSource reflectSound;
-
     private bool justPulsed;
     private int lastHitPlayer;
     private int secondLastHitPlayer;
@@ -39,15 +36,6 @@ public class Ball : MonoBehaviour {
         Rb = GetComponent<Rigidbody>();
         trail = GetComponent<TrailRenderer>();
         neutralColor = new Color(0.5f,0.5f,0.5f,1f);
-		var ball_audioSources = GetComponentsInChildren<AudioSource> ();
-		if (ball_audioSources [0].CompareTag ("goalSound")) {
-			goalSound = ball_audioSources [0];
-			reflectSound = ball_audioSources [1];
-		}else{
-			reflectSound = ball_audioSources [0];
-			goalSound = ball_audioSources [1];
-
-		}
     }
 
     private void OnEnable()
@@ -69,6 +57,7 @@ public class Ball : MonoBehaviour {
 
     protected void FixedUpdate()
     {
+        minSpeed += Time.fixedDeltaTime * 0.125f;
         magnetedTime -= Time.fixedDeltaTime;
 
         if (Rb.velocity.magnitude < minSpeed && magnetedTime < 0)
@@ -89,12 +78,6 @@ public class Ball : MonoBehaviour {
     protected void OnCollisionEnter(Collision collision)
     {
         OnCollisionStay(collision);
-		if (collision.collider.gameObject.layer == LayerMask.NameToLayer ("Ball")) {
-			reflectSound.Play ();
-		}
-		if (collision.collider.gameObject.layer == LayerMask.NameToLayer ("Walls")) {
-			reflectSound.Play ();
-		}
     }
 
     protected void OnCollisionStay(Collision collision)

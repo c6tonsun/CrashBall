@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour {
 
         musicNoice = SaveLoad.Noices[SaveLoad.MUSIC_NOICE];
         soundNoice = SaveLoad.Noices[SaveLoad.SOUND_NOICE];
+
+        FMODUnity.RuntimeManager.GetVCA("vca:/Musics").setVolume(musicNoice);
+        FMODUnity.RuntimeManager.GetVCA("vca:/Sounds").setVolume(soundNoice);
     }
 
     public void SaveMusicVolume(float volume)
@@ -69,6 +72,8 @@ public class GameManager : MonoBehaviour {
         musicNoice = volume;
         SaveLoad.Noices[SaveLoad.MUSIC_NOICE] = musicNoice;
         SaveLoad.Save();
+
+        FMODUnity.RuntimeManager.GetVCA("vca:/Musics").setVolume(musicNoice);
     }
 
     public void SaveSoundVolume(float volume)
@@ -76,5 +81,7 @@ public class GameManager : MonoBehaviour {
         soundNoice = volume;
         SaveLoad.Noices[SaveLoad.SOUND_NOICE] = soundNoice;
         SaveLoad.Save();
+
+        FMODUnity.RuntimeManager.GetVCA("vca:/Sounds").setVolume(soundNoice);
     }
 }

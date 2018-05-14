@@ -57,4 +57,5 @@ MonoBehaviour:
   Plugins: []
   MasterBank: Master Bank
   Banks:
-  - Test
+  - Sound Bank
+  - Music Bank

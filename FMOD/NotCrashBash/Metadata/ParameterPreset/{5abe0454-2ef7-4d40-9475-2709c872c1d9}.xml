@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{5abe0454-2ef7-4d40-9475-2709c872c1d9}">
+        <property name="name">
+            <value>Futur loop 2</value>
+        </property>
+        <relationship name="folder">
+            <destination>{8df8787d-27d6-4db8-a042-f99144a6b983}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{e52304f8-c2c7-4b1a-a357-7f82368a2b75}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{e52304f8-c2c7-4b1a-a357-7f82368a2b75}">
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+    </object>
+</objects>

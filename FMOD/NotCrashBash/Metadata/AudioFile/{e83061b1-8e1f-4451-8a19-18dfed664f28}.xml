@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{e83061b1-8e1f-4451-8a19-18dfed664f28}">
+        <property name="assetPath">
+            <value>VFX1 Hits &amp; Explode 39_2.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>2.8986621315192744</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{6255e7e3-684c-4cb6-a253-64638667c8ac}</destination>
+        </relationship>
+    </object>
+</objects>

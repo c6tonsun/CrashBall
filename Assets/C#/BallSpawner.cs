@@ -144,10 +144,11 @@ public class BallSpawner : MonoBehaviour {
 
         //TODO: Add ground markings to tell this cannon is going to fire. 
         var cannon = nextCannon;
+        cannon.GetComponent<PlayFMODEvent>().Play();
+
         var TurretAnimation = nextCannon.GetComponentInParent<TurretAnimSpeed>();
         if(TurretAnimation!=null)TurretAnimation.PauseAnimation(true); //This stops the cannons rotation for a while
         Destroy(Instantiate(ballRespawn, cannon.transform.position + cannon.forward, cannon.transform.rotation), 2.4f);
-		cannon.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(0.4f);
         ball.transform.position = cannon.position;
         ball.gameObject.SetActive(true);

@@ -60,7 +60,7 @@ public class MyInputManager : MonoBehaviour {
             }
         }
 
-        if (_menuHandler.isGamePaused)
+        if (_menuHandler.isGamePaused && _menuHandler.isGameStarting == false)
             return;
 #endregion
 

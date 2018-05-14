@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{db818ca7-04ef-4ac9-8398-3a70737aa4ca}">
+        <property name="assetPath">
+            <value>plonk.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.75975056689342402</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{6255e7e3-684c-4cb6-a253-64638667c8ac}</destination>
+        </relationship>
+    </object>
+</objects>

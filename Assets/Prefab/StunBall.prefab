@@ -42,6 +42,8 @@ GameObject:
   - component: {fileID: 54190534818745218}
   - component: {fileID: 114627934752554184}
   - component: {fileID: 96925540528582168}
+  - component: {fileID: 114775374074659048}
+  - component: {fileID: 114075519121635534}
   m_Layer: 8
   m_Name: StunBall
   m_TagString: Untagged
@@ -221,6 +223,28 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
+--- !u!114 &114075519121635534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957183209133568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Sounds/Ball Hit
+  PlayEvent: 7
+  StopEvent: 0
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &114627934752554184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,6 +266,28 @@ MonoBehaviour:
   neutralColor: {r: 0, g: 0, b: 0, a: 0}
   BallBlastEffect: {fileID: 198472580756262000, guid: 4ac9550c307a1d44faaf806c39f2d60b,
     type: 2}
+--- !u!114 &114775374074659048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957183209133568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Sounds/Goal
+  PlayEvent: 3
+  StopEvent: 0
+  CollisionTag: Untagged
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!135 &135859239051163648
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -21,9 +21,6 @@ public class ScoreHandler : MonoBehaviour {
     [HideInInspector]
     public bool isElimination;
 
-	[SerializeField]
-	private AudioSource gameStartBoom;
-
     private void Start()
     {
         _UIHandler = GetComponent<UIHandler>();
@@ -182,7 +179,8 @@ public class ScoreHandler : MonoBehaviour {
     IEnumerator StartCountdown()
     {
         TMPro.TextMeshPro stratFeed = _UIHandler.startFeed;
-        
+        _menuHandler.isGameStarting = true;
+
         yield return new WaitForSecondsRealtime(0.2f);
 
         stratFeed.SetText("3");
@@ -200,8 +198,7 @@ public class ScoreHandler : MonoBehaviour {
         stratFeed.SetText("GO");
         stratFeed.color = new Color(stratFeed.color.r, stratFeed.color.g, stratFeed.color.b, 1f);
         _menuHandler.isGamePaused = false;
-
-		if(gameStartBoom!=null) gameStartBoom.Play();
+        _menuHandler.isGameStarting = false;
 
         StopCoroutine(StartCountdown());
     }

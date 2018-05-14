@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 54376807210422890}
   - component: {fileID: 114724535363039100}
   - component: {fileID: 96458614726588838}
+  - component: {fileID: 114361908854412414}
+  - component: {fileID: 114868228128329490}
   m_Layer: 8
   m_Name: Ball
   m_TagString: Untagged
@@ -47,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1479609615826750
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +65,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4423623439564274
 Transform:
   m_ObjectHideFlags: 1
@@ -416,6 +418,28 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
+--- !u!114 &114361908854412414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1008478898466560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Sounds/Goal
+  PlayEvent: 3
+  StopEvent: 0
+  CollisionTag: Untagged
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &114724535363039100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -437,8 +461,28 @@ MonoBehaviour:
   neutralColor: {r: 0, g: 0, b: 0, a: 0}
   BallBlastEffect: {fileID: 198472580756262000, guid: 4ac9550c307a1d44faaf806c39f2d60b,
     type: 2}
-  goalSound: {fileID: 0}
-  reflectSound: {fileID: 0}
+--- !u!114 &114868228128329490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1008478898466560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Sounds/Ball Hit
+  PlayEvent: 7
+  StopEvent: 0
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!135 &135815935098482136
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -31,6 +31,8 @@ public class UIMenuHandler : MonoBehaviour {
     public bool isInTransition;
     [HideInInspector]
     public bool isGamePaused;
+    [HideInInspector]
+    public bool isGameStarting;
 
     private GameManager _gameManager;
     private HuePickerManager _colorManager;
@@ -57,7 +59,7 @@ public class UIMenuHandler : MonoBehaviour {
         else
             Time.timeScale = 1f;
 
-        if (isInTransition || isGamePaused == false)
+        if (isInTransition || isGamePaused == false || isGameStarting)
             return;
 
         if (activeMenu.isColorPickMenu)
