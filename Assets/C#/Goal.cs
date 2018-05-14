@@ -35,15 +35,18 @@ public class Goal : MonoBehaviour {
 
     private PlayFMODEvent _goalSound;
 
+    private void Awake()
+    {
+        _colliders = GetComponents<Collider>();
+        foreach (Collider c in _colliders)
+            c.enabled = c.isTrigger;
+    }
+
     private void Start()
     {
         _scoreHandler = FindObjectOfType<ScoreHandler>();
         _gameManager = FindObjectOfType<GameManager>();
-
-        _colliders = GetComponents<Collider>();
-        foreach (Collider c in _colliders)
-            c.enabled = c.isTrigger;
-
+        
         goalLines = GetComponentInChildren<ParticleSystem>();
         if (goalLines != null)
         {

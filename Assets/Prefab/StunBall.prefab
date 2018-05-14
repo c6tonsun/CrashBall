@@ -255,6 +255,8 @@ MonoBehaviour:
   neutralColor: {r: 0, g: 0, b: 0, a: 0}
   BallBlastEffect: {fileID: 198472580756262000, guid: 4ac9550c307a1d44faaf806c39f2d60b,
     type: 2}
+  ballColorBlast: {fileID: 198952153127787862, guid: 9b3921009a62291478f609715a7353ef,
+    type: 2}
 --- !u!135 &135665504436579734
 SphereCollider:
   m_ObjectHideFlags: 1
