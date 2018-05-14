@@ -25,6 +25,8 @@ public class Ball : MonoBehaviour {
 
     [SerializeField]
     protected ParticleSystem BallBlastEffect;
+    [SerializeField]
+    private ParticleSystem ballColorBlast;
 
     private bool justPulsed;
     private int lastHitPlayer;
@@ -93,7 +95,10 @@ public class Ball : MonoBehaviour {
 
         Ball ball = collision.collider.GetComponent<Ball>();
         if (ball != null && justPulsed)
+        {
             ball.SetLastHitPlayer(lastHitPlayer, lastHitPlayerColor);
+            ball.SpawnColorEffect(collision);
+        }
 
         if (collision.collider.gameObject.layer != LayerMask.NameToLayer("Floor"))
             justPulsed = false;
@@ -105,6 +110,18 @@ public class Ball : MonoBehaviour {
             isFixedY = true;
             canBePulsed = true;
         }
+    }
+
+    private void SpawnColorEffect(Collision collision)
+    {
+        ParticleSystem colorBlast = ballColorBlast;
+        var BallBlastParts = colorBlast.GetComponentsInChildren<ParticleSystem>();
+        foreach (var part in BallBlastParts)
+        {
+            var partStartColor = part.main;
+            partStartColor.startColor = lastHitPlayerColor;
+        }
+        Destroy(Instantiate(colorBlast, collision.collider.transform.position, collision.collider.transform.rotation), 2f);
     }
 
     protected void OnCollisionExit(Collision collision){

@@ -22,7 +22,8 @@ public class Goal : MonoBehaviour {
     private DeathWallParticleHandler deathWallPS;
 
     private ParticleSystem goalLines;
-    private Color _defaultColor;
+    private ParticleSystem.MinMaxGradient _defaultColor;
+    private ParticleSystem.MinMaxGradient _complColor;
     private Coroutine flashlines;
     
     private int lives;
@@ -45,7 +46,16 @@ public class Goal : MonoBehaviour {
 
         goalLines = GetComponentInChildren<ParticleSystem>();
         if (goalLines != null)
-            _defaultColor = goalLines.main.startColor.colorMax;
+        {
+            var main = goalLines.main;
+            var playerColor = _gameManager.Colors[(int)currentPlayer - 1];
+            _defaultColor.colorMax = playerColor;
+            _defaultColor.colorMin = CarLightColor.CreateComplementaryColor(playerColor);
+
+            _defaultColor.mode = ParticleSystemGradientMode.TwoColors;
+            main.startColor = _defaultColor;
+        }
+
 
         lives = _gameManager.playerLives;
         currentLives = lives;
@@ -62,7 +72,7 @@ public class Goal : MonoBehaviour {
         yield return new WaitForSeconds(0.3f);
         while (time < 1)
         {
-            main.startColor = Color.Lerp(Color.red, _defaultColor, time);
+            main.startColor = Color.Lerp(Color.red, _defaultColor.colorMax, time);
             yield return new WaitForEndOfFrame();
             time += Time.deltaTime;        
         }

@@ -40,6 +40,16 @@ public class CarLightColor : MonoBehaviour {
         SetColours();
 	}
 
+    public static Color CreateComplementaryColor(Color color)
+    {
+        var H = 0f;
+        var S = 0f;
+        var V = 0f;
+        Color.RGBToHSV(color, out H, out S, out V);
+
+        return Color.HSVToRGB(H, 0.3f, 1f);
+    }
+
     public void RefreshColor()
     {
         var player = GetComponentInParent<Player>();

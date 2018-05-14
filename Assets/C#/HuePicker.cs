@@ -49,10 +49,6 @@ public class HuePicker : UIMenuButton {
         if (!isSet) {
             moving = true;
             _curveTime = CheckBlockedAreas(1, moveSpeed);
-            //if (currSpeed < maxSpeed)
-            //{
-            //    currSpeed += Time.unscaledDeltaTime;
-            //}
         }
     }
 
@@ -62,10 +58,6 @@ public class HuePicker : UIMenuButton {
         {
             moving = true;
             _curveTime = CheckBlockedAreas(-1, moveSpeed);
-            //if (currSpeed < maxSpeed)
-            //{
-            //    currSpeed += Time.unscaledDeltaTime * 2;
-            //}
         }
     }
 
@@ -97,23 +89,13 @@ public class HuePicker : UIMenuButton {
 
         moving = false;
 
-        //if (!moving && moveTimer<1f)
-        //{
-        //    moveTimer += Time.unscaledDeltaTime;
-        //    if (moveTimer > 0.2f)
-        //    {
-        //        currSpeed = 0.1f;
-        //        moveTimer = 0f;
-        //    }
-        //}
-
-        //_curveTime = CheckBlockedAreas(1, 0);
-
         transform.position = MathHelp.GetCurvePosition(movementCurve.start.position, movementCurve.middle.position, movementCurve.end.position, _curveTime);
         transform.rotation = MathHelp.GetCurveRotation(movementCurve.start.rotation, movementCurve.middle.rotation, movementCurve.end.rotation, _curveTime);
         
         picker = Color.HSVToRGB(_curveTime, 1f, 1f);
         pickerReal = Color.HSVToRGB(_curveTime, 0.9f, 0.9f);
+
+        HueManager.colors[player] = pickerReal;
 
         var temp = GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < 2; i++)

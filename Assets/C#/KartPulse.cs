@@ -16,11 +16,12 @@ public class KartPulse : MonoBehaviour
     private float pulseTimer;
 
     private bool pulseHitsBalls;
-    private bool pulseLongCooldown;
 
     private ParticleSystem pulseParticles;
     [SerializeField]
     private ParticleSystem magnetParticles;
+
+    private ParticleSystem.MinMaxGradient pulseColor;
 
     private Player player;
 
@@ -38,13 +39,21 @@ public class KartPulse : MonoBehaviour
 
         player = GetComponentInParent<Player>();
 
+        var PlayerColor = player.GetColor();
+
+        pulseColor.colorMax = PlayerColor;
+        pulseColor.colorMin = CarLightColor.CreateComplementaryColor(PlayerColor);
+
+        pulseColor.mode = ParticleSystemGradientMode.TwoColors;
+
         pulseParticles = GetComponent<ParticleSystem>();
         var colour = pulseParticles.main;
-        colour.startColor = player.GetColor();
+        colour.startColor = pulseColor;
+
 
         magnetParticles = FindPulseOrigin();
         var magnetColour = magnetParticles.main;
-        magnetColour.startColor = player.GetColor();
+        magnetColour.startColor = pulseColor;
     }
 
     private ParticleSystem FindPulseOrigin()
@@ -65,13 +74,16 @@ public class KartPulse : MonoBehaviour
     {
         pulseTimer += Time.deltaTime;
         magnetTimer += Time.deltaTime;
+
+        isMagneton = magnetParticles.isPlaying;
     }
 
     public float GetPulseTimer() { return pulseTimer; }
-    public bool isLongCooldown() { return pulseLongCooldown; }
+    public bool isLongCooldown { private set; get; }
+    public bool isMagneton { private set; get; }
 
     public void Magnet()
-    {
+    {        
         if ((pulseTimer < pulseCooldown) || magnetTimer < 0)
             return;
 
@@ -81,7 +93,6 @@ public class KartPulse : MonoBehaviour
             magnetTimer = magnetCooldown;
             return;
         }
-
         if(!magnetParticles.isPlaying) magnetParticles.Play();
 
         colliders = Physics.OverlapSphere(transform.position, PulseRadius, layerMask);
@@ -124,7 +135,7 @@ public class KartPulse : MonoBehaviour
 
         pulseTimer = 0f;
         magnetTimer = magnetCooldown;
-        pulseLongCooldown = false;
+        isLongCooldown = false;
 
         magnetParticles.Stop();
         pulseParticles.Play(withChildren:false);
@@ -184,7 +195,7 @@ public class KartPulse : MonoBehaviour
         if (!pulseHitsBalls)
         {
             pulseTimer = -0.8f;
-            pulseLongCooldown = true;
+            isLongCooldown = true;
         }
         StopCoroutine(secondPulse);
     }
