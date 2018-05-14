@@ -137,7 +137,7 @@ public class ContinuesCurve : MonoBehaviour
             debugPosAndRot = false;
 
         if (staticLoop)
-            _totalTime += Time.deltaTime * staticSpeed;
+            _totalTime += Time.unscaledDeltaTime * staticSpeed;
         else
         {
             if (_totalTime == _targetIndex) { } // do nothing

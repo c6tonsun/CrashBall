@@ -266,6 +266,8 @@ MonoBehaviour:
   neutralColor: {r: 0, g: 0, b: 0, a: 0}
   BallBlastEffect: {fileID: 198472580756262000, guid: 4ac9550c307a1d44faaf806c39f2d60b,
     type: 2}
+  ballColorBlast: {fileID: 198472580756262000, guid: 4ac9550c307a1d44faaf806c39f2d60b,
+    type: 2}
 --- !u!114 &114775374074659048
 MonoBehaviour:
   m_ObjectHideFlags: 1

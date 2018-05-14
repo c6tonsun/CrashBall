@@ -405,12 +405,17 @@ public class UIMenuHandler : MonoBehaviour {
         activeItems[index] = item;
         activeItems[index].isHighlighted = true;
 
+        highlightItems[index].GetComponent<MeshFilter>().mesh = activeItems[index].GetComponent<MeshFilter>().mesh;
+
         highlightItems[index].transform.position = activeItems[index].transform.position;
         highlightItems[index].transform.rotation = activeItems[index].transform.rotation;
-        highlightItems[index].transform.localScale = new Vector3(
+
+        //if (activeItems[index].isSceneID) {
+            highlightItems[index].transform.localScale = new Vector3(
             activeItems[index].transform.localScale.x * 1.2f,
             activeItems[index].transform.localScale.y * 1.2f,
             activeItems[index].transform.localScale.z * 0.8f);
+        //}
     }
 
     public void DoPause()
