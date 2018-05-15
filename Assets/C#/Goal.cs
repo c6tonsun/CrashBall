@@ -50,13 +50,18 @@ public class Goal : MonoBehaviour {
         goalLines = GetComponentInChildren<ParticleSystem>();
         if (goalLines != null)
         {
-            var main = goalLines.main;
-            var playerColor = _gameManager.Colors[(int)currentPlayer - 1];
-            _defaultColor.colorMax = playerColor;
-            _defaultColor.colorMin = CarLightColor.CreateComplementaryColor(playerColor);
-
-            _defaultColor.mode = ParticleSystemGradientMode.TwoColors;
-            main.startColor = _defaultColor;
+            if (_gameManager.stageSceneID==2) {
+                _defaultColor = goalLines.main.startColor;
+            }
+            else
+            {
+                var main = goalLines.main;
+                var playerColor = _gameManager.Colors[(int)currentPlayer - 1];
+                _defaultColor.colorMax = playerColor;
+                _defaultColor.colorMin = CarLightColor.CreateComplementaryColor(playerColor);
+                _defaultColor.mode = ParticleSystemGradientMode.TwoColors;
+                main.startColor = _defaultColor;
+            }
         }
 
 

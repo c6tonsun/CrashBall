@@ -15,6 +15,10 @@ public class MustacheManager : MonoBehaviour {
         if (player != null && FindObjectOfType<GameManager>()!=null)
         {
             var stacheID = player.GetStache();
+            if(stacheID == 0)
+            {
+                stacheID = Random.Range(1,10);
+            }
             ChangeMustache(stacheID);
         }
         else
@@ -33,5 +37,13 @@ public class MustacheManager : MonoBehaviour {
             }
             mustache.gameObject.SetActive(false);
         }
+    }
+
+    public PlayFMODEvent GetVictoryCheer()
+    {
+        //Return avail cheer
+        var returnable = GetComponentInChildren<PlayFMODEvent>(false);
+        Debug.Log(returnable);
+        return returnable;
     }
 }

@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 4518345456210318}
   - component: {fileID: 33906560147208938}
   - component: {fileID: 23201677983334522}
+  - component: {fileID: 114853480997718962}
   m_Layer: 0
   m_Name: _FStache
   m_TagString: Untagged
@@ -128,6 +129,7 @@ GameObject:
   - component: {fileID: 4898844651077046}
   - component: {fileID: 33739177154080298}
   - component: {fileID: 23669233612830458}
+  - component: {fileID: 114580176686276780}
   m_Layer: 0
   m_Name: _HStache
   m_TagString: Untagged
@@ -208,6 +210,7 @@ GameObject:
   - component: {fileID: 4209621956728200}
   - component: {fileID: 33003389235597698}
   - component: {fileID: 23667639484240154}
+  - component: {fileID: 114448243005821408}
   m_Layer: 0
   m_Name: _Lstache
   m_TagString: Untagged
@@ -256,6 +259,7 @@ GameObject:
   - component: {fileID: 4436163138768522}
   - component: {fileID: 33904802936650646}
   - component: {fileID: 23724127130143836}
+  - component: {fileID: 114467795389924760}
   m_Layer: 0
   m_Name: _CStache
   m_TagString: Untagged
@@ -336,6 +340,7 @@ GameObject:
   - component: {fileID: 4351616768694924}
   - component: {fileID: 33323593845312124}
   - component: {fileID: 23613429785614892}
+  - component: {fileID: 114018360174632292}
   m_Layer: 0
   m_Name: _KStache
   m_TagString: Untagged
@@ -383,6 +388,7 @@ GameObject:
   - component: {fileID: 4617801651518654}
   - component: {fileID: 33097759307897238}
   - component: {fileID: 23760745993897452}
+  - component: {fileID: 114490244930020304}
   m_Layer: 0
   m_Name: _DStache
   m_TagString: Untagged
@@ -398,6 +404,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4668423785088154}
+  - component: {fileID: 114335129445798448}
   m_Layer: 0
   m_Name: _NoStache
   m_TagString: Untagged
@@ -661,6 +668,7 @@ GameObject:
   - component: {fileID: 4509781905655582}
   - component: {fileID: 33670298274585576}
   - component: {fileID: 23974067355944674}
+  - component: {fileID: 114914162480564308}
   m_Layer: 0
   m_Name: _WStache
   m_TagString: Untagged
@@ -709,6 +717,7 @@ GameObject:
   - component: {fileID: 4290172080201952}
   - component: {fileID: 33838700935994694}
   - component: {fileID: 23935595230357136}
+  - component: {fileID: 114617212777370484}
   m_Layer: 0
   m_Name: _MStache
   m_TagString: Untagged
@@ -1714,6 +1723,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114018360174632292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1467079155556404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray8
 --- !u!114 &114082661834227006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1725,7 +1746,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d201ba533ea934db2f20632904079a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visorRender: {fileID: 0}
   playerColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114286763518291360
 MonoBehaviour:
@@ -1739,6 +1759,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultStyle: 1
+--- !u!114 &114335129445798448
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1597319289383054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray5
+--- !u!114 &114448243005821408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1298552952312622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray7
+--- !u!114 &114467795389924760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1374881592010090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray2
 --- !u!114 &114486510867057684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1750,6 +1806,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb802eebe34247e4aaf95661f12c19fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114490244930020304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1576595478973920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray9
+--- !u!114 &114580176686276780
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1142756428047770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray1
+--- !u!114 &114617212777370484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1989876576462812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray0
+--- !u!114 &114853480997718962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1058167224160116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray3
+--- !u!114 &114914162480564308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956783883346676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray4
 --- !u!137 &137107057334541926
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

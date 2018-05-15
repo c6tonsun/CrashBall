@@ -19,7 +19,7 @@ public class PlayFMODEvent : MonoBehaviour {
         _soundEvent.release();
     }
 
-    public void Play(bool playAnyway)
+    public void Play(bool playAnyway = true)
     {
         if (playAnyway)
         {
@@ -32,5 +32,17 @@ public class PlayFMODEvent : MonoBehaviour {
 
         if (_playBackState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
             _soundEvent.start();
+    }
+
+    public void Stop(bool Fadeout=false)
+    {
+        if (!Fadeout)
+        {
+            _soundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
+        else
+        {
+            _soundEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
     }
 }

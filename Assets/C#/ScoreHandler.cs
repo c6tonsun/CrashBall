@@ -215,8 +215,11 @@ public class ScoreHandler : MonoBehaviour {
         TMPro.TextMeshPro endFeed = _UIHandler.endFeed;
         endFeed.SetText("WINNER");
         endFeed.color = _players[winner - 1].GetColor();
+        _players[winner - 1].GetComponentInChildren<MustacheManager>().GetVictoryCheer().Play();
         
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
+
+        _players[winner - 1].GetComponentInChildren<MustacheManager>().GetVictoryCheer().Play();
 
         _menuHandler.isGamePaused = true;
         _menuHandler.ToMenu(_menuHandler.scoreScreen, false);

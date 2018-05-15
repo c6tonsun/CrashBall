@@ -37,6 +37,8 @@ public class UIMenuHandler : MonoBehaviour {
     private GameManager _gameManager;
     private HuePickerManager _colorManager;
 
+    private PlayFMODEvent[] blips;
+
     private void Start()
     {
         // gets rewired players exgluding system
@@ -50,6 +52,8 @@ public class UIMenuHandler : MonoBehaviour {
         _gameManager = FindObjectOfType<GameManager>();
 
         _colorManager = FindObjectOfType<HuePickerManager>();
+
+        blips = GetComponents<PlayFMODEvent>();
     }
 
     private void Update()
@@ -154,6 +158,8 @@ public class UIMenuHandler : MonoBehaviour {
         if (activeMenu.isColorPickMenu && _readyPlayers[index] == false)
             _colorManager.pickers[index].DoSelect(index);
 
+        PlayMenuBlip(true);
+
         if (activeMenu.allPlayersNeedToBeReady)
         {
             _readyPlayers[index] = true;
@@ -180,6 +186,8 @@ public class UIMenuHandler : MonoBehaviour {
 
         if (activeMenu.isColorPickMenu)
             _colorManager.pickers[index].DoDeselect(index);
+
+        PlayMenuBlip(true, true);
     }
 
     private void DoBack(int index, UIMenuButton activeItem)
@@ -210,6 +218,8 @@ public class UIMenuHandler : MonoBehaviour {
             DoUp(index, result);
         else
             MoveInMenu(result, index);
+
+        PlayMenuBlip(true);
     }
 
     private void DoDown(int index, UIMenuButton activeItem)
@@ -225,6 +235,7 @@ public class UIMenuHandler : MonoBehaviour {
             DoDown(index, result);
         else
             MoveInMenu(result, index);
+        PlayMenuBlip(true);
     }
 
     private void DoLeft(int index, UIMenuButton activeItem)
@@ -275,6 +286,8 @@ public class UIMenuHandler : MonoBehaviour {
             DoLeft(index, result);
         else
             MoveInMenu(result, index);
+
+        PlayMenuBlip(true);
     }
 
     private void DoRight(int index, UIMenuButton activeItem)
@@ -324,6 +337,8 @@ public class UIMenuHandler : MonoBehaviour {
             DoRight(index, result);
         else
             MoveInMenu(result, index);
+
+        PlayMenuBlip(true);
     }
 
 
@@ -431,6 +446,18 @@ public class UIMenuHandler : MonoBehaviour {
     {
         isInTransition = true;
         StartCoroutine(TransitionBackToGame());
+    }
+
+    public void PlayMenuBlip(bool playAnyway, bool reverse=false)
+    {
+        if (!reverse)
+        {
+            blips[0].Play(playAnyway);
+        }
+        else
+        {
+            blips[1].Play(playAnyway);
+        }
     }
 
     IEnumerator TransitionBackToGame()
