@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{76ae9225-f522-4a51-968d-bfcb16f0d335}">
+        <property name="assetPath">
+            <value>kart_humming.WAV</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.5543083900226757</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{6255e7e3-684c-4cb6-a253-64638667c8ac}</destination>
+        </relationship>
+    </object>
+</objects>

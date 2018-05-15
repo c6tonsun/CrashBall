@@ -15,6 +15,8 @@ public class KartPulse : MonoBehaviour
     private float pulseCooldown;
     private float pulseTimer;
 
+    private PlayFMODEvent pulseSound;
+
     private bool pulseHitsBalls;
 
     private ParticleSystem pulseParticles;
@@ -36,6 +38,8 @@ public class KartPulse : MonoBehaviour
         PulseForce = gameManager.pulseForce;
         pulseCooldown = gameManager.pulseCooldown;
         maxMagnetTime = gameManager.maxMagnetTime;
+
+        pulseSound = GetComponent<PlayFMODEvent>();
 
         player = GetComponentInParent<Player>();
 
@@ -139,6 +143,8 @@ public class KartPulse : MonoBehaviour
 
         magnetParticles.Stop();
         pulseParticles.Play(withChildren:false);
+
+        pulseSound.Play(playAnyway:true);
 
         colliders = Physics.OverlapSphere(transform.position, PulseRadius * 0.75f, layerMask);
         Ball[] balls = new Ball[colliders.Length];
