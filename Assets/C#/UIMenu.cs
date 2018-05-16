@@ -6,6 +6,7 @@ public class UIMenu : MonoBehaviour {
 
     public bool allPlayersNeedToBeReady;
     public bool isColorPickMenu;
+    public bool isMainMenu;
     public UIMenu nextMenu;
     public UIMenu backMenu;
     public UIMenuButton[] defaultItems;

@@ -19,6 +19,7 @@ public class UIMenuHandler : MonoBehaviour {
 
     // menu
     public Camera cam;
+    public float transitionDelay;
     public GameObject[] highlightItems;
     public UIMenu pauseMenu;
     public UIMenu scoreScreen;
@@ -28,6 +29,8 @@ public class UIMenuHandler : MonoBehaviour {
     public UIMenuButton[] activeItems;
     [HideInInspector]
     public UIMenu activeMenu;
+    [HideInInspector]
+    public UIMenu[] allMenus;
     [HideInInspector]
     public bool isInTransition;
     [HideInInspector]
@@ -51,10 +54,10 @@ public class UIMenuHandler : MonoBehaviour {
         _isActivePlayer = new bool[_playersRewired.Length];
 
         _gameManager = FindObjectOfType<GameManager>();
-
         _colorManager = FindObjectOfType<HuePickerManager>();
 
         blips = GetComponents<PlayFMODEvent>();
+        allMenus = GetComponentsInChildren<UIMenu>();
     }
 
     private void Update()
@@ -67,6 +70,15 @@ public class UIMenuHandler : MonoBehaviour {
         if (isInTransition || isGamePaused == false || isGameStarting)
             return;
 
+        if (activeMenu.isColorPickMenu == false)
+        {
+            for (int i = 0; i < highlightItems.Length; i++)
+            {
+                if (highlightItems[i].activeSelf)
+                    UpdateHighlightItem(i);
+            }
+        }
+        
         if (activeMenu.isColorPickMenu)
             _colorManager.DoUpdate();
 
@@ -290,7 +302,6 @@ public class UIMenuHandler : MonoBehaviour {
                 activeItem.soundNoice = 0;
 
             activeItem.UpdateSoundSlider();
-            UpdateHighlightItem(index);
             _gameManager.SaveSoundVolume(activeItem.soundNoice);
             return;
         }
@@ -342,7 +353,6 @@ public class UIMenuHandler : MonoBehaviour {
                 activeItem.soundNoice = 1;
 
             activeItem.UpdateSoundSlider();
-            UpdateHighlightItem(index);
             _gameManager.SaveSoundVolume(activeItem.soundNoice);
             return;
         }
@@ -370,11 +380,22 @@ public class UIMenuHandler : MonoBehaviour {
     }
 
 
-    public void SetCamera(Camera camera)
+    public void SetCamera(Camera camera, bool isMainMenu)
     {
         cam = camera;
         defaultCamPos = cam.transform.position;
         defaultCamRot = cam.transform.rotation;
+        
+        if (isMainMenu)
+        {
+            foreach (UIMenu menu in allMenus)
+                menu.gameObject.SetActive(menu.isMainMenu);
+        }
+        else
+        {
+            foreach (UIMenu menu in allMenus)
+                menu.gameObject.SetActive(menu.isMainMenu == false);
+        }
     }
 
 
@@ -383,6 +404,8 @@ public class UIMenuHandler : MonoBehaviour {
         if (isInTransition || menu == null)
             return;
         
+        _gameManager.soundTest.Stop();
+
         for (int i = 0; i < _isActivePlayer.Length; i++)
         {
             bool hasController = _playersRewired[i].controllers.hasKeyboard || _playersRewired[i].controllers.joystickCount > 0;
@@ -405,10 +428,19 @@ public class UIMenuHandler : MonoBehaviour {
                     activePlayerCount++;
             }
 
+            _colorManager.DoUpdate();
             _gameManager.playerCount = activePlayerCount;
         }
 
         isInTransition = true;
+        StartCoroutine(TransitionDelay(menu, instantly));
+    }
+
+    IEnumerator TransitionDelay(UIMenu menu, bool instantly)
+    {
+        if (instantly == false)
+            yield return new WaitForSecondsRealtime(transitionDelay);
+
         activeMenu = menu;
         menu.StartTransition(cam, this, instantly);
 
@@ -431,7 +463,7 @@ public class UIMenuHandler : MonoBehaviour {
         #region handle highlights
         for (int i = 0; i < highlightItems.Length; i++)
         {
-            if (_isActivePlayer[i] == false)
+            if (_isActivePlayer[i] == false || activeMenu.isColorPickMenu)
             {
                 highlightItems[i].SetActive(false);
                 continue;
@@ -439,14 +471,18 @@ public class UIMenuHandler : MonoBehaviour {
 
             highlightItems[i].SetActive(activeMenu.allPlayersNeedToBeReady);
         }
-        highlightItems[0].SetActive(true);
+
+        if (activeMenu.isColorPickMenu == false)
+            highlightItems[0].SetActive(true);
 
         for (int i = 0; i < activeItems.Length; i++)
         {
             if (highlightItems[i].activeSelf)
                 MoveInMenu(activeItems[i], i);
         }
-#endregion
+        #endregion
+
+        StopCoroutine(TransitionDelay(menu, instantly));
     }
 
     public void MoveInMenu(UIMenuButton item, int index)
@@ -463,8 +499,6 @@ public class UIMenuHandler : MonoBehaviour {
 
         if (activeItems[index].isSoundNoice)
             _gameManager.soundTest.Play(false);
-
-        UpdateHighlightItem(index);
     }
 
     public void UpdateHighlightItem(int index)
@@ -509,6 +543,8 @@ public class UIMenuHandler : MonoBehaviour {
         Quaternion camStartRot = cam.transform.rotation;
         
         float time = 0f;
+
+        yield return new WaitForSecondsRealtime(transitionDelay);
 
         while (time < 1)
         {

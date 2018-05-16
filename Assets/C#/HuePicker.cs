@@ -17,37 +17,32 @@ public class HuePicker : UIMenuButton {
 
     [SerializeField]
     private float moveSpeed = 0.5f;
-    private float maxSpeed;
-    private float currSpeed;
-
-    private bool moving = false;
+    
     private float moveTimer;
 
     [SerializeField]
     private Color picker;
     private Color pickerReal;
 
-    private bool isSet = false;
+    [HideInInspector]
+    public bool isSet = false;
 
     [SerializeField]
     private int player;
 
-    private static float[] playerHues = new float[4];
+    private static float[] playerHues = new float[4] { 0f, 0f, 0f, 0f };
 
     void Start()
     {
         HueManager = FindObjectOfType<HuePickerManager>();
-
-        maxSpeed = moveSpeed * 1.5f;
-        currSpeed = 0.1f;
     }
 
     //Input methods
 
     public void DoLeft()
     {
-        if (!isSet) {
-            moving = true;
+        if (!isSet)
+        {
             _curveTime = CheckBlockedAreas(1, moveSpeed);
         }
     }
@@ -56,7 +51,6 @@ public class HuePicker : UIMenuButton {
     {
         if (!isSet)
         {
-            moving = true;
             _curveTime = CheckBlockedAreas(-1, moveSpeed);
         }
     }
@@ -81,14 +75,11 @@ public class HuePicker : UIMenuButton {
         }
     }
 
-    //update
-
+    // basicly update
     public void DoUpdate()
     {
         BlockArea.gameObject.SetActive(isSet);
-
-        moving = false;
-
+        
         transform.position = MathHelp.GetCurvePosition(movementCurve.start.position, movementCurve.middle.position, movementCurve.end.position, _curveTime);
         transform.rotation = MathHelp.GetCurveRotation(movementCurve.start.rotation, movementCurve.middle.rotation, movementCurve.end.rotation, _curveTime);
         
@@ -104,16 +95,15 @@ public class HuePicker : UIMenuButton {
         }
     }
 
+
     public void RefreshSpot()
     {
         _curveTime = CheckBlockedAreas(-0.1f, 0f);
     }
-
     
-
     private float CheckBlockedAreas(float input, float speed)
     {
-        float result = _curveTime; 
+        float result = _curveTime;
         result += input * speed * Time.unscaledDeltaTime;
 
         if(result > 0.95)
