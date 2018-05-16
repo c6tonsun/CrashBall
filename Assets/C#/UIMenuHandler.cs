@@ -14,6 +14,7 @@ public class UIMenuHandler : MonoBehaviour {
     private static int RIGHT_INPUT = 5;
     private bool[] _readyPlayers;
     private bool[] _isActivePlayer;
+    private int activePlayerCount = 0;
     private Rewired.Player[] _playersRewired;
 
     // menu
@@ -69,21 +70,45 @@ public class UIMenuHandler : MonoBehaviour {
         if (activeMenu.isColorPickMenu)
             _colorManager.DoUpdate();
 
+        int index;
         for (int i = 0; i < _playersRewired.Length; i++)
         {
             if (isInTransition)
                 break;
 
+            // dynamic player detection
+            if (activeMenu.isColorPickMenu)
+            {
+                if (_playersRewired[i].GetButtonDown(SELECT_INPUT) && _isActivePlayer[i] == false)
+                {
+                    _isActivePlayer[i] = true;
+                    _colorManager.SetActivePickerCount(_isActivePlayer);
+                }
+                if (_playersRewired[i].GetButtonDown(BACK_INPUT) &&
+                    _playersRewired[i].controllers.hasKeyboard == false &&
+                    _readyPlayers[i] == false &&
+                    _isActivePlayer[i] == true)
+                {
+                    _isActivePlayer[i] = false;
+                    _colorManager.SetActivePickerCount(_isActivePlayer);
+                }
+            }
+
             if (_isActivePlayer[i] == false)
                 continue;
-            if ((i >= activeItems.Length || activeItems[i] == null) && activeMenu.isColorPickMenu == false)
-                continue;
 
+            // all players can control in menus that have only one activeItem
+            // colorPickMenu is exception because it works differently
+            if ((i >= activeItems.Length || activeItems[i] == null) && activeMenu.isColorPickMenu == false)
+                index = 0;
+            else
+                index = i;
+            
             UIMenuButton activeItem;
             if (activeMenu.isColorPickMenu)
-                activeItem = _colorManager.pickers[i];
+                activeItem = _colorManager.pickers[index];
             else
-                activeItem = activeItems[i];
+                activeItem = activeItems[index];
 
             if (_playersRewired[i].GetButtonDown(SELECT_INPUT))
                 DoSelect(i, activeItem);
@@ -96,30 +121,32 @@ public class UIMenuHandler : MonoBehaviour {
             if (_playersRewired[i].GetButtonLongPressDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady)
                 DoBack(i, activeItem);
 
+            if (isInTransition)
+                break;
+
+            // ready player can not move their highlight
             if (_readyPlayers[i])
-                continue;
-            if ((i >= activeItems.Length || activeItems[i] == null) && activeMenu.isColorPickMenu == false)
                 continue;
 
             if (_playersRewired[i].GetButtonDown(UP_INPUT))
-                DoUp(i, activeItem);
+                DoUp(index, activeItem);
 
             if (_playersRewired[i].GetButtonDown(DOWN_INPUT))
-                DoDown(i, activeItem);
+                DoDown(index, activeItem);
 
             if (activeItem.isMusicNoice || activeItem.isSoundNoice || activeMenu.isColorPickMenu)
             {
                 if (_playersRewired[i].GetButton(LEFT_INPUT))
-                    DoLeft(i, activeItem);
+                    DoLeft(index, activeItem);
                 if (_playersRewired[i].GetButton(RIGHT_INPUT))
-                    DoRight(i, activeItem);
+                    DoRight(index, activeItem);
             }
             else
             {
                 if (_playersRewired[i].GetButtonDown(LEFT_INPUT))
-                    DoLeft(i, activeItem);
+                    DoLeft(index, activeItem);
                 if (_playersRewired[i].GetButtonDown(RIGHT_INPUT))
-                    DoRight(i, activeItem);
+                    DoRight(index, activeItem);
             }
         }
     }
@@ -235,6 +262,7 @@ public class UIMenuHandler : MonoBehaviour {
             DoDown(index, result);
         else
             MoveInMenu(result, index);
+
         PlayMenuBlip(true);
     }
 
@@ -262,14 +290,14 @@ public class UIMenuHandler : MonoBehaviour {
                 activeItem.soundNoice = 0;
 
             activeItem.UpdateSoundSlider();
-            MoveInMenu(activeItem, index);
+            UpdateHighlightItem(index);
             _gameManager.SaveSoundVolume(activeItem.soundNoice);
             return;
         }
 
         if (activeMenu.isColorPickMenu)
         {
-            _colorManager.pickers[index].DoLeft();
+            ((HuePicker)activeItem).DoLeft();
             return;
         }
 
@@ -314,7 +342,7 @@ public class UIMenuHandler : MonoBehaviour {
                 activeItem.soundNoice = 1;
 
             activeItem.UpdateSoundSlider();
-            MoveInMenu(activeItem, index);
+            UpdateHighlightItem(index);
             _gameManager.SaveSoundVolume(activeItem.soundNoice);
             return;
         }
@@ -354,8 +382,7 @@ public class UIMenuHandler : MonoBehaviour {
     {
         if (isInTransition || menu == null)
             return;
-
-        int activePlayerCount = 0;
+        
         for (int i = 0; i < _isActivePlayer.Length; i++)
         {
             bool hasController = _playersRewired[i].controllers.hasKeyboard || _playersRewired[i].controllers.joystickCount > 0;
@@ -365,13 +392,21 @@ public class UIMenuHandler : MonoBehaviour {
             if (menu.isColorPickMenu)
             {
                 _colorManager.pickers[i].DoDeselect(i);
-                if (hasController)
-                    activePlayerCount++;
+                _colorManager.SetActivePickerCount(_isActivePlayer);
             }
         }
+        
+        if (activeMenu != null && activeMenu.isColorPickMenu)
+        {
+            activePlayerCount = 0;
+            foreach (bool activePlayer in _isActivePlayer)
+            {
+                if (activePlayer)
+                    activePlayerCount++;
+            }
 
-        if (menu.isColorPickMenu)
             _gameManager.playerCount = activePlayerCount;
+        }
 
         isInTransition = true;
         activeMenu = menu;
@@ -419,21 +454,29 @@ public class UIMenuHandler : MonoBehaviour {
         if (item == null)
             return;
 
+        if (activeItems[index].isSoundNoice)
+            _gameManager.soundTest.Stop();
+
         activeItems[index].isHighlighted = false;
         activeItems[index] = item;
         activeItems[index].isHighlighted = true;
 
+        if (activeItems[index].isSoundNoice)
+            _gameManager.soundTest.Play(false);
+
+        UpdateHighlightItem(index);
+    }
+
+    public void UpdateHighlightItem(int index)
+    {
         highlightItems[index].GetComponent<MeshFilter>().mesh = activeItems[index].GetComponent<MeshFilter>().mesh;
 
         highlightItems[index].transform.position = activeItems[index].transform.position;
         highlightItems[index].transform.rotation = activeItems[index].transform.rotation;
-
-        //if (activeItems[index].isSceneID) {
-            highlightItems[index].transform.localScale = new Vector3(
+        highlightItems[index].transform.localScale = new Vector3(
             activeItems[index].transform.localScale.x * 1.2f,
             activeItems[index].transform.localScale.y * 1.2f,
             activeItems[index].transform.localScale.z * 0.8f);
-        //}
     }
 
     public void DoPause()

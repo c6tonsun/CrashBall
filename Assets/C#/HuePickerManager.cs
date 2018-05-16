@@ -3,39 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HuePickerManager : MonoBehaviour {
-
-    [SerializeField]
+    
     public Color[] colors;
 
     public HuePicker[] pickers;
-
-    public MeshRenderer[] floorMesh;
+    public MeshRenderer[] floorMeshes;
+    public GameObject[] visualPlayers;
 
     private GameManager gameManager;
-
-    // Use this for initialization
-    void Start () {
-        pickers = GetComponentsInChildren<HuePicker>();
+    
+    void Start ()
+    {
         gameManager = FindObjectOfType<GameManager>();
-
-        Transform[] tempQuads = transform.GetComponentsInChildren<Transform>();
-        floorMesh = new MeshRenderer[4];
-        int index = 0;
-        for (int i = 0; i < tempQuads.Length; i++)
-        {
-            if (tempQuads[i].name.Contains("Quad"))
-            {
-                floorMesh[index] = tempQuads[i].GetComponent<MeshRenderer>();
-                index++;
-            }
-        }
     }
 	
-	// Update is called once per frame
-	public void DoUpdate () {
+	public void DoUpdate ()
+    {
         for (int p = 0; p < pickers.Length; p++)
         {
-            floorMesh[p].material.color = colors[p];
+            floorMeshes[p].material.color = colors[p];
             pickers[p].DoUpdate();
         }
         
@@ -50,6 +36,31 @@ public class HuePickerManager : MonoBehaviour {
             {
                 picker.RefreshSpot();
             }
+        }
+    }
+
+    public void SetActivePickerCount(bool[] activePlayers)
+    {
+        int pickerCount = 0;
+        foreach (bool activePlayer in activePlayers)
+        {
+            if (activePlayer)
+                pickerCount++;
+        }
+
+        for (int p = 0; p < pickers.Length; p++)
+        {
+            pickers[p].gameObject.SetActive(p < pickerCount);
+            floorMeshes[p].gameObject.SetActive(p < pickerCount);
+            visualPlayers[p].gameObject.SetActive(p < pickerCount);
+        }
+
+        float step = 1 / pickerCount + 1;
+        float[] times = new float[pickerCount]; 
+        for (int i = 0; i < pickerCount; i++)
+        {
+            times[i] = (step * i) + step;
+            // TODO: set this time as curve time
         }
     }
 }

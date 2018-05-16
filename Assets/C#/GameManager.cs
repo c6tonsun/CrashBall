@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour {
     // noices
     public float musicNoice;
     public float soundNoice;
+    
+    public PlayFMODEvent soundTest;
 
     private void Awake()
     {
@@ -83,7 +85,7 @@ public class GameManager : MonoBehaviour {
         soundNoice = volume;
         SaveLoad.Noices[SaveLoad.SOUND_NOICE] = soundNoice;
         SaveLoad.Save();
-
+        
         FMODUnity.RuntimeManager.GetVCA("vca:/Sounds").setVolume(soundNoice);
     }
 }
