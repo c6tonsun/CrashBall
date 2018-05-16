@@ -5,18 +5,24 @@ using UnityEngine;
 public class MenuSpots : MonoBehaviour {
 
 
-    private UIMenu[] all_menus;
+    private UIMenu[] allMenus;
     private Vector3[] Targets;
 
     public float minimumDistance = 10f;
 
 	// Use this for initialization
 	void Awake () {
-        all_menus = FindObjectsOfType<UIMenu>();
-        Targets = new Vector3[all_menus.Length];
+        allMenus = FindObjectsOfType<UIMenu>();
+        Targets = new Vector3[allMenus.Length];
         int tries = 0;
-        for (int i = 0; i < all_menus.Length;)
+        for (int i = 0; i < allMenus.Length;)
         {
+            if (allMenus[i].isMainMenu == false)
+            {
+                i++;
+                continue;
+            }
+
             bool canFit = true;
             var randomspot = Random.insideUnitSphere * 30;
             for (int t = 0; t < Targets.Length; t++)
@@ -42,11 +48,11 @@ public class MenuSpots : MonoBehaviour {
 
     private void Start()
     {
-        for (int i = 0; i < all_menus.Length; i++)
+        for (int i = 0; i < allMenus.Length; i++)
         {
-            all_menus[i].transform.position = Targets[i];
+            allMenus[i].transform.position = Targets[i];
             //all_menus[i].transform.rotation = Random.rotation;
-            all_menus[i].transform.LookAt(Vector3.zero);
+            allMenus[i].transform.LookAt(Vector3.zero);
         }
     }
 }

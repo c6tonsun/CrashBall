@@ -16211,6 +16211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 0
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -16451,6 +16452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 1
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -26058,6 +26060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 1
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -41387,6 +41390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 0
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -46173,6 +46177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 1
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -58032,6 +58037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  transitionDelay: 0.25
   highlightItems:
   - {fileID: 1592717305}
   - {fileID: 325617870}
@@ -58041,6 +58047,7 @@ MonoBehaviour:
   scoreScreen: {fileID: 1620947508}
   activeItems: []
   activeMenu: {fileID: 0}
+  allMenus: []
   isInTransition: 0
   isGamePaused: 0
   isGameStarting: 0
@@ -75173,6 +75180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 1
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -77732,6 +77740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 1
   isColorPickMenu: 0
+  isMainMenu: 1
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -77788,6 +77797,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 0
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -86660,6 +86670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 1
   isColorPickMenu: 1
+  isMainMenu: 1
   nextMenu: {fileID: 1613766643}
   backMenu: {fileID: 742468243}
   defaultItems: []

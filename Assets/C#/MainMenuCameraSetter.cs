@@ -9,7 +9,7 @@ public class MainMenuCameraSetter : MonoBehaviour {
         GameManager gameManager = FindObjectOfType<GameManager>();
         Camera cam = GetComponent<Camera>();
         UIMenuHandler menuHandler = FindObjectOfType<UIMenuHandler>();
-        menuHandler.SetCamera(cam);
+        menuHandler.SetCamera(cam, true);
         menuHandler.isGamePaused = true;
         menuHandler.ToMenu(gameManager.menuToLoad, instantly: true);
     }

@@ -21,6 +21,9 @@ public class HuePickerManager : MonoBehaviour {
     {
         for (int p = 0; p < pickers.Length; p++)
         {
+            if (pickers[p].gameObject.activeSelf == false)
+                continue;
+
             floorMeshes[p].material.color = colors[p];
             pickers[p].DoUpdate();
         }
@@ -32,7 +35,7 @@ public class HuePickerManager : MonoBehaviour {
     {
         foreach (var picker in pickers)
         {
-            if (picker != sender)
+            if (picker != sender && picker.gameObject.activeSelf && picker.isSet == false)
             {
                 picker.RefreshSpot();
             }

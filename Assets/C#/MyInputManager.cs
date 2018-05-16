@@ -38,7 +38,7 @@ public class MyInputManager : MonoBehaviour {
         _scoreHandler.StageStart(_players, playerCount);
 
         _menuHandler = _scoreHandler.GetComponentInChildren<UIMenuHandler>();
-        _menuHandler.SetCamera(GetComponent<Camera>());
+        _menuHandler.SetCamera(GetComponent<Camera>(), false);
     }
 
     private void Update ()
