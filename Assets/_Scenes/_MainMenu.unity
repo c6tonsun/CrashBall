@@ -15972,6 +15972,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1baffae6d20b346a394e219f2497c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  childParticles: []
+  selectedSize: []
+  meshes: []
 --- !u!1 &223905111
 GameObject:
   m_ObjectHideFlags: 0
@@ -16150,12 +16153,12 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 231021557}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 795c99356ce2eb7478cc55b4773d4744, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 2
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -16295,6 +16298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 0
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -16535,6 +16539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 1
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -23670,6 +23675,7 @@ MonoBehaviour:
   BlockArea: {fileID: 702105098}
   moveSpeed: 0.5
   picker: {r: 0, g: 0, b: 0, a: 0}
+  isSet: 0
   player: 0
 --- !u!1 &292631704
 GameObject:
@@ -26217,6 +26223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 1
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -37807,6 +37814,7 @@ MonoBehaviour:
   BlockArea: {fileID: 1796243548}
   moveSpeed: 0.5
   picker: {r: 0, g: 0, b: 0, a: 0}
+  isSet: 0
   player: 2
 --- !u!1 &623631742
 GameObject:
@@ -44929,6 +44937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 0
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -49748,6 +49757,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 1
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -56946,6 +56956,7 @@ MonoBehaviour:
   BlockArea: {fileID: 1001935644}
   moveSpeed: 0.5
   picker: {r: 0, g: 0, b: 0, a: 0}
+  isSet: 0
   player: 3
 --- !u!1 &1013730805
 GameObject:
@@ -61739,6 +61750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  transitionDelay: 0
   highlightItems:
   - {fileID: 1592717305}
   - {fileID: 325617870}
@@ -61748,6 +61760,7 @@ MonoBehaviour:
   scoreScreen: {fileID: 1620947508}
   activeItems: []
   activeMenu: {fileID: 0}
+  allMenus: []
   isInTransition: 0
   isGamePaused: 0
   isGameStarting: 0
@@ -66734,6 +66747,7 @@ MonoBehaviour:
   BlockArea: {fileID: 649529507}
   moveSpeed: 0.5
   picker: {r: 0, g: 0, b: 0, a: 0}
+  isSet: 0
   player: 1
 --- !u!1 &1329443492
 GameObject:
@@ -75575,6 +75589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 1
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -78202,6 +78217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 1
   isColorPickMenu: 0
+  isMainMenu: 1
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -78258,6 +78274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 0
   isColorPickMenu: 0
+  isMainMenu: 0
   nextMenu: {fileID: 0}
   backMenu: {fileID: 0}
   defaultItems:
@@ -85558,6 +85575,7 @@ GameObject:
   - component: {fileID: 1689788149}
   - component: {fileID: 1689788148}
   - component: {fileID: 1689788147}
+  - component: {fileID: 1689788150}
   m_Layer: 0
   m_Name: Mustache Button Random (4)
   m_TagString: Untagged
@@ -85618,6 +85636,44 @@ Transform:
   m_Father: {fileID: 1613766642}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
+--- !u!114 &1689788150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1689788146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c18f063b5cbac84c939e3cd2f194870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rescale: 1
+  bypassButtonSelected: 1
+  CurveHeight: 0.026
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5
+      value: 0.5
+      inSlope: 2.6632218
+      outSlope: 2.6632218
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1690881065
 GameObject:
   m_ObjectHideFlags: 0
@@ -90181,12 +90237,12 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1769047868}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 795c99356ce2eb7478cc55b4773d4744, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 2
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -90616,6 +90672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPlayersNeedToBeReady: 1
   isColorPickMenu: 1
+  isMainMenu: 1
   nextMenu: {fileID: 1613766643}
   backMenu: {fileID: 742468243}
   defaultItems: []
@@ -90738,7 +90795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rescale: 1
   bypassButtonSelected: 1
-  CurveHeight: 0.025
+  CurveHeight: 0.023
   curve:
     serializedVersion: 2
     m_Curve:
@@ -90980,6 +91037,7 @@ GameObject:
   - component: {fileID: 1827638744}
   - component: {fileID: 1827638743}
   - component: {fileID: 1827638742}
+  - component: {fileID: 1827638745}
   m_Layer: 0
   m_Name: Mustache Button Random (3)
   m_TagString: Untagged
@@ -91040,6 +91098,44 @@ Transform:
   m_Father: {fileID: 1613766642}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
+--- !u!114 &1827638745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1827638741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c18f063b5cbac84c939e3cd2f194870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rescale: 1
+  bypassButtonSelected: 1
+  CurveHeight: 0.025
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5
+      value: 0.5
+      inSlope: 2.6632218
+      outSlope: 2.6632218
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1831740552
 GameObject:
   m_ObjectHideFlags: 0
@@ -101666,6 +101762,7 @@ GameObject:
   - component: {fileID: 2073486135}
   - component: {fileID: 2073486134}
   - component: {fileID: 2073486133}
+  - component: {fileID: 2073486136}
   m_Layer: 0
   m_Name: Mustache Button Random (2)
   m_TagString: Untagged
@@ -101726,6 +101823,44 @@ Transform:
   m_Father: {fileID: 1613766642}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
+--- !u!114 &2073486136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2073486132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c18f063b5cbac84c939e3cd2f194870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rescale: 1
+  bypassButtonSelected: 1
+  CurveHeight: 0.024
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5
+      value: 0.5
+      inSlope: 2.6632218
+      outSlope: 2.6632218
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &2075233227
 GameObject:
   m_ObjectHideFlags: 0

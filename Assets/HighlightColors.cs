@@ -43,10 +43,13 @@ public class HighlightColors : MonoBehaviour {
         {
             for(int m = 0; m<meshes.Length; m++)
             {
-                meshes[m].material.color = _gameManager.Colors[m];
+                Color color = _gameManager.Colors[m];
+                color.a = 0.5f;
+                meshes[m].material.color = color;
 
                 var main = childParticles[m].main;
-                main.startColor = _gameManager.Colors[m];
+                main.startColor = color;
+                
             }
 
         }
