@@ -4578,7 +4578,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 258647045
+  randomSeed: -31959117
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -12007,6 +12007,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 164804232}
+  - component: {fileID: 164804237}
   - component: {fileID: 164804234}
   - component: {fileID: 164804233}
   - component: {fileID: 164804235}
@@ -12142,6 +12143,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &164804237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 164804231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray9
 --- !u!1 &168393902
 GameObject:
   m_ObjectHideFlags: 0
@@ -16176,7 +16189,7 @@ Transform:
   m_GameObject: {fileID: 231021557}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3703704, y: 0.80000025, z: 0.4347827}
+  m_LocalScale: {x: 0.35087726, y: 0.8000005, z: 0.4347828}
   m_Children:
   - {fileID: 1826248271}
   - {fileID: 1421314511}
@@ -16357,8 +16370,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 236148761}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.033492755, y: -0.7115168, z: -0.6994688, w: 0.05801312}
+  m_LocalPosition: {x: 0, y: 22, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1417584086}
@@ -16367,7 +16380,7 @@ Transform:
   - {fileID: 339164351}
   m_Father: {fileID: 1138671904}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -97.48399, y: 83.494995, z: -261.504}
 --- !u!114 &236148763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25015,7 +25028,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: SETTIGS
+  m_text: SETTINGS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c1c1323c0b5aaa442b2390065601d0a0, type: 2}
   m_sharedMaterial: {fileID: 21221551460450010, guid: c1c1323c0b5aaa442b2390065601d0a0,
@@ -25084,7 +25097,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 402735006}
-    characterCount: 7
+    characterCount: 8
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -25401,6 +25414,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 418936665}
+  - component: {fileID: 418936670}
   - component: {fileID: 418936667}
   - component: {fileID: 418936666}
   - component: {fileID: 418936668}
@@ -25536,6 +25550,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &418936670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 418936664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray0
 --- !u!1 &419442614
 GameObject:
   m_ObjectHideFlags: 0
@@ -25812,6 +25838,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 441602394}
+  - component: {fileID: 441602399}
   - component: {fileID: 441602396}
   - component: {fileID: 441602395}
   - component: {fileID: 441602397}
@@ -25947,6 +25974,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &441602399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 441602393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray5
 --- !u!1 &442795779
 GameObject:
   m_ObjectHideFlags: 0
@@ -38314,6 +38353,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 631070665}
+  - component: {fileID: 631070670}
   - component: {fileID: 631070667}
   - component: {fileID: 631070666}
   - component: {fileID: 631070668}
@@ -38449,6 +38489,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &631070670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 631070664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray1
 --- !u!1 &635423564
 GameObject:
   m_ObjectHideFlags: 0
@@ -45251,8 +45303,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 647909452}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.7071065, y: 0.00000026077032, z: 0.0000010376733, w: 0.7071072}
+  m_LocalPosition: {x: 0, y: 22, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1485476845}
@@ -45261,7 +45313,7 @@ Transform:
   - {fileID: 1540506588}
   m_Father: {fileID: 1138671904}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!114 &647909454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49732,7 +49784,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: SETTIGS
+  m_text: SETTINGS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c1c1323c0b5aaa442b2390065601d0a0, type: 2}
   m_sharedMaterial: {fileID: 21221551460450010, guid: c1c1323c0b5aaa442b2390065601d0a0,
@@ -49801,7 +49853,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 708864488}
-    characterCount: 7
+    characterCount: 8
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -61839,7 +61891,7 @@ Transform:
   m_GameObject: {fileID: 1103477655}
   m_LocalRotation: {x: 0, y: -0.095845714, z: 0, w: 0.99539626}
   m_LocalPosition: {x: -2.34, y: 0.08, z: -0}
-  m_LocalScale: {x: 2.7, y: 2.3, z: 1.25}
+  m_LocalScale: {x: 2.9, y: 2.3, z: 1.25}
   m_Children:
   - {fileID: 231021558}
   m_Father: {fileID: 1505038137}
@@ -62339,6 +62391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4601d638355683478673dbca0c01a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _readyPlayers: 
   cam: {fileID: 0}
   transitionDelay: 0
   highlightItems:
@@ -66677,6 +66730,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1219513524}
+  - component: {fileID: 1219513529}
   - component: {fileID: 1219513526}
   - component: {fileID: 1219513525}
   - component: {fileID: 1219513527}
@@ -66812,6 +66866,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1219513529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1219513523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray4
 --- !u!1 &1235031522
 GameObject:
   m_ObjectHideFlags: 0
@@ -78924,8 +78990,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1620947506}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.258819, y: -0, z: -0, w: 0.9659259}
+  m_LocalPosition: {x: 0, y: 6.55, z: -8.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1246729533}
@@ -78935,7 +79001,7 @@ Transform:
   - {fileID: 1484203554}
   m_Father: {fileID: 1138671904}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30.000002, y: 0, z: 0}
 --- !u!114 &1620947508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86332,6 +86398,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1689788149}
+  - component: {fileID: 1689788151}
   - component: {fileID: 1689788148}
   - component: {fileID: 1689788147}
   - component: {fileID: 1689788150}
@@ -86381,7 +86448,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1689788146}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1689788149
 Transform:
   m_ObjectHideFlags: 0
@@ -86433,6 +86500,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1689788151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1689788146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/MagicalSound
 --- !u!1 &1690881065
 GameObject:
   m_ObjectHideFlags: 0
@@ -90645,6 +90724,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1733434998}
+  - component: {fileID: 1733435003}
   - component: {fileID: 1733435000}
   - component: {fileID: 1733434999}
   - component: {fileID: 1733435001}
@@ -90780,6 +90860,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1733435003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1733434997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray7
 --- !u!1 &1762103928
 GameObject:
   m_ObjectHideFlags: 0
@@ -90936,8 +91028,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1769047868}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 0.3703704, y: 0.80000025, z: 0.4347827}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.35087726, y: 0.8000005, z: 0.4347828}
   m_Children:
   - {fileID: 31539491}
   - {fileID: 985735359}
@@ -91446,6 +91538,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1818944231}
+  - component: {fileID: 1818944236}
   - component: {fileID: 1818944234}
   - component: {fileID: 1818944233}
   - component: {fileID: 1818944232}
@@ -91581,6 +91674,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1818944236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1818944230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/MagicalSound
 --- !u!1 &1826248270
 GameObject:
   m_ObjectHideFlags: 0
@@ -91796,6 +91901,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1827638744}
+  - component: {fileID: 1827638746}
   - component: {fileID: 1827638743}
   - component: {fileID: 1827638742}
   - component: {fileID: 1827638745}
@@ -91845,7 +91951,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1827638741}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1827638744
 Transform:
   m_ObjectHideFlags: 0
@@ -91897,6 +92003,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1827638746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1827638741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/MagicalSound
 --- !u!1 &1831740552
 GameObject:
   m_ObjectHideFlags: 0
@@ -92684,6 +92802,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1870812000}
+  - component: {fileID: 1870812005}
   - component: {fileID: 1870812002}
   - component: {fileID: 1870812001}
   - component: {fileID: 1870812003}
@@ -92819,6 +92938,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1870812005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870811999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray8
 --- !u!1 &1871057534
 GameObject:
   m_ObjectHideFlags: 0
@@ -101009,6 +101140,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1958151242}
+  - component: {fileID: 1958151247}
   - component: {fileID: 1958151244}
   - component: {fileID: 1958151243}
   - component: {fileID: 1958151245}
@@ -101144,6 +101276,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1958151247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1958151241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray2
 --- !u!1 &1958162436
 GameObject:
   m_ObjectHideFlags: 0
@@ -102607,6 +102751,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2073486135}
+  - component: {fileID: 2073486137}
   - component: {fileID: 2073486134}
   - component: {fileID: 2073486133}
   - component: {fileID: 2073486136}
@@ -102656,7 +102801,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2073486132}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &2073486135
 Transform:
   m_ObjectHideFlags: 0
@@ -102708,6 +102853,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2073486137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2073486132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/MagicalSound
 --- !u!1 &2075233227
 GameObject:
   m_ObjectHideFlags: 0
@@ -103272,6 +103429,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2122628757}
+  - component: {fileID: 2122628762}
   - component: {fileID: 2122628759}
   - component: {fileID: 2122628758}
   - component: {fileID: 2122628760}
@@ -103407,6 +103565,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2122628762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2122628756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Cheers/Hooray3
 --- !u!1 &2123846398
 GameObject:
   m_ObjectHideFlags: 0
@@ -103765,7 +103935,7 @@ Transform:
   m_GameObject: {fileID: 2143118863}
   m_LocalRotation: {x: 0, y: 0.095845714, z: 0, w: 0.99539626}
   m_LocalPosition: {x: 2.22, y: 0.09, z: 0}
-  m_LocalScale: {x: 2.7, y: 2.3, z: 1.25}
+  m_LocalScale: {x: 2.9, y: 2.3, z: 1.25}
   m_Children:
   - {fileID: 1769047869}
   m_Father: {fileID: 1505038137}

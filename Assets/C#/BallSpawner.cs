@@ -13,6 +13,9 @@ public class BallSpawner : MonoBehaviour {
     public List<Ball> stunBalls;
     private int maxStunBallCount;
     private float stunBallLikelyness;
+
+    [SerializeField]
+    private Bomb BombPrefab;
     
     [SerializeField]
     private GameObject ballRespawn;
@@ -29,6 +32,9 @@ public class BallSpawner : MonoBehaviour {
     private int _lastCannon = -1;
 
     bool canFire = false;
+
+    private float timer = 0;
+    private float timerMax = 10f;
 
     private float ballMinSpeed;
 
@@ -83,6 +89,14 @@ public class BallSpawner : MonoBehaviour {
         }
     }
 
+    private void SpawnBomb()
+    {
+        Debug.Log("spawned");
+        Vector2 position = Random.insideUnitCircle * 7;
+        Vector3 positionWithHeight = new Vector3(position.x, 30f, position.y);
+        Instantiate(BombPrefab, positionWithHeight, Random.rotation);
+    }
+
     //Randomizes the next cannon to be fired. Cannot give same number twice in a row
     Transform RandomizeCannon()
     {
@@ -105,7 +119,7 @@ public class BallSpawner : MonoBehaviour {
 	// Physics related stuff in fixed update
 	void FixedUpdate ()
     {
-        ballMinSpeed += Time.fixedDeltaTime * 0.125f;
+        ballMinSpeed += Time.fixedDeltaTime * 0.0125f;
 
         if (canFire)
         {
@@ -120,6 +134,14 @@ public class BallSpawner : MonoBehaviour {
                 PrepareFire(ball);
                 canFire = false;
             }
+        }
+
+        timer += Time.fixedDeltaTime;
+        if (timer > timerMax)
+        {
+            timer = 0;
+            SpawnBomb();
+            if(timerMax>2) timerMax--;
         }
 
     }

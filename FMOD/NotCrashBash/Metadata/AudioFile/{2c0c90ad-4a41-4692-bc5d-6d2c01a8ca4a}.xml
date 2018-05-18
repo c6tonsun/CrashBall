@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{2c0c90ad-4a41-4692-bc5d-6d2c01a8ca4a}">
+        <property name="assetPath">
+            <value>SPACE_BG_1.WAV</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>5.0009977324263035</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{6255e7e3-684c-4cb6-a253-64638667c8ac}</destination>
+        </relationship>
+    </object>
+</objects>

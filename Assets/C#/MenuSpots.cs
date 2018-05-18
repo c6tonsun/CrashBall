@@ -50,9 +50,12 @@ public class MenuSpots : MonoBehaviour {
     {
         for (int i = 0; i < allMenus.Length; i++)
         {
-            allMenus[i].transform.position = Targets[i];
-            //all_menus[i].transform.rotation = Random.rotation;
-            allMenus[i].transform.LookAt(Vector3.zero);
+            if (allMenus[i].isMainMenu)
+            {
+                allMenus[i].transform.position = Targets[i];
+                allMenus[i].transform.rotation = Random.rotation;
+                //allMenus[i].transform.LookAt(Vector3.zero);
+            }
         }
     }
 }

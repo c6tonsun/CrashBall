@@ -21,7 +21,7 @@ public class HighlightColors : MonoBehaviour {
 
         childParticles = GetComponentsInChildren<ParticleSystem>();
 
-        meshes = GetComponentsInChildren<MeshRenderer>();
+        meshes = GetComponentsInChildren<MeshRenderer>(true);
         selectedSize = new Vector3[meshes.Length];
 
 
@@ -43,7 +43,21 @@ public class HighlightColors : MonoBehaviour {
         {
             for(int m = 0; m<meshes.Length; m++)
             {
+                var Breather = menuHandler.activeItems[m].GetComponent<Breathe>();
                 Color color = _gameManager.Colors[m];
+                if (menuHandler._readyPlayers[m])
+                {
+                    color = _gameManager.Colors[m] * new Vector4(0.4f, 0.4f, 0.4f, 1);
+                    Breather.Rescale = false;
+                }
+                else
+                {
+                    if (menuHandler.highlightItems[m].activeSelf)
+                    {
+                        Breather.Rescale = true;
+                    }
+                }
+                
                 color.a = 0.5f;
                 meshes[m].material.color = color;
 

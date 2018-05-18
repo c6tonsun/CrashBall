@@ -12,7 +12,8 @@ public class UIMenuHandler : MonoBehaviour {
     private static int DOWN_INPUT = 3;
     private static int LEFT_INPUT = 4;
     private static int RIGHT_INPUT = 5;
-    private bool[] _readyPlayers;
+    [HideInInspector]
+    public bool[] _readyPlayers;
     private bool[] _isActivePlayer;
     private int activePlayerCount = 0;
     private Rewired.Player[] _playersRewired;
@@ -126,7 +127,7 @@ public class UIMenuHandler : MonoBehaviour {
                 DoSelect(i, activeItem);
 
             if (_playersRewired[i].GetButtonDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady == true)
-                DoDeselect(i);
+                DoDeselect(i, activeItem);
 
             if (_playersRewired[i].GetButtonDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady == false)
                 DoBack(i, activeItem);
@@ -197,16 +198,27 @@ public class UIMenuHandler : MonoBehaviour {
         if (activeMenu.isColorPickMenu && _readyPlayers[index] == false)
             _colorManager.pickers[index].DoSelect(index);
 
-        PlayMenuBlip(true);
+        
 
         if (activeMenu.allPlayersNeedToBeReady)
         {
+            if (!_readyPlayers[index]) {
+                PlayMenuBlip(true);
+                if (activeItem.isMustach)
+                {
+                    activeItem.GetComponent<PlayFMODEvent>().Play();
+                }
+            }
             _readyPlayers[index] = true;
             for (int i = 0; i < _playersRewired.Length; i++)
             {
                 if (_isActivePlayer[i] && _readyPlayers[i] == false)
                     return;
             }
+        }
+        else
+        {
+            PlayMenuBlip(true);
         }
 
         if (activeMenu.isColorPickMenu)
@@ -219,14 +231,18 @@ public class UIMenuHandler : MonoBehaviour {
         ToMenu(activeItem.nextMenu, instantly:false);
     }
 
-    private void DoDeselect(int index)
+    private void DoDeselect(int index, UIMenuButton activeItem)
     {
+        if(_readyPlayers[index]) PlayMenuBlip(true, true);
         _readyPlayers[index] = false;
 
         if (activeMenu.isColorPickMenu)
             _colorManager.pickers[index].DoDeselect(index);
 
-        PlayMenuBlip(true, true);
+        if (activeItem.isMustach)
+        {
+            activeItem.GetComponent<PlayFMODEvent>().Stop();
+        }
     }
 
     private void DoBack(int index, UIMenuButton activeItem)
