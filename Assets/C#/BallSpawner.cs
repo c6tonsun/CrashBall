@@ -140,7 +140,8 @@ public class BallSpawner : MonoBehaviour {
         if (timer > timerMax)
         {
             timer = 0;
-            SpawnBomb();
+            //TODO:spawn bomb
+            //SpawnBomb();
             if(timerMax>2) timerMax--;
         }
 
