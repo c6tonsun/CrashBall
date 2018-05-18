@@ -410,7 +410,7 @@ public class UIMenuHandler : MonoBehaviour {
         else
         {
             foreach (UIMenu menu in allMenus)
-                menu.gameObject.SetActive(menu.isMainMenu == false);
+                menu.gameObject.SetActive(false);
         }
     }
 
@@ -457,10 +457,15 @@ public class UIMenuHandler : MonoBehaviour {
         if (instantly == false)
             yield return new WaitForSecondsRealtime(transitionDelay);
 
+        UIMenu oldMenu = activeMenu;
         activeMenu = menu;
+
+        if (menu.isMainMenu == false)
+            menu.gameObject.SetActive(true);
+        
         menu.StartTransition(cam, this, instantly);
 
-        UIMenuButton[] buttons = activeMenu.transform.GetComponentsInChildren<UIMenuButton>();
+        UIMenuButton[] buttons = menu.transform.GetComponentsInChildren<UIMenuButton>();
         foreach (UIMenuButton button in buttons)
         {
             if (button.isMusicNoice)
@@ -479,16 +484,16 @@ public class UIMenuHandler : MonoBehaviour {
         #region handle highlights
         for (int i = 0; i < highlightItems.Length; i++)
         {
-            if (_isActivePlayer[i] == false || activeMenu.isColorPickMenu)
+            if (_isActivePlayer[i] == false || menu.isColorPickMenu)
             {
                 highlightItems[i].SetActive(false);
                 continue;
             }
 
-            highlightItems[i].SetActive(activeMenu.allPlayersNeedToBeReady);
+            highlightItems[i].SetActive(menu.allPlayersNeedToBeReady);
         }
 
-        if (activeMenu.isColorPickMenu == false)
+        if (menu.isColorPickMenu == false)
             highlightItems[0].SetActive(true);
 
         for (int i = 0; i < activeItems.Length; i++)
@@ -497,6 +502,11 @@ public class UIMenuHandler : MonoBehaviour {
                 MoveInMenu(activeItems[i], i);
         }
         #endregion
+
+        yield return new WaitForSecondsRealtime(1f);
+        
+        if (oldMenu != null && oldMenu.isMainMenu == false)
+            oldMenu.gameObject.SetActive(false);
 
         StopCoroutine(TransitionDelay(menu, instantly));
     }
@@ -531,12 +541,16 @@ public class UIMenuHandler : MonoBehaviour {
 
     public void DoPause()
     {
+        if (isGameStarting || isInTransition)
+            return;
         isGamePaused = true;
         ToMenu(pauseMenu, false);
     }
 
     public void DoUnpause()
     {
+        if (isGameStarting || isInTransition)
+            return;
         isInTransition = true;
         StartCoroutine(TransitionBackToGame());
     }
