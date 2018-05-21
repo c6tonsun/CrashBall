@@ -128,11 +128,11 @@ public class Ball : MonoBehaviour {
         OnCollisionStay(collision);
     }
 
-    public void SpawnPulseBlastOff(Player player, Vector3 direction)
+    public void SpawnPulseBlastOff(Color playerColor, Vector3 direction)
     {
         ParticleSystem ballBlast = BallBlastEffect;
         var BallBlastParts = ballBlast.GetComponentsInChildren<ParticleSystem>();
-        lastHitPlayerColor = player.GetColor();
+        lastHitPlayerColor = playerColor;
         foreach (var part in BallBlastParts)
         {
             var partStartColor = part.main;

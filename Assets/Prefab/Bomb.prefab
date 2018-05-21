@@ -41,6 +41,8 @@ GameObject:
   - component: {fileID: 114229418425872574}
   - component: {fileID: 65591801070720972}
   - component: {fileID: 54134536192178046}
+  - component: {fileID: 114387401311179916}
+  - component: {fileID: 114242308011012440}
   m_Layer: 8
   m_Name: Bomb
   m_TagString: Untagged
@@ -113,14 +115,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed4a83611418e145a75229650c0abff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pulseSound:
+  - {fileID: 114387401311179916}
+  - {fileID: 114242308011012440}
   pulseParticles: {fileID: 198778647062135616, guid: c5d54c84acf438b4a8edb68889b779c9,
     type: 2}
+  color: {r: 0.91034484, g: 0.8088235, b: 1, a: 0.441}
   HitGround: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 256
-  PulseRadius: 5
+  PulseRadius: 4
   PulseForce: 20
+--- !u!114 &114242308011012440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1851454719675926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Sounds/BombExplosion
+--- !u!114 &114387401311179916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1851454719675926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd8a1b976ae4e047a2dc9cba4eb09e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectSound: event:/Sounds/BombFiring
 --- !u!198 &198205460270825876
 ParticleSystem:
   m_ObjectHideFlags: 1

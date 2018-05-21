@@ -11,6 +11,9 @@ public class Bomb : MonoBehaviour {
 
     ParticleSystem[] bombParticles;
 
+    [SerializeField]
+    private Color color;
+
     private Coroutine secondPulse;
 
     public bool HitGround = false;
@@ -70,6 +73,7 @@ public class Bomb : MonoBehaviour {
                 if (ball.isFixedY)
                     direction.y = 0f;
                 ball.Rb.AddForce(direction.normalized* (PulseForce), ForceMode.Impulse);
+                ball.SpawnPulseBlastOff(color, direction.normalized);
                 
             }
         }
@@ -100,6 +104,7 @@ public class Bomb : MonoBehaviour {
                 if (ball.isFixedY)
                     direction.y = 0f;
                 ball.Rb.AddForce(direction.normalized * (PulseForce), ForceMode.Impulse);
+                ball.SpawnPulseBlastOff(color, direction.normalized);
             }
         }
         Debug.Log("before end");

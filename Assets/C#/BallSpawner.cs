@@ -16,6 +16,8 @@ public class BallSpawner : MonoBehaviour {
 
     [SerializeField]
     private Bomb BombPrefab;
+    [SerializeField]
+    private ParticleSystem BombTarget;
     
     [SerializeField]
     private GameObject ballRespawn;
@@ -93,8 +95,11 @@ public class BallSpawner : MonoBehaviour {
     {
         Debug.Log("spawned");
         Vector2 position = Random.insideUnitCircle * 7;
-        Vector3 positionWithHeight = new Vector3(position.x, 30f, position.y);
+        Vector3 positionWithHeight = new Vector3(position.x, 30, position.y);
+        Vector3 targetPos = new Vector3(position.x, 1.4f, position.y);
+
         Instantiate(BombPrefab, positionWithHeight, Random.rotation);
+        Instantiate(BombTarget, targetPos, transform.rotation);
     }
 
     //Randomizes the next cannon to be fired. Cannot give same number twice in a row
@@ -140,8 +145,8 @@ public class BallSpawner : MonoBehaviour {
         if (timer > timerMax)
         {
             timer = 0;
-            //TODO:spawn bomb
-            //SpawnBomb();
+            //bomb spawns here 
+            SpawnBomb();
             if(timerMax>2) timerMax--;
         }
 
