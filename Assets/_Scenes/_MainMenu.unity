@@ -62393,7 +62393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _readyPlayers: 
   cam: {fileID: 0}
-  transitionDelay: 0
+  transitionDelay: 0.25
   highlightItems:
   - {fileID: 1592717305}
   - {fileID: 325617870}
@@ -86421,9 +86421,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upItem: {fileID: 1870812003}
-  downItem: {fileID: 1818944232}
+  downItem: {fileID: 0}
   leftItem: {fileID: 441602397}
-  rightItem: {fileID: 1818944232}
+  rightItem: {fileID: 0}
   isHighlighted: 0
   nextMenu: {fileID: 1505038138}
   backMenu: {fileID: 1813206070}

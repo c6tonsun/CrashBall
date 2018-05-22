@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +13,8 @@ public class UIMenuHandler : MonoBehaviour {
     private static int RIGHT_INPUT = 5;
     [HideInInspector]
     public bool[] _readyPlayers;
-    private bool[] _isActivePlayer;
+    private bool _lockActivePlayers = false;
+    private bool[] _isActivePlayers;
     private int activePlayerCount = 0;
     private Rewired.Player[] _playersRewired;
 
@@ -52,7 +52,7 @@ public class UIMenuHandler : MonoBehaviour {
             _playersRewired[i] = Rewired.ReInput.players.GetPlayer(i);
         
         _readyPlayers = new bool[_playersRewired.Length];
-        _isActivePlayer = new bool[_playersRewired.Length];
+        _isActivePlayers = new bool[_playersRewired.Length];
 
         _gameManager = FindObjectOfType<GameManager>();
         _colorManager = FindObjectOfType<HuePickerManager>();
@@ -92,22 +92,23 @@ public class UIMenuHandler : MonoBehaviour {
             // dynamic player detection
             if (activeMenu.isColorPickMenu)
             {
-                if (_playersRewired[i].GetButtonDown(SELECT_INPUT) && _isActivePlayer[i] == false)
+                if (_playersRewired[i].GetButtonDown(SELECT_INPUT) && _isActivePlayers[i] == false)
                 {
-                    _isActivePlayer[i] = true;
-                    _colorManager.SetActivePickerCount(_isActivePlayer);
+                    _isActivePlayers[i] = true;
+                    _colorManager.SetActivePickerCount(_isActivePlayers);
+                    continue;
                 }
                 if (_playersRewired[i].GetButtonDown(BACK_INPUT) &&
                     _playersRewired[i].controllers.hasKeyboard == false &&
                     _readyPlayers[i] == false &&
-                    _isActivePlayer[i] == true)
+                    _isActivePlayers[i] == true)
                 {
-                    _isActivePlayer[i] = false;
-                    _colorManager.SetActivePickerCount(_isActivePlayer);
+                    _isActivePlayers[i] = false;
+                    _colorManager.SetActivePickerCount(_isActivePlayers);
                 }
             }
 
-            if (_isActivePlayer[i] == false)
+            if (_isActivePlayers[i] == false)
                 continue;
 
             // all players can control in menus that have only one activeItem
@@ -212,7 +213,7 @@ public class UIMenuHandler : MonoBehaviour {
             _readyPlayers[index] = true;
             for (int i = 0; i < _playersRewired.Length; i++)
             {
-                if (_isActivePlayer[i] && _readyPlayers[i] == false)
+                if (_isActivePlayers[i] && _readyPlayers[i] == false)
                     return;
             }
         }
@@ -424,24 +425,33 @@ public class UIMenuHandler : MonoBehaviour {
             return;
         
         _gameManager.soundTest.Stop();
+        
+        if (menu.isColorPickMenu)
+            _lockActivePlayers = false;
 
-        for (int i = 0; i < _isActivePlayer.Length; i++)
+        for (int i = 0; i < _isActivePlayers.Length; i++)
         {
-            bool hasController = _playersRewired[i].controllers.hasKeyboard || _playersRewired[i].controllers.joystickCount > 0;
-            _isActivePlayer[i] = hasController;
+            if (!_lockActivePlayers)
+            {
+                bool hasController = _playersRewired[i].controllers.hasKeyboard || _playersRewired[i].controllers.joystickCount > 0;
+                _isActivePlayers[i] = hasController;
+            }
             _readyPlayers[i] = false;
             
             if (menu.isColorPickMenu)
             {
                 _colorManager.pickers[i].DoDeselect(i);
-                _colorManager.SetActivePickerCount(_isActivePlayer);
+                _colorManager.SetActivePickerCount(_isActivePlayers);
             }
         }
-        
+
+        if (menu.isColorPickMenu)
+            _lockActivePlayers = true;
+
         if (activeMenu != null && activeMenu.isColorPickMenu)
         {
             activePlayerCount = 0;
-            foreach (bool activePlayer in _isActivePlayer)
+            foreach (bool activePlayer in _isActivePlayers)
             {
                 if (activePlayer)
                     activePlayerCount++;
@@ -487,7 +497,7 @@ public class UIMenuHandler : MonoBehaviour {
         #region handle highlights
         for (int i = 0; i < highlightItems.Length; i++)
         {
-            if (_isActivePlayer[i] == false || menu.isColorPickMenu)
+            if (_isActivePlayers[i] == false || menu.isColorPickMenu)
             {
                 highlightItems[i].SetActive(false);
                 continue;
