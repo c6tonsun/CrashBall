@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BallSpawner : MonoBehaviour {
-    
+
     private Ball normalBallPrefab;
     public List<Ball> normalBalls;
     private int maxNormalBallCount;
@@ -16,8 +16,7 @@ public class BallSpawner : MonoBehaviour {
 
     [SerializeField]
     private Bomb BombPrefab;
-    [SerializeField]
-    private ParticleSystem BombTarget;
+    private Bomb[] bombs;
     
     [SerializeField]
     private GameObject ballRespawn;
@@ -56,6 +55,8 @@ public class BallSpawner : MonoBehaviour {
 
         normalBallLikelyness = gameManager.normalBallLikelyness;
         stunBallLikelyness = gameManager.stunBallLikelyness;
+        // bombs
+        bombs = new Bomb[3];
         // cannon
         _firingInterval = gameManager.firingInterval;
         CannonAmount = Cannons.Length;
@@ -93,13 +94,25 @@ public class BallSpawner : MonoBehaviour {
 
     private void SpawnBomb()
     {
-        Debug.Log("spawned");
         Vector2 position = Random.insideUnitCircle * 7;
         Vector3 positionWithHeight = new Vector3(position.x, 30, position.y);
-        Vector3 targetPos = new Vector3(position.x, 1.4f, position.y);
 
-        Instantiate(BombPrefab, positionWithHeight, Random.rotation);
-        Instantiate(BombTarget, targetPos, transform.rotation);
+        for (int i = 0; i < bombs.Length; i++)
+        {
+            if (bombs[i] == null)
+            {
+                bombs[i] = Instantiate(BombPrefab);
+                bombs[i].gameObject.SetActive(false);
+            }
+
+            if (!bombs[i].gameObject.activeSelf)
+            {
+                bombs[i].transform.position = positionWithHeight;
+                bombs[i].transform.rotation = Random.rotation;
+                bombs[i].gameObject.SetActive(true);
+                break;
+            }   
+        }
     }
 
     //Randomizes the next cannon to be fired. Cannot give same number twice in a row

@@ -411,6 +411,9 @@ public class UIMenuHandler : MonoBehaviour {
         {
             foreach (UIMenu menu in allMenus)
                 menu.gameObject.SetActive(false);
+
+            foreach (GameObject go in highlightItems)
+                go.SetActive(false);
         }
     }
 
@@ -505,7 +508,7 @@ public class UIMenuHandler : MonoBehaviour {
 
         yield return new WaitForSecondsRealtime(1f);
         
-        if (oldMenu != null && oldMenu.isMainMenu == false)
+        if (oldMenu != null && oldMenu.isMainMenu == false && oldMenu != activeMenu)
             oldMenu.gameObject.SetActive(false);
 
         StopCoroutine(TransitionDelay(menu, instantly));
@@ -551,6 +554,7 @@ public class UIMenuHandler : MonoBehaviour {
     {
         if (isGameStarting || isInTransition)
             return;
+
         isInTransition = true;
         StartCoroutine(TransitionBackToGame());
     }
@@ -586,11 +590,19 @@ public class UIMenuHandler : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
 
-        time = 0f;
         cam.transform.position = defaultCamPos;
         cam.transform.rotation = defaultCamRot;
         isInTransition = false;
         isGamePaused = false;
+
+        if (activeItems[0].isContinue)
+        {
+            activeMenu.gameObject.SetActive(false);
+
+            foreach (GameObject go in highlightItems)
+                go.SetActive(false);
+        }
+
         StopCoroutine(TransitionBackToGame());
     }
 }

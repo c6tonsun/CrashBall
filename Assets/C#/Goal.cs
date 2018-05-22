@@ -129,8 +129,10 @@ public class Goal : MonoBehaviour {
     public void GoalToWall()
     {
         //Activates death wall particles
-        if(deathWallPS!=null)deathWallPS.ActivateParticleWall();
-        if (goalLines != null) goalLines.Stop();
+        if (deathWallPS != null)
+            deathWallPS.ActivateParticleWall();
+        if (goalLines != null)
+            goalLines.Stop();
 
         foreach (Collider c in _colliders)
             c.enabled = !c.isTrigger;

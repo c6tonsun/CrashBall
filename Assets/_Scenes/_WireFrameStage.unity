@@ -14438,6 +14438,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalBalls: []
   stunBalls: []
+  BombPrefab: {fileID: 114229418425872574, guid: 7d6abb235378bab408c615ac10b97089,
+    type: 2}
   ballRespawn: {fileID: 1805521677653922, guid: 3c0bf701129030642b513d4ada1cbb6e,
     type: 2}
   Cannons:
