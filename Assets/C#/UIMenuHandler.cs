@@ -599,19 +599,19 @@ public class UIMenuHandler : MonoBehaviour {
 
             yield return new WaitForEndOfFrame();
         }
-
+        
         cam.transform.position = defaultCamPos;
         cam.transform.rotation = defaultCamRot;
+
+        yield return new WaitForSecondsRealtime(transitionDelay);
+
         isInTransition = false;
         isGamePaused = false;
+        
+        activeMenu.gameObject.SetActive(false);
 
-        if (activeItems[0].isContinue)
-        {
-            activeMenu.gameObject.SetActive(false);
-
-            foreach (GameObject go in highlightItems)
-                go.SetActive(false);
-        }
+        foreach (GameObject go in highlightItems)
+            go.SetActive(false);
 
         StopCoroutine(TransitionBackToGame());
     }
