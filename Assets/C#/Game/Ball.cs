@@ -21,6 +21,9 @@ public class Ball : MonoBehaviour {
     [SerializeField]
     private Color neutralColor;
 
+    [HideInInspector]
+    public AI_Ball AI;
+
     [SerializeField]
     protected ParticleSystem BallBlastEffect;
     [SerializeField]
@@ -37,6 +40,7 @@ public class Ball : MonoBehaviour {
     {
         Rb = GetComponent<Rigidbody>();
         trail = GetComponent<TrailRenderer>();
+        AI = GetComponent<AI_Ball>();
         neutralColor = new Color(0.5f,0.5f,0.5f,1f);
 
         _collisionSound = GetComponent<PlayFMODEvent>();

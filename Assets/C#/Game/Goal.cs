@@ -16,6 +16,7 @@ public class Goal : MonoBehaviour {
     private ScoreHandler _scoreHandler;
     private GameManager _gameManager;
 
+
     private Collider[] _colliders;
     [SerializeField]
     private DeathWallParticleHandler deathWallPS;
@@ -38,7 +39,9 @@ public class Goal : MonoBehaviour {
     {
         _colliders = GetComponents<Collider>();
         foreach (Collider c in _colliders)
+        {
             c.enabled = c.isTrigger;
+        }
     }
 
     private void Start()

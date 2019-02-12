@@ -37,7 +37,7 @@ public class Breathe : MonoBehaviour {
                 }
                 else
                 {
-                    localCurveHeight = CurveHeight*0.25f;
+                    localCurveHeight = 0;
                 }
                 float RescaleTimer = Mathf.PingPong(Time.unscaledTime + randomStart, 1);
                 transform.localScale = originalSize * (1 + curve.Evaluate(RescaleTimer) * localCurveHeight);
