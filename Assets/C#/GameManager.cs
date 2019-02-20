@@ -3,7 +3,7 @@
 public class GameManager : MonoBehaviour {
 
     // player options
-    public int playerCount;             // implement
+    public int playerCount;
     [Range(2f, 4f)]
     public float playerSpeed;
     [Range(0.2f, 1f)]
@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
         else
             Destroy(gameObject);
+
+        Cursor.visible = false;
 
         if (SaveLoad.FindSaveFile())
             SaveLoad.Load();

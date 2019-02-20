@@ -87,7 +87,7 @@ public class UIHandler : MonoBehaviour {
         {
             killerText.text = "P" + victim;
             doingText.text = "  got rekt";
-            victimText.text = ":3";
+            victimText.text = "";
             killerText.color = _playerColors[victim - 1];
             doingText.color = new Color(doingText.color.r, doingText.color.g, doingText.color.b, 1f);
             victimText.color = new Color(doingText.color.r, doingText.color.g, doingText.color.b, 1f);
