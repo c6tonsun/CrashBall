@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114969320023424366}
   - component: {fileID: 96976227112366070}
   - component: {fileID: 114664414871783432}
+  - component: {fileID: 114822612875980364}
   m_Layer: 8
   m_Name: StunBall
   m_TagString: Untagged
@@ -234,6 +235,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectSound: event:/Sounds/Ball Hit
+--- !u!114 &114822612875980364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1407653286047754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f3f400bb22f5f4989e3b33eead25fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 769
+  currentTargetGoal: {fileID: 0}
+  TimeToGoal: 0
+  GoalHitPoint: 0
+  GoalTarget: 0
 --- !u!114 &114969320023424366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,6 +272,7 @@ MonoBehaviour:
   canBeMagneted: 1
   Rb: {fileID: 0}
   neutralColor: {r: 0, g: 0, b: 0, a: 0}
+  AI: {fileID: 0}
   BallBlastEffect: {fileID: 198472580756262000, guid: 4ac9550c307a1d44faaf806c39f2d60b,
     type: 2}
   ballColorBlast: {fileID: 198952153127787862, guid: 9b3921009a62291478f609715a7353ef,

@@ -27297,7 +27297,6 @@ Transform:
   m_Children:
   - {fileID: 1416209893}
   - {fileID: 1769680900}
-  - {fileID: 1472098240}
   m_Father: {fileID: 1813206068}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: -10, z: 0}
@@ -52870,7 +52869,6 @@ Transform:
   m_Children:
   - {fileID: 1942660471}
   - {fileID: 1038976642}
-  - {fileID: 1175680267}
   m_Father: {fileID: 1813206068}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 10, z: 0}
@@ -64356,7 +64354,6 @@ Transform:
   m_Children:
   - {fileID: 1531755806}
   - {fileID: 467052900}
-  - {fileID: 1485717076}
   m_Father: {fileID: 1813206068}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: -20, z: 0}
@@ -68517,52 +68514,6 @@ Transform:
   m_Father: {fileID: 826648334}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1175680266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1071641294906510, guid: 110ecad89f9ea6147b7d70cd8db6116d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1175680267}
-  - component: {fileID: 1175680268}
-  m_Layer: 11
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1175680267
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4385728643562934, guid: 110ecad89f9ea6147b7d70cd8db6116d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1175680266}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 766600777}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!64 &1175680268
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 64052741367215638, guid: 110ecad89f9ea6147b7d70cd8db6116d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1175680266}
-  m_Material: {fileID: 13400000, guid: f440fcdbcd036574f8d5c5880c7fe6b7, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 1
-  m_SkinWidth: 0.07
-  m_Mesh: {fileID: 4300000, guid: ec47bfa94c838d548b03f122dd157991, type: 3}
 --- !u!1 &1182323090
 GameObject:
   m_ObjectHideFlags: 0
@@ -78120,52 +78071,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.3270435, y: -0.044796303, z: -0.53834915}
     m_Extent: {x: 0.40555558, y: 0.18646364, z: 0.25565097}
   m_DirtyAABB: 0
---- !u!1 &1472098239
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1512177215119550, guid: 110ecad89f9ea6147b7d70cd8db6116d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1472098240}
-  - component: {fileID: 1472098241}
-  m_Layer: 11
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1472098240
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4663676786978518, guid: 110ecad89f9ea6147b7d70cd8db6116d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1472098239}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 448112733}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!64 &1472098241
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 64105201967261828, guid: 110ecad89f9ea6147b7d70cd8db6116d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1472098239}
-  m_Material: {fileID: 13400000, guid: f440fcdbcd036574f8d5c5880c7fe6b7, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 1
-  m_SkinWidth: 0.07
-  m_Mesh: {fileID: 4300000, guid: ec47bfa94c838d548b03f122dd157991, type: 3}
 --- !u!1 &1482211254
 GameObject:
   m_ObjectHideFlags: 0
@@ -78298,52 +78203,6 @@ Transform:
   m_Father: {fileID: 647909453}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1485717075
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1554512151296210, guid: 110ecad89f9ea6147b7d70cd8db6116d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1485717076}
-  - component: {fileID: 1485717077}
-  m_Layer: 11
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1485717076
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4304697359792334, guid: 110ecad89f9ea6147b7d70cd8db6116d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1485717075}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1115626439}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!64 &1485717077
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 64915308684004864, guid: 110ecad89f9ea6147b7d70cd8db6116d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1485717075}
-  m_Material: {fileID: 13400000, guid: f440fcdbcd036574f8d5c5880c7fe6b7, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 1
-  m_SkinWidth: 0.07
-  m_Mesh: {fileID: 4300000, guid: ec47bfa94c838d548b03f122dd157991, type: 3}
 --- !u!1 &1488200908
 GameObject:
   m_ObjectHideFlags: 0
@@ -80261,11 +80120,11 @@ MonoBehaviour:
   ballMinSpeed: 5
   normalBallPrefab: {fileID: 114103952518715332, guid: a548c401c4c8b684082904c92f547886,
     type: 2}
-  normalBallCount: 8
+  normalBallCount: 12
   normalBallLikelyness: 0.75
   stunBallPrefab: {fileID: 114969320023424366, guid: f2870901075625448926f14570ac0838,
     type: 2}
-  stunBallCount: 2
+  stunBallCount: 4
   stunBallLikelyness: 0.25
   firingInterval: 2
   isElimination: 0

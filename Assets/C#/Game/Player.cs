@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 
     public bool isVerticalCurve;
 
+    public bool AIControlled = true;
+
     public int[] kills;
 
     [SerializeField]

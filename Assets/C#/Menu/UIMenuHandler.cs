@@ -458,7 +458,8 @@ public class UIMenuHandler : MonoBehaviour {
             }
 
             _colorManager.DoUpdate();
-            _gameManager.playerCount = activePlayerCount;
+            //This overwrites playercount
+            //_gameManager.playerCount = activePlayerCount;
         }
 
         isInTransition = true;

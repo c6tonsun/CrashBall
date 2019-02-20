@@ -8,7 +8,9 @@ public class KartMovement : MonoBehaviour
     public float stunTimer;
 
     public Curve movementCurve;
+    [SerializeField]
     private float _curveTime = 0.5f;
+    public float CurveTime { get { return _curveTime; } }
 
     [SerializeField]
     private ParticleSystem stunParticles;

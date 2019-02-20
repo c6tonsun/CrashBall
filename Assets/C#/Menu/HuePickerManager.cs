@@ -46,6 +46,7 @@ public class HuePickerManager : MonoBehaviour {
         foreach (bool activePlayer in activePlayers)
         {
             if (activePlayer)
+            { } //This overwrites player picker count
                 pickerCount++;
         }
 

@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114103952518715332}
   - component: {fileID: 96267573784906448}
   - component: {fileID: 114407053503880836}
+  - component: {fileID: 114926806320577924}
   m_Layer: 8
   m_Name: Ball
   m_TagString: Untagged
@@ -210,6 +211,7 @@ MonoBehaviour:
   canBeMagneted: 1
   Rb: {fileID: 0}
   neutralColor: {r: 0, g: 0, b: 0, a: 0}
+  AI: {fileID: 0}
   BallBlastEffect: {fileID: 198472580756262000, guid: 4ac9550c307a1d44faaf806c39f2d60b,
     type: 2}
   ballColorBlast: {fileID: 198952153127787862, guid: 9b3921009a62291478f609715a7353ef,
@@ -226,6 +228,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectSound: event:/Sounds/Ball Hit
+--- !u!114 &114926806320577924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1286904156807054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f3f400bb22f5f4989e3b33eead25fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 769
+  currentTargetGoal: {fileID: 0}
+  TimeToGoal: 0
+  GoalHitPoint: 0
+  GoalTarget: 0
 --- !u!135 &135541091002871002
 SphereCollider:
   m_ObjectHideFlags: 1
