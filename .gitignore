@@ -48,3 +48,5 @@ FMOD/NotCrashBash/.restore
 Assets/Rewired/Examples/
 Assets/Rewired/Internal/Assets/Extras/
 Builds/
+
+*.meta
