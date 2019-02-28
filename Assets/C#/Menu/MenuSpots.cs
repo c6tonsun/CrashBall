@@ -52,7 +52,7 @@ public class MenuSpots : MonoBehaviour {
             {
                 allMenus[i].transform.position = Targets[i];
                 allMenus[i].transform.rotation = Random.rotation;
-                //allMenus[i].transform.LookAt(Vector3.zero);
+                allMenus[i].transform.LookAt(Vector3.zero);
             }
         }
     }

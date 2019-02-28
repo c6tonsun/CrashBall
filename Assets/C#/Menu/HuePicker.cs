@@ -28,7 +28,7 @@ public class HuePicker : UIMenuButton {
     [SerializeField]
     private int player;
 
-    private static float[] playerHues = new float[4] { 0f, 0f, 0f, 0f };
+    private static float[] playerHues = new float[4] { 0f, 0f, 0f, 1f };
 
     void Start()
     {

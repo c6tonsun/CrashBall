@@ -23,6 +23,15 @@ public class UIMenuButton : MonoBehaviour
     public float soundNoice;
 
     [Space(15)]
+    public bool isPlayerAmount;
+    [Range(0, 3)]
+    public float playerAmount;
+
+    public bool isCpuDifficulty;
+    [Range(1, 5)]
+    public float cpuDifficulty = 1;
+
+    [Space(15)]
     public bool isMustach;
     [Range(-1, 9)]
     public int mustach;
@@ -59,5 +68,17 @@ public class UIMenuButton : MonoBehaviour
     {
         transform.position = Vector3.Lerp(mute.position, noice.position, soundNoice);
         transform.rotation = Quaternion.Lerp(mute.rotation, noice.rotation, soundNoice);
+    }
+
+    public void UpdatePlayerSlider()
+    {
+        transform.position = Vector3.Lerp(mute.position, noice.position, (playerAmount/2));
+        transform.rotation = Quaternion.Lerp(mute.rotation, noice.rotation, (playerAmount/2));
+    }
+
+    public void UpdateDifSlider()
+    {
+        transform.position = Vector3.Lerp(mute.position, noice.position, (cpuDifficulty/4));
+        transform.rotation = Quaternion.Lerp(mute.rotation, noice.rotation, (cpuDifficulty/4));
     }
 }

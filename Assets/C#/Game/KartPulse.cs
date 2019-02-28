@@ -44,7 +44,7 @@ public class KartPulse : MonoBehaviour
 
         var PlayerColor = player.GetColor();
 
-        // hides dump warning
+        // hides dumb warning
         pulseColor = new ParticleSystem.MinMaxGradient(CarLightColor.CreateComplementaryColor(PlayerColor), PlayerColor)
         {
             mode = ParticleSystemGradientMode.TwoColors

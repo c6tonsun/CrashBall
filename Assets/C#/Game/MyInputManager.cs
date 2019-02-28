@@ -20,20 +20,25 @@ public class MyInputManager : MonoBehaviour {
 
         // sort players
         int playerCount = FindObjectOfType<GameManager>().playerCount;
+        int totalPlayers = FindObjectOfType<GameManager>().totalPlayers;
         Player[] unorderedPlayers = FindObjectsOfType<Player>();
-        _players = new Player[playerCount];
+        _players = new Player[totalPlayers];
         _playersRewired = new Rewired.Player[playerCount];
         foreach (Player player in unorderedPlayers)
         {
             int index = (int)player.currentPlayer - 1;
-            if (index < playerCount)
+            if (index < totalPlayers)
             {
                 _players[index] = player;
-                _playersRewired[index] = Rewired.ReInput.players.GetPlayer(index);
+                if (index < playerCount)
+                {
+                    _playersRewired[index] = Rewired.ReInput.players.GetPlayer(index);
+                    player.AIControlled = false;
+                }
             }
         }
 
-        _scoreHandler.StageStart(_players, playerCount);
+        _scoreHandler.StageStart(_players, totalPlayers);
 
         _menuHandler = _scoreHandler.GetComponentInChildren<UIMenuHandler>();
         _menuHandler.SetCamera(GetComponent<Camera>(), false);
@@ -60,10 +65,14 @@ public class MyInputManager : MonoBehaviour {
 
         if (_menuHandler.isGamePaused && _menuHandler.isGameStarting == false)
             return;
-#endregion
+        #endregion
 
         foreach (Player player in _players)
+        {
+            if (player.AIControlled)
+                continue;
             ActPlayerInput(player);
+        }
     }
 
     private void ActPlayerInput(Player player)

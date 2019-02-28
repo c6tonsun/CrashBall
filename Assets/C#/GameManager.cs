@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour {
 
     // player options
     public int playerCount;
+    public int totalPlayers;
     [Range(2f, 4f)]
     public float playerSpeed;
     [Range(0.2f, 1f)]
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour {
     public float pulseArea;
     [Range(0f, 5f)]
     public float maxMagnetTime;
+    [Range(1, 4)]
+    public int Difficulty;
 
     public Color[] Colors;
     [Range(1, 9)]

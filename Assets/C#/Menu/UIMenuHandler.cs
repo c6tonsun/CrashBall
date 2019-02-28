@@ -323,6 +323,30 @@ public class UIMenuHandler : MonoBehaviour {
             return;
         }
 
+        if (activeItem.isPlayerAmount)
+        {
+            activeItem.playerAmount -= 1;
+
+            if (activeItem.playerAmount < 0)
+                activeItem.playerAmount = 0;
+
+            activeItem.UpdatePlayerSlider();
+            _gameManager.totalPlayers = (int)activeItem.playerAmount+2;
+            return;
+        }
+
+        if (activeItem.isCpuDifficulty)
+        {
+            activeItem.cpuDifficulty += 1;
+
+            if (activeItem.cpuDifficulty > 3)
+                activeItem.cpuDifficulty = 3;
+
+            activeItem.UpdateDifSlider();
+            _gameManager.Difficulty = (int)activeItem.cpuDifficulty+1;
+            return;
+        }
+
         if (activeMenu.isColorPickMenu)
         {
             ((HuePicker)activeItem).DoLeft();
@@ -371,6 +395,30 @@ public class UIMenuHandler : MonoBehaviour {
 
             activeItem.UpdateSoundSlider();
             _gameManager.SaveSoundVolume(activeItem.soundNoice);
+            return;
+        }
+
+        if (activeItem.isPlayerAmount)
+        {
+            activeItem.playerAmount += 1;
+
+            if (activeItem.playerAmount > 2)
+                activeItem.playerAmount = 2;
+
+            activeItem.UpdatePlayerSlider();
+            _gameManager.totalPlayers = (int)activeItem.playerAmount+2;
+            return;
+        }
+
+        if (activeItem.isCpuDifficulty)
+        {
+            activeItem.cpuDifficulty -= 1;
+
+            if (activeItem.cpuDifficulty < 0)
+                activeItem.cpuDifficulty = 0;
+
+            activeItem.UpdateDifSlider();
+            _gameManager.Difficulty = (int)activeItem.cpuDifficulty+1;
             return;
         }
 
@@ -459,7 +507,7 @@ public class UIMenuHandler : MonoBehaviour {
 
             _colorManager.DoUpdate();
             //This overwrites playercount
-            //_gameManager.playerCount = activePlayerCount;
+            _gameManager.playerCount = activePlayerCount;
         }
 
         isInTransition = true;
@@ -492,6 +540,16 @@ public class UIMenuHandler : MonoBehaviour {
             {
                 button.soundNoice = _gameManager.soundNoice;
                 button.UpdateSoundSlider();
+            }
+            if (button.isPlayerAmount)
+            {
+                button.playerAmount = _gameManager.totalPlayers-2;
+                button.UpdatePlayerSlider();
+            }
+            if (button.isCpuDifficulty)
+            {
+                button.cpuDifficulty = _gameManager.Difficulty-1;
+                button.UpdateDifSlider();
             }
         }
 

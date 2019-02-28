@@ -160,7 +160,7 @@ public class BallSpawner : MonoBehaviour {
             timer = 0;
             //bomb spawns here 
             SpawnBomb();
-            if(timerMax>2) timerMax--;
+            if(timerMax>8) timerMax--;
         }
 
     }

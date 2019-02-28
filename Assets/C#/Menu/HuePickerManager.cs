@@ -45,8 +45,7 @@ public class HuePickerManager : MonoBehaviour {
         int pickerCount = 0;
         foreach (bool activePlayer in activePlayers)
         {
-            if (activePlayer)
-            { } //This overwrites player picker count
+            if (activePlayer)  //This determines player picker count
                 pickerCount++;
         }
 
