@@ -132,7 +132,7 @@ public class UIMenuHandler : MonoBehaviour {
 
             if (_playersRewired[i].GetButtonDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady == false)
                 DoBack(i, activeItem);
-            if (_playersRewired[i].GetButtonLongPressDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady)
+            if (_playersRewired[i].GetButtonShortPressDown(BACK_INPUT) && activeMenu.allPlayersNeedToBeReady)
                 DoBack(i, activeItem);
 
             if (isInTransition)

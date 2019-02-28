@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour {
         else
             Destroy(gameObject);
 
+        Cursor.visible = false;
+
         if (SaveLoad.FindSaveFile())
             SaveLoad.Load();
         else
