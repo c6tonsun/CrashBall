@@ -78,7 +78,7 @@ public class UIMenuButton : MonoBehaviour
 
     public void UpdateDifSlider()
     {
-        transform.position = Vector3.Lerp(mute.position, noice.position, (cpuDifficulty/4));
-        transform.rotation = Quaternion.Lerp(mute.rotation, noice.rotation, (cpuDifficulty/4));
+        transform.position = Vector3.Lerp(mute.position, noice.position, (cpuDifficulty/3));
+        transform.rotation = Quaternion.Lerp(mute.rotation, noice.rotation, (cpuDifficulty/3));
     }
 }
