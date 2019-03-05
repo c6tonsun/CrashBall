@@ -480,10 +480,8 @@ public class UIMenuHandler : MonoBehaviour {
         for (int i = 0; i < _isActivePlayers.Length; i++)
         {
             if (!_lockActivePlayers)
-            {
-                bool hasController = _playersRewired[i].controllers.hasKeyboard || _playersRewired[i].controllers.joystickCount > 0;
-                _isActivePlayers[i] = hasController;
-            }
+                _isActivePlayers[i] = _playersRewired[i].controllers.hasKeyboard || _playersRewired[i].controllers.joystickCount > 0;
+
             _readyPlayers[i] = false;
             
             if (menu.isColorPickMenu)
